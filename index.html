@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="李佳蓓的个人网站：教育科技、编程教研、课程研发与内容运营。" />
+  <title>李佳蓓 | Portfolio</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="./js/content.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark">
+          <img class="brand-avatar" src="./assets/images/brand-avatar.png" alt="李佳蓓头像" />
+        </span>
+        <span class="brand-name">PORTFOLIO</span>
+      </a>
+      <nav class="nav" id="mainNav" aria-label="主导航"></nav>
+      <a class="download-link" id="resumeLink" href="#" download>简历.pdf</a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <div class="eyebrow" id="heroEyebrow">在线</div>
+          <h1 id="heroTitle">Hi，<br />我是李佳蓓</h1>
+          <div class="hero-title" id="heroSubtitle">Education Technology / 教育科技</div>
+          <div class="file-line file-line-summary">
+            <span id="heroFile">-a current master's student of Science and Robotics Education at The Education University of Hong Kong
+-focus on curriculum development
+-enjoy turning complex content into something clear, easy to follow and practically applicable.</span>
+          </div>
+          <div class="tags" id="heroTags" aria-label="个人标签"></div>
+          <a class="scroll-cue" href="#education">继续下滑，探索更多</a>
+        </div>
+
+        <div class="hero-visual" aria-label="李佳蓓照片">
+          <div class="portrait-frame"></div>
+          <img class="portrait" id="heroPhoto" alt="李佳蓓主页照片" />
+          <div class="hero-note">
+            <small id="heroNoteLabel">NOW</small>
+            <strong id="heroNoteTitle">AI × 教育</strong>
+            <span id="heroNoteText">正在继续探索最前沿的科学技术，确保课程设计与时俱进</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="education">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Education</p>
+            <h2>教育背景</h2>
+          </div>
+          <p id="educationSummary"></p>
+        </div>
+        <div class="surface">
+          <div class="education-list" id="educationList"></div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Projects</p>
+            <h2>AI学习</h2>
+          </div>
+          <p id="aboutSummary"></p>
+        </div>
+        <div class="project-list" id="projectList"></div>
+      </section>
+
+      <section class="section" id="work">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Experience</p>
+            <h2>工作经历</h2>
+            <p class="section-hint">点击卡片查看更多</p>
+          </div>
+          <p id="workSummary"></p>
+        </div>
+        <div class="surface">
+          <div class="timeline work-timeline" id="workList"></div>
+        </div>
+      </section>
+
+      <section class="section" id="other">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Other</p>
+            <h2>其他</h2>
+            <p class="section-hint">点击卡片查看更多</p>
+          </div>
+          <p id="skillsSummary"></p>
+        </div>
+        <div class="surface">
+          <div class="skill-list" id="skillList"></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">Contact</p>
+            <h2>联系我</h2>
+          </div>
+          <p id="contactSummary"></p>
+        </div>
+        <div class="contact-grid" id="contactList"></div>
+        <div class="hero-actions">
+          <a class="btn btn-secondary back-top-link" href="#top">回到顶部</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" id="footer"></footer>
+  </div>
+</body>
+</html>

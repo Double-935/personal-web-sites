@@ -149,5 +149,20 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - `兴趣爱好`
   - `我想说...`
 
+## Latest Responsive Audit
+- The mobile topbar is fixed to the viewport and the page reserves space below it.
+- Work-experience headers now use a separate date row and an independent action-button column at tablet and mobile widths.
+- Work-experience company and role text can wrap inside its available column without covering the action button.
+- Contact email and phone values stay on one line, with the arrow in a separate grid column.
+- The project reading panels support touch scrolling and contain overscroll within the panel.
+- The page has additional bottom safe space for the fixed scroll cue.
+- Local asset references were checked with no missing local files.
+- The resume PDF is present and non-empty.
+- The GLB model has a valid `glTF` file header.
+- JavaScript syntax check passed with the bundled Node.js runtime.
+- Visual browser verification of the deployed GitHub Pages URL was unavailable because the controlled browser blocked that domain; source-level and asset-level checks were completed instead.
+
 ## Next Step
-- If desired, do one final pass on desktop and mobile spacing after any future copy updates.
+- Push the latest source files and documentation to the GitHub Pages repository.
+- After deployment, manually inspect 375px, 390px, tablet portrait, tablet landscape, and desktop widths.
+- If desired, do one final visual spacing pass after future copy updates.

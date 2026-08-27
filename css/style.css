@@ -35,7 +35,7 @@ button, input, textarea { font: inherit; }
 .page {
   width: min(var(--max), calc(100% - 40px));
   margin: 0 auto;
-  padding: 24px 0 54px;
+  padding: 24px 0 96px;
 }
 
 .topbar {
@@ -981,8 +981,8 @@ button, input, textarea { font: inherit; }
 .timeline-head {
   width: 100%;
   display: grid;
-  grid-template-columns: 124px minmax(0, 1fr) auto;
-  gap: 24px;
+  grid-template-columns: max-content minmax(0, 1fr) max-content;
+  gap: clamp(12px, 2vw, 24px);
   align-items: center;
   padding: 20px 12px 20px 20px;
   border: 0;
@@ -995,30 +995,38 @@ button, input, textarea { font: inherit; }
   min-width: 0;
   display: flex;
   align-items: baseline;
-  gap: 10px;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  padding-right: 34px;
+  gap: 6px 10px;
+  flex-wrap: wrap;
+  white-space: normal;
+  padding-right: 0;
 }
 
 .timeline-title strong {
   display: inline;
+  min-width: 0;
   margin: 0;
   font-size: 0.88rem;
   line-height: 1.3;
   color: var(--ink);
   font-weight: 850;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
 }
 
 .timeline-title span {
   display: inline;
+  min-width: 0;
+  max-width: 100%;
   margin-top: 0;
   color: var(--ink);
   line-height: 1.3;
   font-size: 0.88rem;
   font-weight: 850;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.timeline-title strong {
+  max-width: 100%;
 }
 
 .timeline-title span::before {
@@ -1525,6 +1533,9 @@ button, input, textarea { font: inherit; }
   border-radius: 18px;
   background: rgba(255, 253, 248, 0.58);
   scrollbar-gutter: stable;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 .project-content--scroll::-webkit-scrollbar {
@@ -1656,6 +1667,11 @@ button, input, textarea { font: inherit; }
   inset: 0;
   z-index: 1;
   pointer-events: none;
+}
+
+/* Keep the second-draw button above the revealed detail card. */
+.skills-showcase.has-result .skills-stack {
+  display: contents;
 }
 
 .skills-stack__deck {
@@ -1860,6 +1876,7 @@ button, input, textarea { font: inherit; }
   position: absolute;
   left: 50%;
   bottom: 30px;
+  z-index: 5;
   pointer-events: auto;
   transform: translateX(-50%);
 }
@@ -2219,7 +2236,7 @@ button, input, textarea { font: inherit; }
   background: linear-gradient(180deg, #fff, rgba(248, 250, 246, 0.96));
   color: var(--ink);
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr) 24px;
+  grid-template-columns: minmax(0, 1fr) 24px;
   align-items: center;
   column-gap: 10px;
   box-shadow: 0 10px 22px rgba(31, 30, 26, 0.08);
@@ -2240,19 +2257,23 @@ button, input, textarea { font: inherit; }
 
 .contact-action__value {
   min-width: 0;
-  grid-column: 1 / -1;
+  grid-column: 1;
   grid-row: 1;
-  justify-self: center;
-  padding-inline: 36px;
+  justify-self: stretch;
+  padding-inline: 0 8px;
   text-align: center;
   font-size: clamp(0.86rem, 1.15vw, 1rem);
   font-weight: 850;
   line-height: 1.45;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .contact-action__arrow {
-  grid-column: 3;
+  grid-column: 2;
   grid-row: 1;
   justify-self: end;
   z-index: 1;
@@ -2351,12 +2372,34 @@ button, input, textarea { font: inherit; }
   .hero-visual { min-height: 520px; }
   .about-grid { grid-template-columns: 1fr; }
   .project-list { grid-template-columns: 1fr; }
+
+  .timeline-head {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    gap: 10px 14px;
+    padding-right: 16px;
+  }
+
+  .timeline-year {
+    grid-column: 1 / -1;
+  }
+
+  .timeline-title {
+    grid-column: 1;
+  }
+
+  .timeline-click-hint {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 700px) {
   .page {
     width: 100%;
-    padding: 9px 8px 54px;
+    --mobile-topbar-space: 150px;
+    padding: var(--mobile-topbar-space) 8px 96px;
     overflow: hidden;
   }
 
@@ -2382,11 +2425,21 @@ button, input, textarea { font: inherit; }
   }
 
   .topbar {
+    position: fixed;
+    left: 50%;
     grid-template-columns: minmax(0, 1fr) auto;
     top: 9px;
+    width: calc(100% - 16px);
+    margin: 0;
     padding: 10px 12px;
     min-height: auto;
     gap: 12px;
+    transform: translateX(-50%);
+  }
+
+  #about-me,
+  .section {
+    scroll-margin-top: calc(var(--mobile-topbar-space) + 12px);
   }
 
   .brand-mark {
@@ -2569,6 +2622,9 @@ button, input, textarea { font: inherit; }
   .project-content--scroll {
     max-height: 380px;
     padding: 18px;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
   }
 
   .project-visual__frame {
@@ -2704,13 +2760,13 @@ button, input, textarea { font: inherit; }
   .contact-action__button {
     min-height: 48px;
     padding: 0 14px;
-    grid-template-columns: 18px minmax(0, 1fr) 18px;
+    grid-template-columns: minmax(0, 1fr) 18px;
     column-gap: 8px;
     border-radius: 16px;
   }
 
   .contact-action__value {
-    padding-inline: 28px;
+    padding-inline: 0 8px;
   }
 
   .contact-action .copy-widget__status {
@@ -2730,7 +2786,7 @@ button, input, textarea { font: inherit; }
   }
 
   .skills-showcase.has-result {
-    min-height: 620px;
+    min-height: 700px;
   }
 
   .skills-stack__deck {
@@ -2818,24 +2874,31 @@ button, input, textarea { font: inherit; }
   }
 
   .timeline-head {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) max-content;
     gap: 8px;
     padding: 20px;
   }
 
-  .timeline-year,
-  .timeline-title {
-    grid-column: 1;
+  .timeline-year {
+    grid-column: 1 / -1;
   }
 
   .timeline-title {
-    padding-right: 0;
+    grid-column: 1;
+    align-self: center;
+  }
+
+  .timeline-title strong,
+  .timeline-title span {
+    white-space: normal;
   }
 
   .timeline-click-hint {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 2;
     align-self: center;
+    margin-left: 0;
+    transform: none;
   }
 
   .timeline-highlights {

@@ -5,8 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="李佳蓓的个人网站：教育科技、编程教研、课程研发与内容运营。" />
   <title>李佳蓓 | Portfolio</title>
-  <link rel="stylesheet" href="./css/style.css" />
-  <script src="./js/content.js" defer></script>
+  <link rel="stylesheet" href="./css/style.css?v=20260827-contact-hint-left" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.166.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.166.1/examples/jsm/"
+      }
+    }
+  </script>
+  <script src="./js/content.js?v=20260827-contact-hint-left" defer></script>
 </head>
 <body>
   <div class="page">
@@ -22,18 +30,18 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero" id="about-me" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow" id="heroEyebrow">在线</div>
           <h1 id="heroTitle">Hi，<br />我是李佳蓓</h1>
           <div class="hero-title" id="heroSubtitle">Education Technology / 教育科技</div>
-          <div class="file-line file-line-summary">
-            <span id="heroFile">-a current master's student of Science and Robotics Education at The Education University of Hong Kong
--focus on curriculum development
--enjoy turning complex content into something clear, easy to follow and practically applicable.</span>
-          </div>
+          <ul class="file-line file-line-summary hero-file-list" id="heroFile">
+            <li>A current master's student of Science and Robotics Education at The Education University of Hong Kong</li>
+            <li>Focus on curriculum development</li>
+            <li>Enjoy turning complex content into something clear, easy to follow and practically applicable.</li>
+          </ul>
           <div class="tags" id="heroTags" aria-label="个人标签"></div>
-          <a class="scroll-cue" href="#education">继续下滑，探索更多</a>
+          <a class="scroll-cue" id="scrollCue" href="#education">继续下滑，探索更多</a>
         </div>
 
         <div class="hero-visual" aria-label="李佳蓓照片">
@@ -48,23 +56,21 @@
       </section>
 
       <section class="section" id="education">
-        <div class="section-header">
+        <div class="section-header section-header--education">
           <div>
-            <p class="section-kicker">Education</p>
-            <h2>教育背景</h2>
+            <p class="section-kicker">Learning Path</p>
+            <h2>我的学习坐标</h2>
+            <p id="educationSummary"></p>
           </div>
-          <p id="educationSummary"></p>
         </div>
-        <div class="surface">
-          <div class="education-list" id="educationList"></div>
-        </div>
+        <div class="education-list" id="educationList"></div>
       </section>
 
       <section class="section" id="about">
         <div class="section-header">
           <div>
-            <p class="section-kicker">Projects</p>
-            <h2>AI学习</h2>
+            <p class="section-kicker">AI coding</p>
+            <h2>没有排期，也想把它做出来</h2>
           </div>
           <p id="aboutSummary"></p>
         </div>
@@ -75,8 +81,7 @@
         <div class="section-header">
           <div>
             <p class="section-kicker">Experience</p>
-            <h2>工作经历</h2>
-            <p class="section-hint">点击卡片查看更多</p>
+            <h2>我在真实现场做过什么</h2>
           </div>
           <p id="workSummary"></p>
         </div>
@@ -85,31 +90,27 @@
         </div>
       </section>
 
-      <section class="section" id="other">
-        <div class="section-header">
+      <section class="section section--skills" id="other">
+        <div class="section-header section-header--skills">
           <div>
-            <p class="section-kicker">Other</p>
-            <h2>其他</h2>
-            <p class="section-hint">点击卡片查看更多</p>
+            <h2>随机抽取一张我的档案卡</h2>
           </div>
           <p id="skillsSummary"></p>
         </div>
-        <div class="surface">
-          <div class="skill-list" id="skillList"></div>
-        </div>
+        <div class="skill-list" id="skillList"></div>
       </section>
 
-      <section class="section" id="contact">
-        <div class="section-header">
-          <div>
-            <p class="section-kicker">Contact</p>
-            <h2>联系我</h2>
+      <section class="section section--contact" id="contact">
+        <div class="contact-panel">
+          <div class="contact-panel__copy">
+            <p class="section-kicker section-kicker--contact">LET'S TALK</p>
+            <h2>
+              <span>下一段经历</span>
+              <span>也许可以一起创建。</span>
+            </h2>
+            <p id="contactSummary"></p>
           </div>
-          <p id="contactSummary"></p>
-        </div>
-        <div class="contact-grid" id="contactList"></div>
-        <div class="hero-actions">
-          <a class="btn btn-secondary back-top-link" href="#top">回到顶部</a>
+          <div class="contact-actions" id="contactList"></div>
         </div>
       </section>
     </main>

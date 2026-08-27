@@ -42,7 +42,9 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - `跨团队协作`
   - `内容表达`
   - a left-right expanded layout with the four modules on the left and a stacked image gallery on the right
-  - a small hover hint under the gallery
+  - an auto-rotating stacked image gallery that advances every 2 seconds while active
+- The work experience and other sections now show the "点击卡片查看更多" hint in the appropriate desktop and mobile positions.
+- The MBTI image no longer uses a special oversized image treatment, keeping the original image size more natural.
 - The `其他` section now uses expandable cards that show only the short preview first and reveal the detailed introduction after a click.
 - `MBTI` is filled with:
   - `ENTJ-A`
@@ -60,6 +62,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The top-left brand mark now uses the avatar image in `assets/images/brand-avatar.png` instead of the `李` character.
 - The hero eyebrow text is now `在线`.
 - The hero intro file text has been cleaned up so it fills the box naturally instead of breaking in odd places.
+- The hero intro file text is now rendered as a bulleted list with bold `·` markers and capitalized line starts.
 - The footer text is simplified to:
   - `李佳蓓 · Education Technology`
 - Contact cards now support one-click copy for:
@@ -71,10 +74,13 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - phone / WeChat copy card
   - `回到顶部`
 - The `回到顶部` button keeps its hover-to-black behavior.
+- The hero scroll cue now switches from `继续下滑，探索更多` to `回到顶部` when the page reaches the bottom area, and clicking it scrolls appropriately.
+- The hero scroll cue is now a fixed floating button, so it stays visible while scrolling.
 - The desktop portrait has a yellow outline, while mobile keeps the original look.
 
 ## Current State
 - The website is usable and visually consistent.
+- Latest local date worked on: 2026-08-27.
 - Desktop styling has the latest portrait/avatar updates.
 - Mobile layout was adjusted repeatedly for narrow screens, especially:
   - 375px
@@ -85,9 +91,20 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - work experience
   - other
   - contact
-- The AI learning section now reads as two project cards instead of a summary/facts split.
-- The work experience section now uses expandable cards that initially show only time, company name, and role, then reveal the detailed content after a click.
+- The `教育背景` section now uses a centered showcase header and two large side-by-side cards, each with a visual panel above the school details, closer to the reference-style learning path layout.
+- The `教育背景` card visuals now use local background images:
+  - `assets/images/hk-edu-background.jpg`
+  - `assets/images/scnu-background.jpg`
+- The `教育背景` card badges now use local school logos:
+  - `assets/images/eduhk-logo.jpg`
+  - `assets/images/scnu-logo.svg`
+- The top visual area of the education cards no longer shows the date and degree lines, leaving only the school name and brief description over the background image.
+- The education card badges are now positioned lower so they sit between the visual area and the lower text block.
+- The lower text block of the education cards no longer repeats the school name; it now starts with the date and degree meta row, followed by the description.
+- The AI learning section now uses two large showcase cards with a visual panel on the left and detailed content on the right, closer to a portfolio case-study layout.
+- The work experience section now uses a two-sided timeline layout with alternating cards and a central rail; each card initially shows time, company name, and role, then reveals the detailed content after a click.
 - The work experience cards now show company name and role on the same line in the collapsed state.
+- The work experience cards now contain filled expanded content for the current resume-based work items.
 - The `猿编程` work item now contains:
   - `课程研发`
   - `课堂支持`
@@ -95,8 +112,35 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - `内容表达`
   - a left-right expanded layout with the four modules on the left and a stacked image gallery on the right
   - a small hover hint under the gallery
-- The `其他` section summary now reads:
-  - `垂直之外的眷恋`
+- The `猿编程` work item now uses its complete course-development description, including the 6-month timeline, 10-lesson breakdown, relevant certificates, AI tool usage, end-to-end workflow, Keynote output, and above-baseline renewal/completion results.
+- The `猿编程` work item text has been updated to the latest user-provided long-form course-development copy in both the expanded intro and the collapsed detail text.
+- The `猿编程` gallery now includes `assets/images/work-experience-2.jpg` and automatically advances to the next stacked image every 2 seconds.
+- The `猿编程` work item is now open by default so its expanded content is immediately visible on page load.
+- The `技能与爱好` module now plays a 2-second shuffle sound when `随机抽一张` is clicked, synced with the shuffle animation.
+- The `AI 学习` section's first project now includes a 3D model on the left side, using `assets/models/3d-model.glb` with a Three.js canvas renderer.
+- The 3D model visual now includes a small loading/error status so the left-side model area does not become blank if the browser blocks `file://` GLB loading; README deployment notes now include `assets/models/3d-model.glb`.
+- The 3D model loader was hardened after the model failed to appear in HTTP preview: `index.html` now defines a Three.js import map, `content.js` uses import-map module names with an `esm.sh` fallback, and a native WebGL GLB renderer now draws `assets/models/3d-model.glb` if external Three.js loading fails.
+- The `技能与爱好` section summary now reads:
+  - `也许你会想认识更真实的我`
+- The `技能与爱好` section now uses a centered card-draw showcase layout:
+  - the card deck and `随机抽一张` button are centered before interaction
+  - after drawing, the selected introduction appears as one enlarged card face in the center
+  - the other cards scatter into the module background
+- The `技能与爱好` section now starts with only the centered card deck and centered `随机抽一张` button visible.
+- The skill detail card stays hidden until the user clicks `随机抽一张`.
+- After clicking `随机抽一张`, the cards play a 2-second shuffle animation, then the selected card flips for 1 second while the detail panel appears.
+- The `联系我` section now uses a dark end-card layout inspired by the provided reference, while keeping one-click copy actions for:
+  - email
+  - phone / WeChat
+- Latest 2026-08-27 updates:
+  - Contact copy values are centered inside the white buttons.
+  - Contact copy hints are left-aligned under each button.
+  - Work-experience highlight body text is gray, regular weight, and matches the company-role line font size.
+  - AI learning project 1 and project 2 right-side content uses bordered scrollable reading boxes.
+  - Skills and hobbies now uses seven cards: 快速学习的能力, MBTI, 潜水, 游泳, 吃饭, 旅行, 稳中求进的心态.
+  - Eating, swimming, and travel images were regenerated from HEIC originals because earlier JPG exports rendered as black images.
+  - Non-MBTI skill detail images are large hero-style visuals with a soft fade near the text side.
+  - `更新记录.md` records the day's work in Chinese.
 
 ## Current Blockers
 - None critical.

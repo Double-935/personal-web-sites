@@ -21,10 +21,9 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - `联系我`
 - The former `个人作品` module has been removed.
 - `技能与标签` has been renamed to `其他`.
-- The `AI学习` section is now organized into:
-  - `项目一`
-  - `项目二`
-  - each project contains:
+- The `AI学习` section is now aligned with the latest PDF resume and focuses on:
+  - `AI 辅助 - 个人网页搭建`
+  - the project contains:
     - `项目基本介绍`
     - `学习到的新知识`
     - `遇到的问题及解决方案`
@@ -80,7 +79,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 
 ## Current State
 - The website is usable and visually consistent.
-- Latest local date worked on: 2026-08-27.
+- Latest local date worked on: 2026-08-28.
 - Desktop styling has the latest portrait/avatar updates.
 - Mobile layout was adjusted repeatedly for narrow screens, especially:
   - 375px
@@ -91,6 +90,12 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - work experience
   - other
   - contact
+- The built-in resume PDF has been replaced with the latest 2-page PDF from Downloads:
+  - `李佳蓓-立即到岗:每周四天-18628387059.pdf`
+- The website resume link still points to:
+  - `assets/docs/li-jiabei-resume.pdf`
+- The hero and contact copy now mention:
+  - `立即到岗，每周 4 天，持续 3 个月`
 - The `教育背景` section now uses a centered showcase header and two large side-by-side cards, each with a visual panel above the school details, closer to the reference-style learning path layout.
 - The `教育背景` card visuals now use local background images:
   - `assets/images/hk-edu-background.jpg`
@@ -101,8 +106,14 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The top visual area of the education cards no longer shows the date and degree lines, leaving only the school name and brief description over the background image.
 - The education card badges are now positioned lower so they sit between the visual area and the lower text block.
 - The lower text block of the education cards no longer repeats the school name; it now starts with the date and degree meta row, followed by the description.
-- The AI learning section now uses two large showcase cards with a visual panel on the left and detailed content on the right, closer to a portfolio case-study layout.
+- The AI learning section now uses a showcase card for the resume-listed personal website project, with a visual panel on the left and detailed content on the right.
 - The work experience section now uses a two-sided timeline layout with alternating cards and a central rail; each card initially shows time, company name, and role, then reveals the detailed content after a click.
+- Work experience has been aligned with the latest PDF resume and now contains:
+  - `猿编程 - 编程教研`
+  - `作业帮 - 编程教研实习`
+  - `成都市迎宾路小学 - 信息技术教师`
+- The previous `成都市玉林小学` item is no longer shown on the website because it is not included in the latest PDF resume.
+- The top summary paragraphs were removed from the 作业帮 and 成都市迎宾路小学 entries so their expanded views start directly with the highlight modules.
 - The work experience cards now show company name and role on the same line in the collapsed state.
 - The work experience cards now contain filled expanded content for the current resume-based work items.
 - The `猿编程` work item now contains:
@@ -115,6 +126,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The `猿编程` work item now uses its complete course-development description, including the 6-month timeline, 10-lesson breakdown, relevant certificates, AI tool usage, end-to-end workflow, Keynote output, and above-baseline renewal/completion results.
 - The `猿编程` work item text has been updated to the latest user-provided long-form course-development copy in both the expanded intro and the collapsed detail text.
 - The `猿编程` gallery now includes `assets/images/work-experience-2.jpg` and automatically advances to the next stacked image every 2 seconds.
+- The `猿编程` gallery now uses `assets/images/img-6385.jpg` for the updated second image; the portrait image is marked for full display on desktop so its main subject is not cropped.
 - The `猿编程` work item is now open by default so its expanded content is immediately visible on page load.
 - The `技能与爱好` module now plays a 2-second shuffle sound when `随机抽一张` is clicked, synced with the shuffle animation.
 - The `AI 学习` section's first project now includes a 3D model on the left side, using `assets/models/3d-model.glb` with a Three.js canvas renderer.
@@ -129,6 +141,8 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The `技能与爱好` section now starts with only the centered card deck and centered `随机抽一张` button visible.
 - The skill detail card stays hidden until the user clicks `随机抽一张`.
 - After clicking `随机抽一张`, the cards play a 2-second shuffle animation, then the selected card flips for 1 second while the detail panel appears.
+- The skills deck now includes `高中信息技术教师资格证` with `assets/images/teacher-certification.jpg`.
+- The `快速学习的能力` card now includes the full parenthetical copy and uses `assets/images/hobby-interest.jpg` as its paddleboarding image.
 - The `联系我` section now uses a dark end-card layout inspired by the provided reference, while keeping one-click copy actions for:
   - email
   - phone / WeChat
@@ -137,7 +151,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - Contact copy hints are left-aligned under each button.
   - Work-experience highlight body text is gray, regular weight, and matches the company-role line font size.
   - AI learning project 1 and project 2 right-side content uses bordered scrollable reading boxes.
-  - Skills and hobbies now uses seven cards: 快速学习的能力, MBTI, 潜水, 游泳, 吃饭, 旅行, 稳中求进的心态.
+  - Skills and hobbies now uses eight cards: 快速学习的能力, 高中信息技术教师资格证, MBTI, 潜水, 游泳, 吃饭, 旅行, 稳中求进的心态.
   - Eating, swimming, and travel images were regenerated from HEIC originals because earlier JPG exports rendered as black images.
   - Non-MBTI skill detail images are large hero-style visuals with a soft fade near the text side.
   - `更新记录.md` records the day's work in Chinese.
@@ -160,7 +174,14 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The resume PDF is present and non-empty.
 - The GLB model has a valid `glTF` file header.
 - JavaScript syntax check passed with the bundled Node.js runtime.
+- The desktop work-gallery rule now supports a `contain` display mode for the portrait `IMG_6385` asset, while tablet and mobile gallery rules continue to use responsive natural image height.
+- Source-level checks confirmed balanced CSS braces and 19 existing local asset references with no missing files.
+- Browser-based local visual verification could not be completed because the current environment blocks both the local `file://` page and starting a temporary local preview server; the remaining final visual check should be done manually in a browser at 375px, 390px, tablet portrait, tablet landscape, and desktop widths.
 - Visual browser verification of the deployed GitHub Pages URL was unavailable because the controlled browser blocked that domain; source-level and asset-level checks were completed instead.
+- Latest content sync:
+  - `assets/docs/li-jiabei-resume.pdf` was replaced by the latest 2-page resume PDF.
+  - `js/content.js` was updated from the PDF content.
+  - current CSS/JS cache version in `index.html` is `20260828-responsive-audit`.
 
 ## Next Step
 - Push the latest source files and documentation to the GitHub Pages repository.

@@ -596,6 +596,10 @@ button, input, textarea { font: inherit; }
   overflow-wrap: anywhere;
 }
 
+#aboutSummary {
+  font-size: 0.92rem;
+}
+
 .section-hint {
   margin-top: 8px;
   color: var(--lavender);
@@ -812,11 +816,10 @@ button, input, textarea { font: inherit; }
 }
 
 .education-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: baseline;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 5px;
+  align-items: start;
 }
 
 .education-card__date {
@@ -827,10 +830,16 @@ button, input, textarea { font: inherit; }
 }
 
 .education-card__degree-label {
+  display: block;
+  max-width: 100%;
   color: rgba(31, 30, 26, 0.6);
-  font-size: 0.82rem;
+  font-size: 0.68rem;
   font-weight: 800;
-  text-align: right;
+  line-height: 1.35;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .education-card__body h3 {
@@ -1088,6 +1097,11 @@ button, input, textarea { font: inherit; }
   align-items: start;
 }
 
+.timeline-body--featured > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .timeline-item.is-open .timeline-body {
   max-height: 1800px;
   padding: 0 20px 20px;
@@ -1095,10 +1109,13 @@ button, input, textarea { font: inherit; }
 }
 
 .timeline-intro {
+  max-width: 100%;
+  min-width: 0;
   margin: 0 0 16px;
   color: var(--muted);
   line-height: 1.8;
-  font-size: 0.94rem;
+  font-size: 0.88rem;
+  overflow-wrap: anywhere;
 }
 
 .timeline-highlights {
@@ -1144,6 +1161,8 @@ button, input, textarea { font: inherit; }
   width: 100%;
   aspect-ratio: 16 / 9;
   min-height: 220px;
+  overflow: hidden;
+  border-radius: 18px;
 }
 
 .timeline-feature__media {
@@ -1169,6 +1188,11 @@ button, input, textarea { font: inherit; }
   transform: translate(32px, 24px) scale(0.9);
   filter: saturate(0.96) contrast(0.98);
   pointer-events: none;
+}
+
+.timeline-gallery__image--contain {
+  object-fit: contain;
+  background: rgba(255, 253, 248, 0.82);
 }
 
 .timeline-gallery__image.is-active {
@@ -1571,7 +1595,9 @@ button, input, textarea { font: inherit; }
   overflow-wrap: anywhere;
 }
 
-.project-header p {
+.project-header p,
+.project-section p,
+.project-section ul {
   margin-top: 10px;
   color: var(--muted);
   line-height: 1.7;
@@ -1596,12 +1622,17 @@ button, input, textarea { font: inherit; }
   font-weight: 850;
 }
 
-.project-section p {
-  margin: 8px 0 0;
-  color: var(--ink);
-  line-height: 1.7;
-  font-size: 0.92rem;
-  overflow-wrap: anywhere;
+.project-section p,
+.project-section ul {
+  margin-bottom: 0;
+}
+
+.project-section ul {
+  padding-left: 1.25em;
+}
+
+.project-section li + li {
+  margin-top: 4px;
 }
 
 .section-header--skills {
@@ -2332,6 +2363,14 @@ button, input, textarea { font: inherit; }
   cursor: pointer;
 }
 
+.contact-action__button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: center;
+  column-gap: 10px;
+}
+
 .copy-widget__button.is-copied {
   color: var(--lavender);
 }
@@ -2392,6 +2431,32 @@ button, input, textarea { font: inherit; }
     grid-row: 2;
     align-self: center;
     margin-left: 0;
+  }
+
+  .education-card__degree-label {
+    font-size: 0.62rem;
+  }
+
+  .timeline-gallery__stack {
+    display: grid;
+    aspect-ratio: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .timeline-gallery__image {
+    position: relative;
+    inset: auto;
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    transform: none !important;
+  }
+
+  .timeline-gallery__image:not(.is-active) {
+    display: none;
   }
 }
 
@@ -2720,6 +2785,10 @@ button, input, textarea { font: inherit; }
     padding: 38px 18px 20px;
   }
 
+  .education-card__degree-label {
+    font-size: 0.58rem;
+  }
+
   .contact-panel {
     min-height: auto;
     padding: 28px 18px 20px;
@@ -2826,6 +2895,10 @@ button, input, textarea { font: inherit; }
     transform: translate(-50%, -50%) translate(0, 202px) rotate(5deg) scale(0.66);
   }
 
+  .skills-showcase.has-result .skills-stack-card:nth-child(8) {
+    transform: translate(-50%, -50%) translate(0, -202px) rotate(-5deg) scale(0.64);
+  }
+
   .skills-stack__hint {
     max-width: 24ch;
   }
@@ -2910,13 +2983,21 @@ button, input, textarea { font: inherit; }
     gap: 18px;
   }
 
+  .timeline-intro {
+    font-size: 0.84rem;
+    line-height: 1.75;
+  }
+
   .timeline-gallery__stack {
-    aspect-ratio: 1 / 1;
-    min-height: 240px;
+    aspect-ratio: auto;
   }
 
   .timeline-gallery {
     margin-top: 8px;
+  }
+
+  .timeline-gallery__image {
+    background: rgba(255, 253, 248, 0.72);
   }
 
   .skill-preview {

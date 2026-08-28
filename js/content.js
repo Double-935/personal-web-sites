@@ -19,27 +19,27 @@ const PORTFOLIO = {
   hero: {
     eyebrow: "在线",
     title: '<span class="hero-greeting">Hi，</span><span class="hero-name">我是李佳蓓</span>',
-    subtitle: "Education Technology / 教育科技",
+    subtitle: "AI产品 x 教育科技",
     file: [
       "A current master's student of Science and Robotics Education at The Education University of Hong Kong",
-      "Focus on curriculum development",
-      "Enjoy turning complex content into something clear, easy to follow and practically applicable.",
+      "Have a strong interest in AI products and will actively seek out the latest information and give them a try",
+      "Enjoy turning complex content into something clear, easy to follow and practically applicable",
     ],
     lead: "",
-    tags: ["AI", "STEM教育", "课程研发", "信息技术教学"],
+    tags: ["AI", "STEM教育", "课程研发", "跨学科融合"],
     note: {
       label: "NOW",
-      title: "AI × 教育",
-      text: "正在继续探索最前沿的科学技术，确保课程设计与时俱进",
+      title: "立即到岗",
+      text: "每周 4 天，持续 3 个月，期待参与AI产品与教育研发的相关工作",
     },
   },
   projects: {
-    summary: "从一个真实的小问题出发，独立完成从想法、原型到可用产品",
+    summary: "从一个真实的小问题出发，独立完成从想法、原型到可用产品。",
     items: [
       {
         number: "项目一",
-        title: "Codex 搭建个人简历网站",
-        lead: "以静态网站为载体，练习内容拆分、响应式布局和部署维护。",
+        title: "AI 辅助 - 个人网页搭建",
+        lead: "基于 Codex、Gemini、triverse 等 AI 辅助开发工具，完成个人网站搭建、分层开发和 GitHub Pages 部署准备。",
         model: {
           src: "./assets/models/3d-model.glb",
           alt: "项目一 3D 模型",
@@ -49,81 +49,45 @@ const PORTFOLIO = {
           {
             label: "项目基本介绍",
             text:
-              "围绕个人简历网站搭建，完成页面结构、内容配置、图片资源管理和部署准备，让网站既能展示信息，也便于后续继续维护。",
+              "围绕个人能力展示需求，独立完成个人网站从 0 到 1 搭建。网站用于系统展示教育背景、AI 学习项目、课程研发经历、编程教研经历和联系方式。",
           },
           {
             label: "学习到的新知识",
             text:
-              "进一步理解了 HTML、CSS、JavaScript 分离的思路，也更熟悉了 data-driven 渲染、静态资源引用和多端适配。",
+              "熟悉Prompt调优，并在实际项目中进一步理解了 HTML、CSS、JavaScript 分层开发。也熟悉了内容配置、视觉排版、交互功能、图片资源管理、3D 模型展示和 GitHub Pages 部署准备。",
           },
           {
             label: "遇到的问题及解决方案",
             text:
-              "遇到过图片路径、按钮定位、文字换行和布局溢出等问题，通过拆分 assets、调整 grid / flex、检查资源路径逐步解决。",
+              "开发过程中重点处理了响应式适配、文字与按钮重叠、固定元素遮挡正文、抽卡结果按钮层级、邮箱电话单行显示、项目内容触摸滚动和本地资源引用等问题。",
           },
           {
             label: "下次可以改进的",
-            text:
-              "后续可以继续把页面内容模块化，增加更清晰的配置层和可复用组件，减少重复修改的成本。",
+            text: [
+              "先确定最小可行性的方案（mvp），如网页中，必须包含的模块有哪些。",
+              "先确定项目的基本结构，如html+css+js，便于更换模型/迁移/维护。",
+            ],
           },
           {
             label: "有待思考和完善的",
-            text:
-              "还可以继续补充项目成果、过程截图和更完整的说明，让作品展示更有说服力。",
-          },
-        ],
-      },
-      {
-        number: "项目二",
-        title: "AI 学习与教育表达整理",
-        lead: "围绕 AI、STEM 教育、课程研发和信息技术教学做结构化表达。",
-        placeholderImage: {
-          src: "./assets/images/project-placeholder.svg",
-          alt: "项目二图片占位",
-        },
-        scrollContent: true,
-        sections: [
-          {
-            label: "项目基本介绍",
-            text:
-              "把 AI 学习、课程研发和教学经历重新整理成更清晰的表达方式，方便在招聘场景里快速看懂我的重点方向。",
-          },
-          {
-            label: "学习到的新知识",
-            text:
-              "在整理过程中更重视信息分层、重点提炼和表达节奏，也更清楚怎样把学习内容转成能直接阅读的项目描述。",
-          },
-          {
-            label: "遇到的问题及解决方案",
-            text:
-              "最难的是避免内容太满、太散，于是通过标题层级、卡片化排版和短句拆分，让信息更容易被扫描和理解。",
-          },
-          {
-            label: "下次可以改进的",
-            text:
-              "后续可以把每个项目补上成果图、时间线和真实输出，增强项目展示的完整度。",
-          },
-          {
-            label: "有待思考和完善的",
-            text:
-              "还可以进一步思考怎样把 AI 学习和实际教学、课程开发、内容运营之间的联系写得更具体。",
+            text: ["token的成本控制问题。", "是否可以把该网页做成一个可供用户复刻使用的产品。"],
           },
         ],
       },
     ],
   },
   education: {
-    summary: "教育技术学本科为我打下课程设计与技术应用基础，接下来继续在科学、机器人和 AI 教育方向深入学习。",
+    summary: "教育技术学本科，科学与机器人硕士",
     items: [
       {
         school: "香港教育大学",
-        degree: "科学与机器人教育硕士",
-        date: "2026.09 - 2027.07",
-        visualNote: "主修科学与机器人教育、编程与评价方向。",
+        degree: "Master of Arts in Science and Robotics Education",
+        date: "2026.08 - 2027.07",
+        visualNote: "科学与机器人教育硕士，全日制。",
         visualImage: "./assets/images/hk-edu-background.jpg",
         badgeImage: "./assets/images/eduhk-logo.jpg",
         text:
-          "主修 AI in Science and Robotics Education、Engineering and Programming for School Science and Robotics、Assessment in Science and Robotics Education。",
+          "主修 AI in Science and Robotics Education、Principles and Methods in Science and Robotics Education Research、Engineering and Programming for School Science and Robotics.",
         accent: "warm",
       },
       {
@@ -134,26 +98,25 @@ const PORTFOLIO = {
         visualImage: "./assets/images/scnu-background.jpg",
         badgeImage: "./assets/images/scnu-logo.svg",
         text:
-          "计算机科学学院全日制本科。曾获全国大学生计算机设计大赛三等奖、校级优秀共青团员、校级优秀学生干部、校级奖学金等。",
+          "计算机科学学院全日制本科。曾获全国大学生计算机设计大赛三等奖、全国第六届大学生艺术展演活动优秀志愿者、校级优秀共青团员、校级优秀学生干部、校级三等奖学金、校级学术科技竞赛奖等。",
         accent: "fresh",
       },
     ],
   },
   work: {
-    summary:
-      "从课程内容研究院到一线小学课堂，我一直在做同一件事：让学习内容真正被理解、被使用、被持续优化。",
+    summary: "用户行为不可控，但做一个好产品的行动可控",
     items: [
       {
         date: "2024.07 - 2025.11",
         title: "猿编程",
         role: "编程教研",
         intro:
-          "课程本身的制作。已有青少年人工智能辅导师证书、高中信息技术教师资格证。针对 6-10 岁学龄段的学生，进行从 0 到 1 的 Python 课程搭建。历时 6 个月，独立完成 <strong>10</strong> 节课（4 节硬件课 + 6 节软件课）的研发。熟悉从课程目标评审，到课后班主任答疑的全部流程。最终成果以 keynote 的形式展现。在课程制作过程中，能够使用即梦等 AI 工具生成图片、视频辅助课件制作，能够使用 GPT、豆包等 AI 工具生成教案辅助课程目标的确立、能够使用通义等 AI 工具提升会议效率。该期课程的续报率和完课率均在基准线以上。",
+          "参与在线双师课课程的研发工作，并通过实际测试与调研来不断改进课程内容。该课程面向6-10岁学生，该课程内容包括Python与硬件（类似乐高积木）。",
         highlights: [
-          { label: "课程研发", value: "面向 6-10 岁学生，从 0 到 1 搭建 Python 课程体系" },
-          { label: "AI 工具使用", value: "使用即梦生成图片、视频辅助课件制作，使用 GPT、豆包辅助教案与课程目标确立" },
-          { label: "流程协同", value: "覆盖课程目标评审、传课测课、行课跟进、课后班主任答疑等完整流程" },
-          { label: "课程效果", value: "该期课程续报率和完课率均在基准线以上，并使用通义等工具提升会议效率" },
+          { label: "AI工具应用", value: "即梦生成图片、通义总结会议、mia搭建个人知识库......我勇于尝试" },
+          { label: "多方沟通与协作", value: "与研发、与设计、与产品......我乐于沟通" },
+          { label: "用户洞察与转化", value: "真实的环境、真实的人，看看这节课的目标能否达成、看看这个产品能够走得多远" },
+          { label: "随材物料的制作", value: "Canva、Sketch、秀米、剪映......基础的设计工具我都能使用" },
         ],
         images: [
           {
@@ -161,8 +124,9 @@ const PORTFOLIO = {
             alt: "猿编程线下课堂支持现场",
           },
           {
-            src: "./assets/images/yuancheng-structure.png",
-            alt: "猿编程课程研发内容卡片展示",
+            src: "./assets/images/img-6385.jpg?v=20260828-work-image-6385",
+            alt: "猿编程课程支持现场",
+            fit: "contain",
           },
           {
             src: "./assets/images/yuancheng-classroom.jpg",
@@ -174,52 +138,33 @@ const PORTFOLIO = {
           },
         ],
         text:
-          "课程本身的制作。已有青少年人工智能辅导师证书、高中信息技术教师资格证。针对 6-10 岁学龄段的学生，进行从 0 到 1 的 Python 课程搭建。历时 6 个月，独立完成 10 节课（4 节硬件课 + 6 节软件课）的研发。熟悉从课程目标评审，到课后班主任答疑的全部流程。最终成果以 keynote 的形式展现。在课程制作过程中，能够使用即梦等 AI 工具生成图片、视频辅助课件制作，能够使用 GPT、豆包等 AI 工具生成教案辅助课程目标的确立、能够使用通义等 AI 工具提升会议效率。该期课程的续报率和完课率均在基准线以上。",
-      },
-      {
-        date: "2024.03 - 2024.06",
-        title: "四川焱飞科技",
-        role: "信息技术教师",
-        intro:
-          "在成都市迎宾路小学担任信息技术教师，面向 3-6 年级学生开展 Python、Scratch 等信息科技课程教学。熟悉 2022 版《义务教育信息科技课程标准》，能结合学生年龄特点组织课堂内容，并支持学校竞赛、摄影、公众号排版等工作。",
-        highlights: [
-          { label: "课堂教学", value: "面向 3-6 年级学生教授 Python、Scratch，每周 4 节，共计 40 节" },
-          { label: "课程标准", value: "熟悉 2022 版《义务教育信息科技课程标准》，依据学段特点设计教学节奏" },
-          { label: "竞赛支持", value: "按照学校要求，带领学生参加全国青少年信息素养大赛" },
-          { label: "校园协作", value: "参与学校摄影与行政支持，能够独立使用秀米完成公众号文章排版" },
-        ],
-        text:
-          "在成都市迎宾路小学面向 3-6 年级学生教授 Python、Scratch 等信息科技课程，每周 4 节，共计 40 节。熟悉 2022 版《义务教育信息科技课程标准》，能够结合学生基础和认知特点组织课堂内容。按照学校要求带领学生参加全国青少年信息素养大赛，同时支持学校行政、摄影和公众号排版工作，能够独立使用秀米完成文章排版。",
+          "在线双师课程研发方面，熟悉从课程目标评审、传课测课、每周跟课到课后班主任答疑的完整流程，最终成果以 Keynote 形式呈现。课程制作过程中，能够使用 AI 工具生成代码题正则并应用到课上题目中，能够独立撰写脚本并使用剪映等工具制作视频，讲解直播课中不好描述的硬件原理。也能够使用 GPT、豆包等 AI 工具生成教案、辅助课程目标确立，并使用通义等工具提升会议效率。线下项目中，于 2024-2025 年春季学期在北京市航天图强小学跟课 16 次，负责教研方人员排期、讲师对接和项目复盘，观察学生正向反馈设计点并推动延续。",
       },
       {
         date: "2024.01 - 2024.03",
         title: "作业帮",
         role: "编程教研实习",
-        intro:
-          "在作业帮教学教研部参与少儿编程课程研发与日常运营维护，使用 Scratch 开发 AI 课和专业拓展课，负责工程文件、课件及相关物料制作，并参与课程生产流程和文档沉淀。",
         highlights: [
-          { label: "课程研发", value: "使用 Scratch 开发 AI 课、专业拓展课共 4 节，对课程内容和呈现效果负责" },
-          { label: "物料制作", value: "设计工程文件，完成课件和相关教学物料制作，熟悉产品生产流程" },
-          { label: "运营维护", value: "负责新媒体平台日常维护，与主讲老师沟通，确保发布内容与教学计划同步" },
-          { label: "内容优化", value: "研究目标学生特点，对 10 余个工程文件进行适应性修改和优化" },
+          { label: "课程制作", value: "使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件并完成课件及物料制作" },
+          { label: "流程沉淀", value: "熟悉课程产品生产流程，参与文档沉淀，并提供跨部门支持与协作" },
+          { label: "运营维护", value: "负责新媒体平台日常运营维护，确保内容更新及时、准确，并与主讲老师同步教学计划" },
+          { label: "内容优化", value: "围绕目标学生认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化" },
         ],
         text:
-          "在教学教研部参与少儿编程课程研发。使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件，完成课件及相关物料制作，对课程内容和呈现效果负责。参与课程产品生产流程和文档沉淀，并提供跨部门支持与协作。负责新媒体平台日常运营维护，与主讲老师紧密沟通，确保每周发布内容与教学计划同步。深入研究目标学生群体特点，围绕认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化。",
+          "在教学教研部参与少儿编程课程研发，使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件，完成课件及相关物料制作，对课程内容和呈现效果负责。负责新媒体平台日常运营维护，确保每周发布内容与教学计划同步，避免信息误差。深入研究目标学生群体特点，针对认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化，确保内容有趣且易于理解。",
       },
       {
-        date: "2023.02 - 2023.06",
-        title: "成都市玉林小学",
+        date: "2024.03 - 2024.06",
+        title: "成都市迎宾路小学",
         role: "信息技术教师",
-        intro:
-          "在成都市玉林小学担任信息技术教师，负责四、五年级 Scratch、3D One 等课程教学。除课堂教学外，也参与班会组织、班级事务推进、毕业纪念视频制作以及学校公众号内容支持。",
         highlights: [
-          { label: "教学设计", value: "使用 Word、PPT 等完成电子教案与课件 20 余个，相关内容获优秀教案" },
-          { label: "课堂教学", value: "面向四、五年级教授 Scratch、3D One，每周 4 节，共计 48 节" },
-          { label: "班级支持", value: "组织开展班会等活动 10 余次，安排并推动日常班级事务进行" },
-          { label: "内容制作", value: "使用 PR、剪映等工具制作毕业纪念视频 5 份，并参与校级活动摄影、撰稿 10 余次" },
+          { label: "课堂教学", value: "面向 3-6 年级学生教授 Python、Scratch，每周 4 节，共计 40 节" },
+          { label: "课程标准", value: "熟悉 2022 版《义务教育信息科技课程标准》，结合学生学段特点组织课堂内容" },
+          { label: "竞赛支持", value: "按照学校要求，带领学生参加全国青少年信息素养大赛" },
+          { label: "校园协作", value: "支持学校行政与摄影工作，能够独立使用秀米完成公众号文章排版" },
         ],
         text:
-          "依据学生基础与特征，使用 Word、PPT 等完成电子教案与课件 20 余个，相关内容荣获优秀教案。利用教学技术与相关资源担任四、五年级信息技术教学工作，主要授课内容为 Scratch、3D One，每周 4 节，共计 48 节。依据学校安排与学生兴趣，组织开展班会等活动 10 余次，安排并推动日常班级事务进行。同时使用 PR、剪映等图文编辑软件为毕业班级制作纪念视频 5 份，在校级大型活动中参与摄影、撰稿 10 余次，为学校公众号运营提供支持。",
+          "熟悉 2022 版《义务教育信息科技课程标准》，针对 3-6 年级学生，使用 Python、Scratch 进行教学工作，每周 4 节，共计 40 节。按照学校要求，带领学生参加全国青少年信息素养大赛。支持学校其他行政工作，参与摄影工作，并能够独立使用秀米对该校公众号文章进行排版。",
       },
     ],
   },
@@ -230,7 +175,17 @@ const PORTFOLIO = {
         title: "快速学习的能力",
         preview: "快速学习的能力",
         detail:
-          "仅用五天就部署完成该网站",
+          "仅用五天就部署完成该网站，仅用10分钟就上手桨板（后半句是想加个配图）",
+        image: "./assets/images/hobby-interest.jpg?v=20260828-paddleboarding",
+        imageAlt: "桨板配图",
+      },
+      {
+        title: "高中信息技术教师资格证",
+        preview: "高中信息技术教师资格证",
+        detail:
+          "一棵树摇动另一棵树，一朵云推动另一朵云，一个灵魂唤醒另一个灵魂",
+        image: "./assets/images/teacher-certification.jpg",
+        imageAlt: "高中信息技术教师资格证配图",
       },
       {
         title: "MBTI",
@@ -286,14 +241,13 @@ const PORTFOLIO = {
     ],
   },
   contact: {
-    summary:
-      "如果您正在寻找对AI有浓厚兴趣，愿意主动学习与尝试的候选人。欢迎通过邮箱或电话联系我！",
+    summary: "如果您正在寻找对 AI 、产品方面有浓厚兴趣的候选人，欢迎通过邮箱或电话联系我！",
     items: [
       { label: "邮箱", value: "jiabeilieee@foxmail.com" },
       { label: "电话/微信同号", value: "186-2838-7059" },
     ],
   },
-  footer: "李佳蓓 · Education Technology",
+  footer: "李佳蓓 · AI · Education Technology",
 };
 
 function setHTML(id, value) {
@@ -457,7 +411,7 @@ function sleep(ms) {
 
 async function playTagSequence() {
   const tags = document.querySelectorAll("[data-tag-button]");
-  const targetLabels = ["课程研发", "信息技术教学", "AI"];
+  const targetLabels = ["课程研发", "跨学科融合", "AI"];
   const targetButtons = targetLabels
     .map((label) => Array.from(tags).find((tag) => tag.dataset.tagText === label))
     .filter(Boolean);
@@ -499,12 +453,18 @@ function renderProjects(containerId, items) {
     .map((project) => {
       const sections = project.sections
         .map(
-          (section) => `
-            <div class="project-section">
-              <span class="project-section__label">${section.label}</span>
-              <p>${section.text}</p>
-            </div>
-          `,
+          (section) => {
+            const body = Array.isArray(section.text)
+              ? `<ul>${section.text.map((item) => `<li>${item}</li>`).join("")}</ul>`
+              : `<p>${section.text}</p>`;
+
+            return `
+              <div class="project-section">
+                <span class="project-section__label">${section.label}</span>
+                ${body}
+              </div>
+            `;
+          },
         )
         .join("");
       const chips = project.sections
@@ -1192,6 +1152,7 @@ function renderTimeline(containerId, items) {
       const side = index % 2 === 0 ? "left" : "right";
       const step = String(index + 1).padStart(2, "0");
       const isOpen = Boolean(item.defaultOpen);
+      const timelineIntro = item.intro || (!item.highlights ? item.text : "");
 
       return `
         <div class="timeline-entry timeline-entry--${side}" data-work-item data-step="${step}">
@@ -1218,7 +1179,7 @@ function renderTimeline(containerId, items) {
                 : item.highlights
                   ? `
                     <div class="timeline-feature__copy">
-                      <p class="timeline-intro">${item.intro || item.text}</p>
+                      ${timelineIntro ? `<p class="timeline-intro">${timelineIntro}</p>` : ""}
                       <div class="timeline-highlights">
                         ${item.highlights
                           .map(
@@ -1242,7 +1203,7 @@ function renderTimeline(containerId, items) {
                                   .map(
                                     (image, index) => `
                                       <img
-                                        class="timeline-gallery__image${index === 0 ? " is-active" : ""}"
+                                        class="timeline-gallery__image${image.fit === "contain" ? " timeline-gallery__image--contain" : ""}${index === 0 ? " is-active" : ""}"
                                         src="${image.src}"
                                         alt="${image.alt}"
                                         data-gallery-image

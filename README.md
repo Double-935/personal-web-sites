@@ -4,7 +4,15 @@
 
 ## 网站结构框架
 
-网站当前由 6 个主要模块组成：
+网站当前由 6 个主要模块组成，并支持游客版 / 朋友版入口：
+
+0. 访问模式
+   - 用户打开网站时默认进入游客版
+   - 顶部提供 `朋友版` 切换入口
+   - 点击后打开邮箱 + 密码注册 / 登录弹窗
+   - 朋友版包含真实地图、路线棋子、见面提醒、每日金币、愿望农场、漂流瓶和宠物小屋
+   - 已接入 Supabase 邮箱 + 密码认证
+   - 朋友版业务状态可以通过 Supabase 数据库和 RLS 按账号隔离
 
 1. 首屏介绍
    - 个人照片
@@ -21,6 +29,7 @@
    - 两张响应式教育经历展示卡
 3. AI 学习
    - AI 辅助 - 个人网页搭建
+   - 黑客松比赛
    - 左侧 3D 模型或图片视觉展示
    - 使用本地 GLB 3D 模型
    - Three.js、CDN 和原生 WebGL 多级加载方案
@@ -149,6 +158,9 @@
 ## 如何维护
 
 - 修改页面内容：编辑 `js/content.js`
+- 修改游客版 / 朋友版入口和弹窗结构：编辑 `index.html`
+- 修改游客版 / 朋友版入口样式：编辑 `css/style.css`
+- 配置朋友版认证：在 `js/content.js` 的 `PORTFOLIO.auth.supabaseUrl` 和 `PORTFOLIO.auth.publishableKey` 中填写 Supabase 项目配置
 - 修改颜色、排版、按钮、卡片、响应式样式：编辑 `css/style.css`
 - 修改页面骨架：编辑 `index.html`
 - 更换主页照片：替换 `assets/images/home-photo.png`
@@ -157,6 +169,7 @@
 - 更换简历 PDF：替换 `assets/docs/li-jiabei-resume.pdf`
 - 查看今日修改记录：打开 `更新记录.md`
 - 查看交接说明：打开 `HANDOFF.md`
+- 配置朋友版数据库：在 Supabase SQL Editor 执行 `supabase/friend-space.sql`
 
 ## 部署方式
 
@@ -170,6 +183,63 @@
 ```text
 index.html
 ```
+
+### 自定义域名
+
+当前网站可以继续部署到 GitHub Pages，再把阿里云购买的域名 `doublelee.cn` 绑定到仓库的 Pages 设置中。
+
+推荐的访问地址是：
+
+```text
+https://doublelee.cn
+```
+
+域名只负责把访问者带到网站，不会提供注册、密码校验或数据库能力。朋友版认证需要另接 Supabase、Cloudflare Worker、Vercel Functions 或其他 HTTPS 后端服务。
+
+### 朋友版认证安全边界
+
+当前代码已经提供以下前端入口：
+
+- 游客版默认显示
+- 朋友版默认隐藏
+- 注册 / 登录弹窗
+- 默认先显示登录表单，注册入口位于登录按钮下方
+- 注册后停留在当前页面等待邮箱验证
+- 邮箱格式和密码基本校验
+- Supabase 邮箱 + 密码认证
+- 认证成功后进入朋友版，退出后回到游客版
+- 验证邮件链接会回到 `https://doublelee.cn/`，确认会话后自动进入朋友版
+
+Supabase 配置项形式如下：
+
+```js
+{
+  supabaseUrl: "你的 Project URL",
+  publishableKey: "你的 publishable key"
+}
+```
+
+前端不会把密码写入 `localStorage`、源码或 Git 仓库。朋友版现在默认优先从 Supabase 的 `friend_space_states` 表读取和保存状态；如果数据库表还没有创建或网络暂时失败，会保留 `localStorage` 作为本地备份。
+
+数据库迁移文件位于：
+
+```text
+supabase/friend-space.sql
+```
+
+执行后，表中的每一行通过 `user_id = auth.uid()` 进行 RLS 隔离。前端只使用 publishable key，不能把 service_role key 或数据库密码放进网页。
+
+当前保存到数据库的朋友版状态包括：
+
+- 真实地图上的路线棋子和经纬度
+- 见面记录与提醒计算所需的日期
+- 金币与每日领取日期
+- 愿望农场，包括用户自己填写的愿望
+- 漂流瓶
+- 宠物状态和衣服
+- 头像 Data URL
+
+后续如果数据量变大，可以把 JSONB 状态拆成 `friend_routes`、`friend_meetings`、`friend_farm_state`、`friend_bottles`、`friend_pets` 和 Storage 头像文件等多张表。
 
 ## 本地预览
 

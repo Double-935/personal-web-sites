@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="李佳蓓的个人网站：教育科技、编程教研、课程研发与内容运营。" />
   <title>李佳蓓 | Portfolio</title>
-  <link rel="stylesheet" href="./css/style.css?v=20260828-responsive-audit" />
+  <link rel="stylesheet" href="./css/style.css?v=20261007-auth-flow" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    crossorigin=""
+  />
   <script type="importmap">
     {
       "imports": {
@@ -14,7 +19,12 @@
       }
     }
   </script>
-  <script src="./js/content.js?v=20260828-responsive-audit" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    crossorigin=""
+  ></script>
+  <script src="./js/content.js?v=20261007-auth-flow" defer></script>
 </head>
 <body>
   <div class="page">
@@ -26,11 +36,24 @@
         <span class="brand-name">PORTFOLIO</span>
       </a>
       <nav class="nav" id="mainNav" aria-label="主导航"></nav>
-      <a class="download-link" id="resumeLink" href="#" download>简历.pdf</a>
+      <div class="topbar-actions">
+        <button
+          class="mode-switch"
+          id="modeSwitch"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="authModal"
+        >
+          <span id="modeSwitchLabel">朋友版</span>
+          <span class="mode-switch__arrow" aria-hidden="true">↗</span>
+        </button>
+        <a class="download-link" id="resumeLink" href="#" download>简历.pdf</a>
+      </div>
     </header>
 
     <main id="top">
-      <section class="hero" id="about-me" aria-labelledby="hero-title">
+      <div id="guestContent" data-site-version="guest">
+        <section class="hero" id="about-me" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow" id="heroEyebrow">在线</div>
           <h1 id="heroTitle">Hi，<br />我是李佳蓓</h1>
@@ -53,9 +76,9 @@
             <span id="heroNoteText">正在继续探索最前沿的科学技术，确保课程设计与时俱进</span>
           </div>
         </div>
-      </section>
+        </section>
 
-      <section class="section" id="education">
+        <section class="section" id="education">
         <div class="section-header section-header--education">
           <div>
             <p class="section-kicker">Learning Path</p>
@@ -64,9 +87,9 @@
           </div>
         </div>
         <div class="education-list" id="educationList"></div>
-      </section>
+        </section>
 
-      <section class="section" id="about">
+        <section class="section" id="about">
         <div class="section-header">
           <div>
             <p class="section-kicker">AI coding</p>
@@ -75,9 +98,9 @@
           <p id="aboutSummary"></p>
         </div>
         <div class="project-list" id="projectList"></div>
-      </section>
+        </section>
 
-      <section class="section" id="work">
+        <section class="section" id="work">
         <div class="section-header">
           <div>
             <p class="section-kicker">Experience</p>
@@ -88,9 +111,9 @@
         <div class="surface">
           <div class="timeline work-timeline" id="workList"></div>
         </div>
-      </section>
+        </section>
 
-      <section class="section section--skills" id="other">
+        <section class="section section--skills" id="other">
         <div class="section-header section-header--skills">
           <div>
             <h2>随机抽取一张我的档案卡</h2>
@@ -98,9 +121,9 @@
           <p id="skillsSummary"></p>
         </div>
         <div class="skill-list" id="skillList"></div>
-      </section>
+        </section>
 
-      <section class="section section--contact" id="contact">
+        <section class="section section--contact" id="contact">
         <div class="contact-panel">
           <div class="contact-panel__copy">
             <p class="section-kicker section-kicker--contact">LET'S TALK</p>
@@ -112,10 +135,73 @@
           </div>
           <div class="contact-actions" id="contactList"></div>
         </div>
+        </section>
+      </div>
+
+      <section class="friend-content" id="friendContent" data-site-version="friend" hidden>
+        <div id="friendSpaceRoot"></div>
       </section>
     </main>
 
     <footer class="footer" id="footer"></footer>
+  </div>
+
+  <div class="auth-modal" id="authModal" hidden>
+    <div class="auth-modal__backdrop" data-auth-close></div>
+    <section
+      class="auth-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="authTitle"
+    >
+      <button class="auth-dialog__close" id="authClose" type="button" aria-label="关闭">
+        ×
+      </button>
+      <p class="section-kicker">FRIENDS ONLY</p>
+      <h2 id="authTitle">登录朋友版</h2>
+      <p class="auth-dialog__intro" id="authIntro">
+        输入邮箱和密码，登录后进入朋友版。
+      </p>
+
+      <form class="auth-form" id="authForm">
+        <label class="auth-field">
+          <span>邮箱</span>
+          <input
+            id="authEmail"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="输入你的邮箱"
+            required
+          />
+        </label>
+        <label class="auth-field">
+          <span>密码</span>
+          <input
+            id="authPassword"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+            minlength="8"
+            maxlength="72"
+            placeholder="至少 8 位"
+            required
+          />
+        </label>
+        <button class="auth-submit" id="authSubmit" type="submit">登录并进入</button>
+        <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+        <p class="auth-mode-hint" id="authModeHint">
+          <span id="authModePrompt">还没有账号？</span>
+          <button class="auth-mode-link" id="authModeToggle" type="button">先来注册吧</button>
+        </p>
+        <button class="auth-resend" id="authResend" type="button" hidden>
+          重新发送验证邮件
+        </button>
+      </form>
+      <p class="auth-security-note">
+        注册和登录由 Supabase Auth 处理。密码不会写入这个网站的代码或浏览器本地存储。
+      </p>
+    </section>
   </div>
 </body>
 </html>

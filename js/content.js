@@ -8,6 +8,11 @@ const PORTFOLIO = {
     photo: "./assets/images/home-photo.png",
     mail: "mailto:jiabeilieee@foxmail.com",
   },
+  auth: {
+    // Fill these with Supabase's project URL and publishable key.
+    supabaseUrl: "https://txvcpuusjwkmgjanhqlc.supabase.co",
+    publishableKey: "sb_publishable_yQW2hR3tAKxzzyvlQl8X0A_DL3Q_g3U",
+  },
   nav: [
     { label: "关于我", href: "#about-me" },
     { label: "教育背景", href: "#education" },
@@ -71,6 +76,47 @@ const PORTFOLIO = {
           {
             label: "有待思考和完善的",
             text: ["token的成本控制问题。", "是否可以把该网页做成一个可供用户复刻使用的产品。"],
+          },
+        ],
+      },
+      {
+        number: "项目二",
+        title: "黑客松比赛",
+        lead: "围绕黑客松比赛经历，记录从选题、协作到作品呈现的完整过程。",
+        placeholderImage: {
+          src: "./assets/images/project-placeholder.svg",
+          alt: "黑客松比赛项目图片占位",
+        },
+        scrollContent: true,
+        sections: [
+          {
+            label: "项目基本介绍",
+            text:
+              "待补充：比赛名称、比赛主题、参赛时间、团队成员、项目目标和最终作品。后续可以在这里完整记录黑客松项目从想法到呈现的过程。",
+          },
+          {
+            label: "学习到的新知识",
+            text:
+              "待补充：比赛过程中接触到的新工具、新技术、产品方法、团队协作方式，以及如何在有限时间内完成方案验证。",
+          },
+          {
+            label: "遇见的问题和解决方案",
+            text:
+              "待补充：记录比赛过程中遇到的技术、沟通、时间管理或方案取舍问题，以及团队最终采取的解决方式。",
+          },
+          {
+            label: "下次可以改进的",
+            text: [
+              "待补充：赛前准备、任务拆分、时间安排和最终展示方面可以改进的地方。",
+              "待补充：如果再次参赛，希望提前验证哪些关键假设。",
+            ],
+          },
+          {
+            label: "有待思考和完善的",
+            text: [
+              "待补充：项目后续是否可以继续开发，或转化为一个真正可使用的产品。",
+              "待补充：如何进一步验证用户需求和项目价值。",
+            ],
           },
         ],
       },
@@ -245,6 +291,26 @@ const PORTFOLIO = {
     items: [
       { label: "邮箱", value: "jiabeilieee@foxmail.com" },
       { label: "电话/微信同号", value: "186-2838-7059" },
+    ],
+  },
+  friend: {
+    title: "欢迎来到朋友版",
+    cards: [
+      {
+        kicker: "A LITTLE CLOSER",
+        title: "这里会放只和朋友分享的内容",
+        text: "朋友版的内容可以是近况、照片、旅行记录、碎碎念，或者你想单独保留的一小块私人空间。",
+      },
+      {
+        kicker: "IN PROGRESS",
+        title: "先把入口搭好",
+        text: "等认证服务接入后，这里就只对注册并登录成功的朋友开放。",
+      },
+      {
+        kicker: "YOUR SPACE",
+        title: "内容可以慢慢长出来",
+        text: "之后我们可以继续设计朋友版的首页、动态卡片、照片墙或留言功能。",
+      },
     ],
   },
   footer: "李佳蓓 · AI · Education Technology",
@@ -1568,6 +1634,1071 @@ function renderContacts(containerId, items) {
   `;
 }
 
+const FRIEND_STORAGE_PREFIX = "friend-space-v1:";
+const MEETING_REMINDER_DAYS = 60;
+const FARM_ACTIONS_FOR_FRUIT = 6;
+
+function escapeHTML(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function getTodayKey() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${now.getFullYear()}-${month}-${day}`;
+}
+
+function daysSince(dateString) {
+  if (!dateString) return 0;
+  const target = new Date(`${dateString}T00:00:00`);
+  if (Number.isNaN(target.getTime())) return 0;
+  return Math.max(0, Math.floor((Date.now() - target.getTime()) / 86400000));
+}
+
+function clampNumber(value, min, max) {
+  return Math.min(max, Math.max(min, Number(value) || 0));
+}
+
+function createFriendState(email) {
+  const displayName = email.split("@")[0] || "朋友";
+  return {
+    profile: {
+      name: displayName,
+      email,
+      avatar: "",
+    },
+    coins: 0,
+    level: 1,
+    lastDailyClaim: "",
+    notice: "",
+    mapMarkers: [],
+    meetings: [],
+    farm: {
+      wish: "身体健康",
+      progress: 0,
+      fruit: "",
+      lastWatered: "",
+      lastFertilized: "",
+    },
+    bottles: [],
+    pet: {
+      type: "cat",
+      closeness: 0,
+      hunger: 82,
+      hygiene: 82,
+      health: 100,
+      clothes: "#b7dc55",
+      sick: false,
+      lastCareAt: "",
+    },
+  };
+}
+
+function getFriendStorageKey(email) {
+  return `${FRIEND_STORAGE_PREFIX}${email.toLowerCase()}`;
+}
+
+function normalizeFriendState(email, saved) {
+  const fallback = createFriendState(email);
+  if (!saved || typeof saved !== "object") return fallback;
+  return {
+    ...fallback,
+    ...saved,
+    profile: { ...fallback.profile, ...saved.profile, email },
+    farm: { ...fallback.farm, ...saved.farm },
+    pet: { ...fallback.pet, ...saved.pet },
+    mapMarkers: Array.isArray(saved.mapMarkers) ? saved.mapMarkers : [],
+    meetings: Array.isArray(saved.meetings) ? saved.meetings : [],
+    bottles: Array.isArray(saved.bottles) ? saved.bottles : [],
+  };
+}
+
+function readLocalFriendState(email) {
+  try {
+    return JSON.parse(localStorage.getItem(getFriendStorageKey(email)) || "null");
+  } catch (error) {
+    return null;
+  }
+}
+
+async function loadFriendState(email, supabaseClient, userId) {
+  const localState = normalizeFriendState(email, readLocalFriendState(email));
+  if (!supabaseClient || !userId) return localState;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("friend_space_states")
+      .select("state")
+      .eq("user_id", userId)
+      .maybeSingle();
+    if (error) throw error;
+
+    if (data?.state) {
+      const databaseState = normalizeFriendState(email, data.state);
+      localStorage.setItem(getFriendStorageKey(email), JSON.stringify(databaseState));
+      return databaseState;
+    }
+
+    if (readLocalFriendState(email)) {
+      await supabaseClient.from("friend_space_states").upsert({
+        user_id: userId,
+        state: localState,
+      });
+    }
+  } catch (error) {
+    console.warn("Friend Space database read failed; using local backup.", error);
+  }
+
+  return localState;
+}
+
+function saveFriendState(email, state, supabaseClient, userId) {
+  localStorage.setItem(getFriendStorageKey(email), JSON.stringify(state));
+  if (!supabaseClient || !userId) return;
+
+  supabaseClient
+    .from("friend_space_states")
+    .upsert({
+      user_id: userId,
+      state,
+    })
+    .then(({ error }) => {
+      if (error) {
+        console.warn("Friend Space database save failed; local backup kept.", error);
+      }
+    });
+}
+
+function getPetName(type) {
+  return type === "dog" ? "狗狗" : "猫猫";
+}
+
+async function renderFriendContent(data, userEmail, supabaseClient, userId, onLogout) {
+  const oldRoot = document.getElementById("friendSpaceRoot");
+  if (!oldRoot || !userEmail) return;
+  const root = oldRoot.cloneNode(false);
+  oldRoot.replaceWith(root);
+  if (!root || !userEmail) return;
+
+  root.innerHTML = `<p class="friend-loading">正在加载朋友版空间...</p>`;
+  const state = await loadFriendState(userEmail, supabaseClient, userId);
+  const today = getTodayKey();
+  let dailyClaimed = false;
+
+  if (state.lastDailyClaim !== today) {
+    state.lastDailyClaim = today;
+    state.coins += 1;
+    state.notice = "今日登录奖励 +1 金币，慢慢把自己的小世界养起来。";
+    dailyClaimed = true;
+  }
+
+  if (
+    state.pet.lastCareAt &&
+    daysSince(state.pet.lastCareAt) >= 3 &&
+    !state.pet.sick
+  ) {
+    state.pet.sick = true;
+    state.pet.health = Math.min(state.pet.health, 28);
+    state.notice = `${getPetName(state.pet.type)}生病了，记得照顾它。`;
+  }
+
+  saveFriendState(userEmail, state, supabaseClient, userId);
+
+  const getLatestMeetings = () => {
+    const latest = new Map();
+    state.meetings.forEach((meeting) => {
+      const old = latest.get(meeting.name);
+      if (!old || meeting.date > old.date) latest.set(meeting.name, meeting);
+    });
+    return [...latest.values()];
+  };
+
+  const getReminderMeetings = () =>
+    getLatestMeetings().filter((meeting) => daysSince(meeting.date) >= MEETING_REMINDER_DAYS);
+
+  let routeMap = null;
+
+  const renderBoard = () => {
+    const reminders = getReminderMeetings();
+    const reminderMarkup = reminders.length
+      ? reminders
+          .map(
+            (meeting) => `
+              <div class="friend-alert">
+                <span class="friend-alert__icon" aria-hidden="true">!</span>
+                <p>好久没和<strong>${escapeHTML(meeting.name)}</strong>见面了，友情需要常联系！快去找她玩吧！</p>
+              </div>
+            `,
+          )
+          .join("")
+      : `<div class="friend-empty-state">还没有需要提醒的见面记录，先约下一次见面吧。</div>`;
+
+    return `
+      <div class="friend-route-map" id="friendRouteMap" role="application" aria-label="朋友路线地图">
+        <div class="friend-map-loading">地图加载中...</div>
+      </div>
+      <div class="friend-map-caption">
+        <span class="friend-map-caption__dot" aria-hidden="true"></span>
+        点击地图选择下一站，已保存的地点会用小人棋子显示，并按添加顺序连成路线。
+      </div>
+      <div class="friend-board__side">
+        <div class="friend-map-summary">
+          <strong>${state.mapMarkers.length}</strong>
+          <span>个路线地点</span>
+        </div>
+        <div class="friend-alerts">
+          <p class="friend-mini-label">FRIENDSHIP CHECK-IN</p>
+          ${reminderMarkup}
+        </div>
+        <div class="friend-record-list">
+          <p class="friend-mini-label">最近见面</p>
+          ${
+            state.meetings.length
+              ? state.meetings
+                  .slice()
+                  .sort((a, b) => b.date.localeCompare(a.date))
+                  .slice(0, 4)
+                  .map(
+                    (meeting) => `
+                      <div class="friend-record">
+                        <strong>${escapeHTML(meeting.name)}</strong>
+                        <span>${escapeHTML(meeting.date)} · ${escapeHTML(meeting.place)}</span>
+                      </div>
+                    `,
+                  )
+                  .join("")
+              : `<div class="friend-empty-state">还没有见面记录。</div>`
+          }
+        </div>
+      </div>
+    `;
+  };
+
+  const setupRouteMap = () => {
+    const mapElement = root.querySelector("#friendRouteMap");
+    if (!mapElement) return;
+
+    if (!window.L) {
+      mapElement.innerHTML = `
+        <div class="friend-map-error">
+          地图组件暂时没有加载成功，请检查网络后刷新页面。
+        </div>
+      `;
+      return;
+    }
+
+    routeMap?.remove();
+    routeMap = window.L.map(mapElement, {
+      zoomControl: true,
+      scrollWheelZoom: true,
+    }).setView([30.5, 114], 4.5);
+
+    window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a>',
+    }).addTo(routeMap);
+
+    const routePoints = state.mapMarkers
+      .map((marker) => ({
+        ...marker,
+        latitude: Number(marker.latitude),
+        longitude: Number(marker.longitude),
+      }))
+      .filter(
+        (marker) =>
+          Number.isFinite(marker.latitude) &&
+          Number.isFinite(marker.longitude),
+      );
+
+    const pieceIcon = window.L.divIcon({
+      className: "friend-map-piece-icon",
+      html: '<span aria-hidden="true">🧍</span>',
+      iconSize: [38, 38],
+      iconAnchor: [19, 34],
+      popupAnchor: [0, -30],
+    });
+
+    routePoints.forEach((marker, index) => {
+      const popup = `
+        <strong>${index + 1}. ${escapeHTML(marker.name)}</strong>
+        <br />${escapeHTML(marker.place)}
+        ${marker.date ? `<br />${escapeHTML(marker.date)}` : ""}
+        ${marker.note ? `<br /><span>${escapeHTML(marker.note)}</span>` : ""}
+      `;
+      window.L.marker([marker.latitude, marker.longitude], { icon: pieceIcon })
+        .addTo(routeMap)
+        .bindPopup(popup);
+    });
+
+    if (routePoints.length > 1) {
+      window.L.polyline(
+        routePoints.map((marker) => [marker.latitude, marker.longitude]),
+        {
+          color: "#7eaa31",
+          weight: 4,
+          opacity: 0.9,
+          dashArray: "8 8",
+        },
+      ).addTo(routeMap);
+    }
+
+    if (routePoints.length > 1) {
+      routeMap.fitBounds(
+        routePoints.map((marker) => [marker.latitude, marker.longitude]),
+        { padding: [28, 28], maxZoom: 8 },
+      );
+    } else if (routePoints.length === 1) {
+      routeMap.setView([routePoints[0].latitude, routePoints[0].longitude], 8);
+    }
+
+    let pendingPin = null;
+    routeMap.on("click", (event) => {
+      const latitude = Number(event.latlng.lat.toFixed(6));
+      const longitude = Number(event.latlng.lng.toFixed(6));
+      const latitudeInput = root.querySelector('[name="latitude"]');
+      const longitudeInput = root.querySelector('[name="longitude"]');
+      const pointStatus = root.querySelector("#friendMapPointStatus");
+      if (latitudeInput) latitudeInput.value = String(latitude);
+      if (longitudeInput) longitudeInput.value = String(longitude);
+      if (pointStatus) {
+        pointStatus.textContent = `已选择：${latitude}, ${longitude}`;
+        pointStatus.dataset.state = "selected";
+      }
+      pendingPin?.remove();
+      pendingPin = window.L.circleMarker([latitude, longitude], {
+        radius: 9,
+        color: "#1d2420",
+        weight: 3,
+        fillColor: "#f3d98b",
+        fillOpacity: 1,
+      }).addTo(routeMap);
+    });
+
+    window.setTimeout(() => routeMap?.invalidateSize(), 0);
+  };
+
+  const renderFarm = () => {
+    const farm = state.farm;
+    const waterReady = farm.lastWatered !== today;
+    const fertilizerReady = farm.lastFertilized !== today;
+    const progress = Math.min(100, Math.round((farm.progress / FARM_ACTIONS_FOR_FRUIT) * 100));
+    return `
+      <div class="friend-farm-visual">
+        <div class="friend-farm-sky">
+          <span class="friend-cloud friend-cloud--one"></span>
+          <span class="friend-cloud friend-cloud--two"></span>
+          <div class="friend-sun" aria-hidden="true">☼</div>
+        </div>
+        <div class="friend-farm-soil">
+          <div class="friend-sprout${farm.progress >= 3 ? " is-growing" : ""}${farm.fruit ? " is-fruitful" : ""}">
+            <span class="friend-sprout__stem"></span>
+            <span class="friend-sprout__leaf friend-sprout__leaf--left"></span>
+            <span class="friend-sprout__leaf friend-sprout__leaf--right"></span>
+            ${farm.fruit ? `<span class="friend-sprout__fruit" title="${escapeHTML(farm.fruit)}">●</span>` : ""}
+          </div>
+        </div>
+      </div>
+      <div class="friend-farm-copy">
+        <p class="friend-mini-label">WISH FARM</p>
+        <h3>${farm.fruit ? `愿望已经结成果实：${escapeHTML(farm.fruit)}` : `正在种下：${escapeHTML(farm.wish)}`}</h3>
+        <p>${farm.fruit ? "可以重新选择一个愿望，继续照顾下一颗种子。" : "每天浇水和施肥，让愿望一点点长出来。"}</p>
+        <div class="friend-progress">
+          <div class="friend-progress__header">
+            <span>成长进度</span>
+            <strong>${progress}%</strong>
+          </div>
+          <div class="friend-progress__track"><span style="width:${progress}%"></span></div>
+        </div>
+        <div class="friend-farm-actions">
+          <button class="friend-action-button" type="button" data-friend-action="water" ${waterReady && !farm.fruit ? "" : "disabled"}>
+            浇水 <small>${waterReady && !farm.fruit ? "+1 金币" : "今天完成"}</small>
+          </button>
+          <button class="friend-action-button" type="button" data-friend-action="fertilize" ${fertilizerReady && !farm.fruit ? "" : "disabled"}>
+            施肥 <small>${fertilizerReady && !farm.fruit ? "+1 金币" : "今天完成"}</small>
+          </button>
+        </div>
+      </div>
+    `;
+  };
+
+  const renderPet = () => {
+    const pet = state.pet;
+    const petName = getPetName(pet.type);
+    return `
+      <div class="friend-pet-visual">
+        <div class="friend-pet-orbit friend-pet-orbit--one"></div>
+        <div class="friend-pet-orbit friend-pet-orbit--two"></div>
+        <div class="friend-pet-avatar" style="--pet-clothes:${pet.clothes}">
+          <span class="friend-pet-clothes"></span>
+          <span class="friend-pet-face" aria-label="${petName}">${pet.type === "dog" ? "🐶" : "🐱"}</span>
+        </div>
+        <span class="friend-pet-status">${pet.sick ? "需要照顾" : "状态很好"}</span>
+      </div>
+      <div class="friend-pet-copy">
+        <p class="friend-mini-label">MY COMPANION</p>
+        <h3>${petName}</h3>
+        <p>${pet.sick ? `${petName}好像生病了，先多陪陪它。` : "每天做一点小事，亲密度就会慢慢增加。"}</p>
+        <div class="friend-stat-list">
+          <div><span>亲密度</span><strong>${pet.closeness}</strong></div>
+          <div><span>饱腹</span><strong>${pet.hunger}</strong></div>
+          <div><span>清洁</span><strong>${pet.hygiene}</strong></div>
+          <div><span>健康</span><strong>${pet.health}</strong></div>
+        </div>
+        <div class="friend-pet-actions">
+          ${[
+            ["pet", "摸头"],
+            ["train", "社会化训练"],
+            ["walk", "遛一遛"],
+            ["feed", "喂食"],
+            ["clean", "铲屎"],
+          ]
+            .map(
+              ([action, label]) =>
+                `<button type="button" class="friend-small-action" data-friend-action="pet-${action}">${label}</button>`,
+            )
+            .join("")}
+        </div>
+        <div class="friend-clothes">
+          <span>换一件衣服</span>
+          ${["#b7dc55", "#f3d98b", "#91c8bc", "#e4a86c", "#c3b2dd"]
+            .map(
+              (color) =>
+                `<button type="button" class="friend-color-swatch${pet.clothes === color ? " is-active" : ""}" style="--swatch:${color}" data-friend-clothes="${color}" aria-label="选择${color}衣服"></button>`,
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+  };
+
+  const renderBottles = () => {
+    const bottles = state.bottles
+      .slice()
+      .sort((a, b) => a.openAt.localeCompare(b.openAt));
+    return bottles.length
+      ? bottles
+          .map((bottle) => {
+            const opened = bottle.openAt <= today;
+            return `
+              <article class="friend-bottle${opened ? " is-open" : ""}">
+                <span class="friend-bottle__cap" aria-hidden="true">✦</span>
+                <div>
+                  <strong>${opened ? "今天可以打开" : `将在 ${escapeHTML(bottle.openAt)} 漂来`}</strong>
+                  <p>${opened ? escapeHTML(bottle.message) : "先把这封信交给未来的自己。"}</p>
+                </div>
+              </article>
+            `;
+          })
+          .join("")
+      : `<div class="friend-empty-state">还没有漂流瓶，写一封信给未来的自己吧。</div>`;
+  };
+
+  const draw = () => {
+    root.innerHTML = `
+      <div class="friend-space" aria-label="朋友版互动空间">
+        <header class="friend-space__header">
+          <div class="friend-profile">
+            <label class="friend-avatar" title="上传头像">
+              ${
+                state.profile.avatar
+                  ? `<img src="${state.profile.avatar}" alt="我的头像" />`
+                  : `<span aria-hidden="true">${escapeHTML(state.profile.name.slice(0, 1).toUpperCase())}</span>`
+              }
+              <input id="friendAvatarInput" type="file" accept="image/*" />
+              <small>更换头像</small>
+            </label>
+            <div>
+              <p class="friend-space__eyebrow">FRIEND MODE</p>
+              <h1>${escapeHTML(state.profile.name)}</h1>
+              <p>${escapeHTML(state.profile.email)}</p>
+            </div>
+          </div>
+          <div class="friend-space__controls">
+            <div class="friend-level">
+              <span class="friend-level__star" aria-hidden="true">★</span>
+              <div><small>LEVEL</small><strong>LV.${state.level}</strong></div>
+            </div>
+            <div class="friend-coins"><span aria-hidden="true">●</span><strong>${state.coins}</strong><small>金币</small></div>
+            <button class="friend-logout" data-friend-action="logout" type="button">回到游客版 <span aria-hidden="true">↗</span></button>
+          </div>
+        </header>
+
+        <p class="friend-toast" role="status" aria-live="polite">${escapeHTML(state.notice || (dailyClaimed ? "今日登录奖励 +1 金币" : ""))}</p>
+
+        <section class="friend-module friend-module--board">
+          <div class="friend-module__heading">
+            <div><p class="friend-space__eyebrow">FRIEND ROUTES</p><h2>友谊棋盘</h2><p>把下一次见面和想去的地方，放到同一张地图上。</p></div>
+            <span class="friend-module__stamp">PLAY TOGETHER</span>
+          </div>
+          <div class="friend-board-layout">
+            <div>${renderBoard()}</div>
+            <form class="friend-form friend-form--route" data-friend-form="route">
+              <p class="friend-mini-label">放下一颗棋子</p>
+              <label>朋友 / 目的地<input name="name" placeholder="例如：小王" required /></label>
+              <label>地点<input name="place" placeholder="例如：南京" required /></label>
+              <label>时间<input name="date" type="month" required /></label>
+              <label>备注<input name="note" placeholder="例如：九月份一起看展" /></label>
+              <input name="latitude" type="hidden" />
+              <input name="longitude" type="hidden" />
+              <p class="friend-map-point-status" id="friendMapPointStatus">请先在地图上点击选择位置。</p>
+              <button class="friend-primary-button" type="submit">放到棋盘上 <span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+        </section>
+
+        <section class="friend-module friend-module--meet">
+          <div class="friend-module__heading"><div><p class="friend-space__eyebrow">MEET LOG</p><h2>见面记录</h2><p>记录每一次真实见面，也让棋盘提醒我们不要失联。</p></div></div>
+          <div class="friend-meet-layout">
+            <div class="friend-meet-cards">
+              ${
+                state.meetings.length
+                  ? state.meetings
+                      .slice()
+                      .sort((a, b) => b.date.localeCompare(a.date))
+                      .map(
+                        (meeting) => `
+                          <article class="friend-meet-card">
+                            <span>${escapeHTML(meeting.date)}</span>
+                            <strong>${escapeHTML(meeting.name)}</strong>
+                            <p>${escapeHTML(meeting.place)}</p>
+                          </article>
+                        `,
+                      )
+                      .join("")
+                  : `<div class="friend-empty-state">第一次见面记录，等你来写。</div>`
+              }
+            </div>
+            <form class="friend-form" data-friend-form="meeting">
+              <p class="friend-mini-label">新增一次见面</p>
+              <label>和谁<input name="name" placeholder="朋友名字" required /></label>
+              <label>在哪里<input name="place" placeholder="见面地点" required /></label>
+              <label>什么时候<input name="date" type="date" required /></label>
+              <button class="friend-primary-button" type="submit">保存见面记录 <span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+        </section>
+
+        <div class="friend-feature-grid">
+          <section class="friend-module friend-module--farm">
+            <div class="friend-module__heading"><div><p class="friend-space__eyebrow">WISH FARM</p><h2>愿望农场</h2></div></div>
+            <div class="friend-farm-layout">
+              ${renderFarm()}
+              <form class="friend-form friend-form--wish" data-friend-form="farm">
+                <p class="friend-mini-label">选择一颗愿望种子</p>
+                <label>我的愿望
+                  <select name="wishPreset">
+                    ${["身体健康", "吃一顿寿喜烧", "去看一次海", "顺利完成一个作品"]
+                      .map((wish) => `<option${state.farm.wish === wish ? " selected" : ""}>${wish}</option>`)
+                      .join("")}
+                  </select>
+                </label>
+                <label>自定义愿望（可选）
+                  <input
+                    name="customWish"
+                    maxlength="60"
+                    value="${escapeHTML(
+                      ["身体健康", "吃一顿寿喜烧", "去看一次海", "顺利完成一个作品"].includes(state.farm.wish)
+                        ? ""
+                        : state.farm.wish,
+                    )}"
+                    placeholder="例如：今年通过潜水证考试"
+                  />
+                </label>
+                <button class="friend-secondary-button" type="submit">重新播种</button>
+              </form>
+            </div>
+          </section>
+
+          <section class="friend-module friend-module--pet">
+            <div class="friend-module__heading"><div><p class="friend-space__eyebrow">PET LIFE</p><h2>宠物小屋</h2></div></div>
+            <div class="friend-pet-layout">
+              ${renderPet()}
+              <div class="friend-pet-choice">
+                <span>选择陪伴者</span>
+                <button type="button" class="${state.pet.type === "cat" ? "is-active" : ""}" data-friend-pet="cat">🐱 猫猫</button>
+                <button type="button" class="${state.pet.type === "dog" ? "is-active" : ""}" data-friend-pet="dog">🐶 狗狗</button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="friend-module friend-module--bottle">
+          <div class="friend-module__heading"><div><p class="friend-space__eyebrow">MESSAGE TO FUTURE ME</p><h2>漂流瓶</h2><p>写信给未来的自己，到约定的日子再打开。</p></div></div>
+          <div class="friend-bottle-layout">
+            <div class="friend-bottle-list">${renderBottles()}</div>
+            <form class="friend-form" data-friend-form="bottle">
+              <p class="friend-mini-label">投递一封信</p>
+              <label>打开时间<input name="openAt" type="date" min="${today}" required /></label>
+              <label>写给未来的自己<textarea name="message" rows="5" placeholder="想对未来的自己说什么？" required></textarea></label>
+              <button class="friend-primary-button" type="submit">投进时间的河里 <span aria-hidden="true">↗</span></button>
+            </form>
+          </div>
+        </section>
+      </div>
+    `;
+    setupRouteMap();
+  };
+
+  const update = (notice = "") => {
+    if (notice) state.notice = notice;
+    saveFriendState(userEmail, state, supabaseClient, userId);
+    draw();
+  };
+
+  root.addEventListener("click", (event) => {
+    const actionButton = event.target.closest("[data-friend-action]");
+    if (actionButton) {
+      const action = actionButton.dataset.friendAction;
+      if (action === "logout") {
+        onLogout?.();
+        return;
+      }
+      if (action === "water" || action === "fertilize") {
+        const farmKey = action === "water" ? "lastWatered" : "lastFertilized";
+        if (state.farm[farmKey] === today || state.farm.fruit) return;
+        state.farm[farmKey] = today;
+        state.farm.progress += 1;
+        state.coins += 1;
+        if (state.farm.progress >= FARM_ACTIONS_FOR_FRUIT) {
+          state.farm.fruit = `${state.farm.wish}的果实`;
+          state.coins += 5;
+          update("愿望结成果实了！额外获得 5 金币。");
+        } else {
+          update(`${action === "water" ? "浇水" : "施肥"}完成，+1 金币。`);
+        }
+        return;
+      }
+      if (action.startsWith("pet-")) {
+        const petAction = action.replace("pet-", "");
+        const pet = state.pet;
+        const changes = {
+          pet: [3, 0, 0, 2],
+          train: [4, -4, 0, 3],
+          walk: [2, -6, -5, 4],
+          feed: [2, 25, -2, 3],
+          clean: [1, 0, 22, 4],
+        }[petAction];
+        if (!changes) return;
+        pet.closeness = clampNumber(pet.closeness + changes[0], 0, 100);
+        pet.hunger = clampNumber(pet.hunger + changes[1], 0, 100);
+        pet.hygiene = clampNumber(pet.hygiene + changes[2], 0, 100);
+        pet.health = clampNumber(pet.health + changes[3], 0, 100);
+        pet.lastCareAt = today;
+        if (pet.health > 50 && pet.sick) pet.sick = false;
+        update(`${getPetName(pet.type)}和你一起完成了“${action === "pet-pet" ? "摸头" : action === "pet-train" ? "社会化训练" : action === "pet-walk" ? "散步" : action === "pet-feed" ? "喂食" : "铲屎"}”。`);
+        return;
+      }
+    }
+
+    const petChoice = event.target.closest("[data-friend-pet]");
+    if (petChoice) {
+      state.pet.type = petChoice.dataset.friendPet;
+      state.pet.sick = false;
+      update(`现在由${getPetName(state.pet.type)}陪你生活。`);
+      return;
+    }
+
+    const clothesButton = event.target.closest("[data-friend-clothes]");
+    if (clothesButton) {
+      state.pet.clothes = clothesButton.dataset.friendClothes;
+      update("换好新衣服了。");
+    }
+  });
+
+  root.addEventListener("change", (event) => {
+    if (event.target.id !== "friendAvatarInput") return;
+    const file = event.target.files?.[0];
+    if (!file || !file.type.startsWith("image/")) return;
+    if (file.size > 2 * 1024 * 1024) {
+      update("头像图片请控制在 2MB 以内。");
+      return;
+    }
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      state.profile.avatar = String(reader.result || "");
+      update("头像已经换好了。");
+    });
+    reader.readAsDataURL(file);
+  });
+
+  root.addEventListener("submit", (event) => {
+    const form = event.target.closest("[data-friend-form]");
+    if (!form) return;
+    event.preventDefault();
+    const formData = new FormData(form);
+    const formType = form.dataset.friendForm;
+
+    if (formType === "route") {
+      const latitude = Number(formData.get("latitude"));
+      const longitude = Number(formData.get("longitude"));
+      if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+        update("请先在地图上点击选择路线位置。");
+        return;
+      }
+      state.mapMarkers.push({
+        name: String(formData.get("name") || "").trim(),
+        place: String(formData.get("place") || "").trim(),
+        date: String(formData.get("date") || ""),
+        note: String(formData.get("note") || "").trim(),
+        latitude,
+        longitude,
+      });
+      update("一颗新的路线棋子已经放到真实地图上。");
+      return;
+    }
+
+    if (formType === "meeting") {
+      state.meetings.push({
+        name: String(formData.get("name") || "").trim(),
+        place: String(formData.get("place") || "").trim(),
+        date: String(formData.get("date") || ""),
+      });
+      update("见面记录保存好了。");
+      return;
+    }
+
+    if (formType === "farm") {
+      const presetWish = String(formData.get("wishPreset") || "身体健康").trim();
+      const customWish = String(formData.get("customWish") || "").trim();
+      const wish = customWish || presetWish;
+      if (!wish) {
+        update("请填写一个愿望，或者选择一个预设愿望。");
+        return;
+      }
+      if (wish.length > 60) {
+        update("愿望请控制在 60 个字以内。");
+        return;
+      }
+      state.farm.wish = wish;
+      state.farm.progress = 0;
+      state.farm.fruit = "";
+      state.farm.lastWatered = "";
+      state.farm.lastFertilized = "";
+      update(`已经播下“${state.farm.wish}”这颗愿望种子。`);
+      return;
+    }
+
+    if (formType === "bottle") {
+      state.bottles.push({
+        message: String(formData.get("message") || "").trim(),
+        openAt: String(formData.get("openAt") || ""),
+      });
+      update("漂流瓶已经投进时间的河里。");
+    }
+  });
+
+  draw();
+}
+
+function setSiteMode(mode, userId = "") {
+  const isFriend = mode === "friend";
+  const guestContent = document.getElementById("guestContent");
+  const friendContent = document.getElementById("friendContent");
+  const modeSwitch = document.getElementById("modeSwitch");
+  const modeSwitchLabel = document.getElementById("modeSwitchLabel");
+  const friendGreeting = document.getElementById("friendGreeting");
+
+  if (guestContent) guestContent.hidden = isFriend;
+  if (friendContent) friendContent.hidden = !isFriend;
+  document.body.dataset.siteMode = isFriend ? "friend" : "guest";
+
+  if (modeSwitch) {
+    modeSwitch.setAttribute("aria-label", isFriend ? "退出朋友版" : "切换至朋友版");
+  }
+  if (modeSwitchLabel) {
+    modeSwitchLabel.textContent = isFriend ? "游客版" : "朋友版";
+  }
+  if (friendGreeting && userId) {
+    friendGreeting.textContent = `你好，${userId}。这里是一块只在朋友版里出现的空间。`;
+  }
+
+  if (isFriend) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+function closeAuthModal() {
+  const modal = document.getElementById("authModal");
+  if (!modal) return;
+  modal.hidden = true;
+  document.body.classList.remove("is-auth-open");
+}
+
+function openAuthModal() {
+  const modal = document.getElementById("authModal");
+  const emailInput = document.getElementById("authEmail");
+  if (!modal) return;
+  modal.hidden = false;
+  document.body.classList.add("is-auth-open");
+  window.requestAnimationFrame(() => emailInput?.focus());
+}
+
+function setAuthStatus(message, state = "") {
+  const status = document.getElementById("authStatus");
+  if (!status) return;
+  status.textContent = message;
+  status.dataset.state = state;
+}
+
+function getAuthRedirectUrl() {
+  const currentUrl = window.location.href.split("#")[0];
+  if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    return currentUrl;
+  }
+  return "https://doublelee.cn/";
+}
+
+function setAuthMode(mode) {
+  const isSignIn = mode === "signIn";
+  const authTitle = document.getElementById("authTitle");
+  const authIntro = document.getElementById("authIntro");
+  const authSubmit = document.getElementById("authSubmit");
+  const password = document.getElementById("authPassword");
+  const authModePrompt = document.getElementById("authModePrompt");
+  const authModeToggle = document.getElementById("authModeToggle");
+  const authResend = document.getElementById("authResend");
+
+  if (authTitle) authTitle.textContent = isSignIn ? "登录朋友版" : "注册朋友版";
+  if (authIntro) {
+    authIntro.textContent = isSignIn
+      ? "输入邮箱和密码，登录后进入朋友版。"
+      : "填写邮箱和密码，注册后请先完成邮箱验证。";
+  }
+  if (authSubmit) {
+    authSubmit.textContent = isSignIn ? "登录并进入" : "注册并发送验证邮件";
+  }
+  if (password) {
+    password.autocomplete = isSignIn ? "current-password" : "new-password";
+  }
+  if (authModePrompt) {
+    authModePrompt.textContent = isSignIn ? "还没有账号？" : "已经有账号？";
+  }
+  if (authModeToggle) {
+    authModeToggle.textContent = isSignIn ? "先来注册吧" : "返回登录";
+  }
+  if (authResend) authResend.hidden = true;
+  setAuthStatus("");
+}
+
+function createSupabaseClient(data) {
+  if (
+    !data.auth.supabaseUrl ||
+    !data.auth.publishableKey ||
+    !window.supabase?.createClient
+  ) {
+    return null;
+  }
+
+  return window.supabase.createClient(
+    data.auth.supabaseUrl,
+    data.auth.publishableKey,
+  );
+}
+
+async function authenticateFriend(mode, credentials, client) {
+  if (!client) {
+    throw new Error("SUPABASE_CONFIG_MISSING");
+  }
+
+  if (mode === "signUp") {
+    const { data, error } = await client.auth.signUp({
+      email: credentials.email,
+      password: credentials.password,
+      options: {
+        emailRedirectTo: getAuthRedirectUrl(),
+      },
+    });
+    if (error) throw error;
+    return data;
+  }
+
+  const { data, error } = await client.auth.signInWithPassword({
+    email: credentials.email,
+    password: credentials.password,
+  });
+  if (error) throw error;
+  return data;
+}
+
+function bindFriendMode(data) {
+  const supabaseClient = createSupabaseClient(data);
+  let authMode = "signIn";
+  let currentUserEmail = "";
+  let renderedFriendEmail = "";
+
+  const modeSwitch = document.getElementById("modeSwitch");
+  const modal = document.getElementById("authModal");
+  const closeButton = document.getElementById("authClose");
+  const form = document.getElementById("authForm");
+  const authModeToggle = document.getElementById("authModeToggle");
+  const authResend = document.getElementById("authResend");
+  const submit = document.getElementById("authSubmit");
+  let pendingVerificationEmail = "";
+
+  modeSwitch?.addEventListener("click", () => {
+    if (document.body.dataset.siteMode === "friend") {
+      if (supabaseClient) {
+        supabaseClient.auth.signOut();
+      } else {
+        currentUserEmail = "";
+        setSiteMode("guest");
+      }
+      return;
+    }
+    setAuthMode("signIn");
+    openAuthModal();
+  });
+
+  closeButton?.addEventListener("click", closeAuthModal);
+  modal?.addEventListener("click", (event) => {
+    if (event.target.matches("[data-auth-close]")) closeAuthModal();
+  });
+  authModeToggle?.addEventListener("click", () => {
+    authMode = authMode === "signIn" ? "signUp" : "signIn";
+    setAuthMode(authMode);
+  });
+  authResend?.addEventListener("click", async () => {
+    if (!supabaseClient || !pendingVerificationEmail) return;
+    authResend.disabled = true;
+    setAuthStatus("正在重新发送验证邮件...", "loading");
+    const { error } = await supabaseClient.auth.resend({
+      type: "signup",
+      email: pendingVerificationEmail,
+      options: {
+        emailRedirectTo: getAuthRedirectUrl(),
+      },
+    });
+    if (error) {
+      setAuthStatus("验证邮件暂时没有发送成功，请检查 Supabase 邮件设置。", "error");
+    } else {
+      setAuthStatus("验证邮件已重新发送，请检查收件箱和垃圾邮件文件夹。", "notice");
+    }
+    authResend.disabled = false;
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal && !modal.hidden) {
+      closeAuthModal();
+    }
+  });
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const emailInput = document.getElementById("authEmail");
+    const passwordInput = document.getElementById("authPassword");
+    const email = emailInput?.value.trim() || "";
+    const password = passwordInput?.value || "";
+
+    if (!emailInput?.validity.valid) {
+      setAuthStatus("请输入有效的邮箱地址。", "error");
+      emailInput?.focus();
+      return;
+    }
+    if (password.length < 8) {
+      setAuthStatus("密码至少需要 8 位。", "error");
+      passwordInput?.focus();
+      return;
+    }
+
+    if (!supabaseClient) {
+      setAuthStatus(
+        "页面入口已经准备好，但还没有配置 Supabase。请先填写项目配置。",
+        "notice",
+      );
+      return;
+    }
+
+    if (submit) submit.disabled = true;
+    setAuthStatus(authMode === "signIn" ? "正在登录..." : "正在创建账号...", "loading");
+
+    try {
+      const result = await authenticateFriend(
+        authMode,
+        { email, password },
+        supabaseClient,
+      );
+      if (authMode === "signUp" && !result.session) {
+        pendingVerificationEmail = email;
+        setAuthStatus(
+          "注册成功。请查收验证邮件，点击邮件中的验证按钮后，页面会自动进入朋友版。当前页面会保持不变。",
+          "notice",
+        );
+        if (passwordInput) passwordInput.value = "";
+        if (authResend) authResend.hidden = false;
+        return;
+      }
+      currentUserEmail = email;
+      closeAuthModal();
+      setSiteMode("friend", currentUserEmail);
+      renderedFriendEmail = currentUserEmail;
+      renderFriendContent(
+        data,
+        currentUserEmail,
+        supabaseClient,
+        result.user?.id || result.session?.user?.id,
+        () => supabaseClient.auth.signOut(),
+      );
+      form.reset();
+    } catch (error) {
+      const rawMessage = String(error?.message || "");
+      const message = rawMessage.toLowerCase().includes("invalid login credentials")
+        ? "邮箱或密码不正确，请检查后再试。"
+        : rawMessage.toLowerCase().includes("email not confirmed")
+          ? "请先完成邮箱确认，再登录朋友版。"
+          : rawMessage.toLowerCase().includes("already registered")
+            ? "这个邮箱已经注册过，请切换到登录。"
+            : "认证服务暂时无法完成操作，请稍后再试。";
+      setAuthStatus(message, "error");
+    } finally {
+      if (submit) submit.disabled = false;
+    }
+  });
+
+  if (supabaseClient) {
+    const mountFriendSpace = (user) => {
+      const email = user?.email || "";
+      if (!email || renderedFriendEmail === email) return;
+      renderedFriendEmail = email;
+      renderFriendContent(
+        data,
+        email,
+        supabaseClient,
+        user.id,
+        () => supabaseClient.auth.signOut(),
+      );
+    };
+
+    supabaseClient.auth.getSession().then(({ data: sessionData }) => {
+      const session = sessionData?.session;
+      if (session?.user?.email) {
+        currentUserEmail = session.user.email;
+        closeAuthModal();
+        setSiteMode("friend", currentUserEmail);
+        mountFriendSpace(session.user);
+      }
+    });
+
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+      if (session?.user?.email) {
+        currentUserEmail = session.user.email;
+        closeAuthModal();
+        setSiteMode("friend", currentUserEmail);
+        mountFriendSpace(session.user);
+      } else {
+        currentUserEmail = "";
+        renderedFriendEmail = "";
+        setSiteMode("guest");
+      }
+    });
+  }
+}
+
 function renderPortfolio(data) {
   renderNav(data.nav);
   bindNavActivation();
@@ -1610,6 +2741,7 @@ function renderPortfolio(data) {
   bindSkillCards(data.skills.items);
 
   setText("footer", data.footer);
+  bindFriendMode(data);
 
   const resumeLinks = ["resumeLink"];
   resumeLinks.forEach((id) => {

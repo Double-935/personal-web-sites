@@ -3,6 +3,46 @@
 ## Current Goal
 Keep polishing the personal resume website so it is clean, deployment-friendly, and readable across desktop, tablet, and mobile.
 
+## Visitor / Friend Mode
+- The site now defaults to the visitor version.
+- The header has a `朋友版` switch.
+- Clicking it opens a login dialog with email and password fields.
+- Registration is a small link below the login button.
+- After signup, the dialog stays open and waits for email confirmation instead of returning to the visitor page.
+- A resend-confirmation-email action is shown after signup.
+- The friend version has a separate content container and logout control.
+- The front end intentionally does not store passwords or pretend that static GitHub Pages is a real authentication server.
+- Configure `PORTFOLIO.auth.supabaseUrl` and `PORTFOLIO.auth.publishableKey` inside `js/content.js` before enabling friend access.
+- Do not place private friend content directly in the public static files. Fetch it after the backend authenticates the user.
+- The purchased domain is `doublelee.cn`; domain mapping and authentication are separate concerns.
+
+## Friend Space Features
+- The friend version now renders a separate dark workspace with pale yellow panels and green controls.
+- The route board now uses a real Leaflet map with OpenStreetMap tiles:
+  - click the map to choose latitude and longitude
+  - add a friend or destination with month and note
+  - render a person-shaped piece at each saved coordinate
+  - connect saved route points with a dashed line
+- The wish farm accepts either a preset wish or a custom wish of up to 60 characters.
+- Per-account state is keyed by the Supabase Auth user:
+  - route board markers
+  - meeting records and inactivity reminders
+  - daily coins
+  - wish farm progress
+  - future-self bottles
+  - pet type, care stats, sickness, and clothes
+  - avatar image
+
+## Database Persistence
+- Run `supabase/friend-space.sql` in the Supabase SQL Editor.
+- The table is `public.friend_space_states`.
+- Each row is keyed by `auth.users.id`.
+- RLS policies allow an authenticated user to select, insert, update, or delete only their own row.
+- The browser first reads Supabase and falls back to `localStorage` when the table is not ready or the network fails.
+- If a local state exists and the Supabase row does not exist yet, the first successful authenticated load uploads the local state.
+- The browser still keeps a local backup so a temporary database failure does not immediately erase the visible friend space.
+- This is a deliberately small migration step: one JSONB state row per user. It can later be normalized into separate route, meeting, farm, bottle, pet, profile, and storage tables.
+
 ## What Is Already Done
 - The site is now structured as a maintainable static setup with separated HTML, CSS, and JS:
   - `index.html`
@@ -23,6 +63,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - `技能与标签` has been renamed to `其他`.
 - The `AI学习` section is now aligned with the latest PDF resume and focuses on:
   - `AI 辅助 - 个人网页搭建`
+  - `黑客松比赛`
   - the project contains:
     - `项目基本介绍`
     - `学习到的新知识`
@@ -107,6 +148,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - The education card badges are now positioned lower so they sit between the visual area and the lower text block.
 - The lower text block of the education cards no longer repeats the school name; it now starts with the date and degree meta row, followed by the description.
 - The AI learning section now uses a showcase card for the resume-listed personal website project, with a visual panel on the left and detailed content on the right.
+- The AI learning section now includes a second showcase card for `黑客松比赛`, using the shared placeholder image and the same five-section scrollable content layout as project one.
 - The work experience section now uses a two-sided timeline layout with alternating cards and a central rail; each card initially shows time, company name, and role, then reveals the detailed content after a click.
 - Work experience has been aligned with the latest PDF resume and now contains:
   - `猿编程 - 编程教研`
@@ -158,6 +200,10 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 
 ## Current Blockers
 - None critical.
+- Supabase project configuration is now present and the project API responded successfully.
+- Email authentication is enabled and email confirmation is currently required.
+- `supabase/friend-space.sql` still needs to be executed in the Supabase SQL Editor before database persistence is active.
+- The map uses OpenStreetMap tiles and therefore needs network access when the friend page loads.
 - The `其他` module copy is now filled out, including:
   - `自我评价`
   - `兴趣爱好`

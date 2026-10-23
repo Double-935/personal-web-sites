@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="李佳蓓的个人网站：教育科技、编程教研、课程研发与内容运营。" />
   <title>李佳蓓 | Portfolio</title>
-  <link rel="stylesheet" href="./css/style.css?v=20261007-auth-flow" />
+  <link rel="stylesheet" href="./css/style.css?v=20261023-friend-space" />
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -24,7 +24,7 @@
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     crossorigin=""
   ></script>
-  <script src="./js/content.js?v=20261007-auth-flow" defer></script>
+  <script src="./js/content.js?v=20261023-friend-space" defer></script>
 </head>
 <body>
   <div class="page">
@@ -187,6 +187,10 @@
             placeholder="至少 8 位"
             required
           />
+        </label>
+        <label class="auth-remember">
+          <input id="authRemember" name="remember" type="checkbox" checked />
+          <span>保持登录状态</span>
         </label>
         <button class="auth-submit" id="authSubmit" type="submit">登录并进入</button>
         <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>

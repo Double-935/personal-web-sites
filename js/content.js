@@ -1689,6 +1689,7 @@ function createFriendState(email) {
     bottles: [],
     pet: {
       type: "cat",
+      name: "",
       closeness: 0,
       hunger: 82,
       hygiene: 82,
@@ -1779,6 +1780,10 @@ function getPetName(type) {
   return type === "dog" ? "狗狗" : "猫猫";
 }
 
+function getPetDisplayName(pet) {
+  return String(pet?.name || "").trim() || getPetName(pet?.type);
+}
+
 async function renderFriendContent(data, userEmail, supabaseClient, userId, onLogout) {
   const oldRoot = document.getElementById("friendSpaceRoot");
   if (!oldRoot || !userEmail) return;
@@ -1823,6 +1828,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     getLatestMeetings().filter((meeting) => daysSince(meeting.date) >= MEETING_REMINDER_DAYS);
 
   let routeMap = null;
+  let locateRoutePlace = null;
 
   const renderBoard = () => {
     const reminders = getReminderMeetings();
@@ -1916,9 +1922,9 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
           Number.isFinite(marker.longitude),
       );
 
-    const pieceIcon = window.L.divIcon({
+    const createPieceIcon = (marker) => window.L.divIcon({
       className: "friend-map-piece-icon",
-      html: '<span aria-hidden="true">🧍</span>',
+      html: `<span aria-hidden="true">${escapeHTML(marker.piece || "🧍")}</span>`,
       iconSize: [38, 38],
       iconAnchor: [19, 34],
       popupAnchor: [0, -30],
@@ -1931,7 +1937,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         ${marker.date ? `<br />${escapeHTML(marker.date)}` : ""}
         ${marker.note ? `<br /><span>${escapeHTML(marker.note)}</span>` : ""}
       `;
-      window.L.marker([marker.latitude, marker.longitude], { icon: pieceIcon })
+      window.L.marker([marker.latitude, marker.longitude], { icon: createPieceIcon(marker) })
         .addTo(routeMap)
         .bindPopup(popup);
     });
@@ -1958,16 +1964,14 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     }
 
     let pendingPin = null;
-    routeMap.on("click", (event) => {
-      const latitude = Number(event.latlng.lat.toFixed(6));
-      const longitude = Number(event.latlng.lng.toFixed(6));
+    const selectPoint = (latitude, longitude, label = "") => {
       const latitudeInput = root.querySelector('[name="latitude"]');
       const longitudeInput = root.querySelector('[name="longitude"]');
       const pointStatus = root.querySelector("#friendMapPointStatus");
       if (latitudeInput) latitudeInput.value = String(latitude);
       if (longitudeInput) longitudeInput.value = String(longitude);
       if (pointStatus) {
-        pointStatus.textContent = `已选择：${latitude}, ${longitude}`;
+        pointStatus.textContent = label || `已选择：${latitude}, ${longitude}`;
         pointStatus.dataset.state = "selected";
       }
       pendingPin?.remove();
@@ -1978,6 +1982,48 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         fillColor: "#f3d98b",
         fillOpacity: 1,
       }).addTo(routeMap);
+    };
+
+    locateRoutePlace = async () => {
+      const placeInput = root.querySelector('[name="place"]');
+      const place = String(placeInput?.value || "").trim();
+      const pointStatus = root.querySelector("#friendMapPointStatus");
+      if (!place) {
+        if (pointStatus) pointStatus.textContent = "先输入想去的地点，再为你定位。";
+        placeInput?.focus();
+        return;
+      }
+      if (pointStatus) {
+        pointStatus.textContent = `正在定位“${place}”…`;
+        pointStatus.dataset.state = "loading";
+      }
+      try {
+        const response = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&accept-language=zh-CN&q=${encodeURIComponent(place)}`,
+          { headers: { Accept: "application/json" } },
+        );
+        if (!response.ok) throw new Error("PLACE_LOOKUP_FAILED");
+        const results = await response.json();
+        const result = Array.isArray(results) ? results[0] : null;
+        const latitude = Number(result?.lat);
+        const longitude = Number(result?.lon);
+        if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+          throw new Error("PLACE_NOT_FOUND");
+        }
+        routeMap.setView([latitude, longitude], 12, { animate: true });
+        selectPoint(latitude, longitude, `已定位到：${result.display_name || place}`);
+      } catch (error) {
+        if (pointStatus) {
+          pointStatus.textContent = "暂时找不到这个地点；可以换一个更完整的地点名称，或直接点击地图选点。";
+          pointStatus.dataset.state = "error";
+        }
+      }
+    };
+
+    routeMap.on("click", (event) => {
+      const latitude = Number(event.latlng.lat.toFixed(6));
+      const longitude = Number(event.latlng.lng.toFixed(6));
+      selectPoint(latitude, longitude);
     });
 
     window.setTimeout(() => routeMap?.invalidateSize(), 0);
@@ -2029,21 +2075,23 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
 
   const renderPet = () => {
     const pet = state.pet;
-    const petName = getPetName(pet.type);
+    const petName = getPetDisplayName(pet);
+    const reaction = String(pet.reaction || "");
     return `
       <div class="friend-pet-visual">
         <div class="friend-pet-orbit friend-pet-orbit--one"></div>
         <div class="friend-pet-orbit friend-pet-orbit--two"></div>
-        <div class="friend-pet-avatar" style="--pet-clothes:${pet.clothes}">
+        <div class="friend-pet-avatar${reaction ? " is-reacting is-reacting--" + escapeHTML(pet.reactionAction || "pet") : ""}" style="--pet-clothes:${pet.clothes}">
           <span class="friend-pet-clothes"></span>
-          <span class="friend-pet-face" aria-label="${petName}">${pet.type === "dog" ? "🐶" : "🐱"}</span>
+          <span class="friend-pet-face" aria-label="${escapeHTML(petName)}">${pet.type === "dog" ? "🐶" : "🐱"}</span>
         </div>
+        ${reaction ? `<span class="friend-pet-reaction" aria-live="polite">${escapeHTML(reaction)}</span>` : ""}
         <span class="friend-pet-status">${pet.sick ? "需要照顾" : "状态很好"}</span>
       </div>
       <div class="friend-pet-copy">
         <p class="friend-mini-label">MY COMPANION</p>
-        <h3>${petName}</h3>
-        <p>${pet.sick ? `${petName}好像生病了，先多陪陪它。` : "每天做一点小事，亲密度就会慢慢增加。"}</p>
+        <h3>${escapeHTML(petName)}</h3>
+        <p>${pet.sick ? `${escapeHTML(petName)}好像生病了，先多陪陪它。` : "每天做一点小事，亲密度就会慢慢增加。"}</p>
         <div class="friend-stat-list">
           <div><span>亲密度</span><strong>${pet.closeness}</strong></div>
           <div><span>饱腹</span><strong>${pet.hunger}</strong></div>
@@ -2073,6 +2121,12 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
             )
             .join("")}
         </div>
+        <form class="friend-inline-form" data-friend-form="pet-name">
+          <label>给${getPetName(pet.type)}起名
+            <input name="petName" maxlength="20" value="${escapeHTML(pet.name)}" placeholder="例如：团子" />
+          </label>
+          <button class="friend-secondary-button" type="submit">保存名字</button>
+        </form>
       </div>
     `;
   };
@@ -2090,7 +2144,8 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
                 <span class="friend-bottle__cap" aria-hidden="true">✦</span>
                 <div>
                   <strong>${opened ? "今天可以打开" : `将在 ${escapeHTML(bottle.openAt)} 漂来`}</strong>
-                  <p>${opened ? escapeHTML(bottle.message) : "先把这封信交给未来的自己。"}</p>
+                  <small>写给${escapeHTML(bottle.recipientName || "未来的自己")}</small>
+                  <p>${opened ? escapeHTML(bottle.message) : `先把这封信交给${escapeHTML(bottle.recipientName || "未来的自己")}。`}</p>
                 </div>
               </article>
             `;
@@ -2117,6 +2172,10 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
               <p class="friend-space__eyebrow">FRIEND MODE</p>
               <h1>${escapeHTML(state.profile.name)}</h1>
               <p>${escapeHTML(state.profile.email)}</p>
+              <form class="friend-name-form" data-friend-form="profile">
+                <input name="profileName" maxlength="24" value="${escapeHTML(state.profile.name)}" aria-label="修改我的名字" />
+                <button type="submit">修改名字</button>
+              </form>
             </div>
           </div>
           <div class="friend-space__controls">
@@ -2141,12 +2200,20 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
             <form class="friend-form friend-form--route" data-friend-form="route">
               <p class="friend-mini-label">放下一颗棋子</p>
               <label>朋友 / 目的地<input name="name" placeholder="例如：小王" required /></label>
-              <label>地点<input name="place" placeholder="例如：南京" required /></label>
+              <label>地点<input name="place" data-friend-locate placeholder="例如：南京夫子庙" required /></label>
+              <button class="friend-location-button" type="button" data-friend-action="locate-place">定位到地图</button>
               <label>时间<input name="date" type="month" required /></label>
               <label>备注<input name="note" placeholder="例如：九月份一起看展" /></label>
+              <label>选择小人形象
+                <select name="piece">
+                  ${["🧍", "👩", "👨", "🧑", "🧙", "🦸", "🐱", "🐶"]
+                    .map((piece) => `<option value="${piece}">${piece} ${piece === "🧍" ? "默认小人" : "棋子"}</option>`)
+                    .join("")}
+                </select>
+              </label>
               <input name="latitude" type="hidden" />
               <input name="longitude" type="hidden" />
-              <p class="friend-map-point-status" id="friendMapPointStatus">请先在地图上点击选择位置。</p>
+              <p class="friend-map-point-status" id="friendMapPointStatus">输入地点会自动定位；也可以点击地图微调位置。</p>
               <button class="friend-primary-button" type="submit">放到棋盘上 <span aria-hidden="true">↗</span></button>
             </form>
           </div>
@@ -2192,13 +2259,14 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
               <form class="friend-form friend-form--wish" data-friend-form="farm">
                 <p class="friend-mini-label">选择一颗愿望种子</p>
                 <label>我的愿望
-                  <select name="wishPreset">
+                  <select name="wish">
                     ${["身体健康", "吃一顿寿喜烧", "去看一次海", "顺利完成一个作品"]
-                      .map((wish) => `<option${state.farm.wish === wish ? " selected" : ""}>${wish}</option>`)
+                      .map((wish) => `<option value="${wish}"${state.farm.wish === wish ? " selected" : ""}>${wish}</option>`)
                       .join("")}
+                    <option value="custom"${["身体健康", "吃一顿寿喜烧", "去看一次海", "顺利完成一个作品"].includes(state.farm.wish) ? "" : " selected"}>自定义愿望…</option>
                   </select>
                 </label>
-                <label>自定义愿望（可选）
+                <label class="friend-custom-wish${["身体健康", "吃一顿寿喜烧", "去看一次海", "顺利完成一个作品"].includes(state.farm.wish) ? "" : " is-visible"}">自定义愿望
                   <input
                     name="customWish"
                     maxlength="60"
@@ -2229,13 +2297,20 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         </div>
 
         <section class="friend-module friend-module--bottle">
-          <div class="friend-module__heading"><div><p class="friend-space__eyebrow">MESSAGE TO FUTURE ME</p><h2>漂流瓶</h2><p>写信给未来的自己，到约定的日子再打开。</p></div></div>
+          <div class="friend-module__heading"><div><p class="friend-space__eyebrow">MESSAGE IN THE RIVER</p><h2>漂流瓶</h2><p>写给未来的自己，也可以把心意交给一位好朋友。</p></div></div>
           <div class="friend-bottle-layout">
-            <div class="friend-bottle-list">${renderBottles()}</div>
+            <div class="friend-bottle-scene"><div class="friend-river-illustration" aria-label="一条流向远方的河"><span class="friend-river-mountain friend-river-mountain--one"></span><span class="friend-river-mountain friend-river-mountain--two"></span><span class="friend-river-flow"></span><span class="friend-river-boat">⌁</span></div><div class="friend-bottle-list">${renderBottles()}</div></div>
             <form class="friend-form" data-friend-form="bottle">
               <p class="friend-mini-label">投递一封信</p>
               <label>打开时间<input name="openAt" type="date" min="${today}" required /></label>
-              <label>写给未来的自己<textarea name="message" rows="5" placeholder="想对未来的自己说什么？" required></textarea></label>
+              <label>写给谁
+                <select name="recipientType">
+                  <option value="self">未来的自己</option>
+                  <option value="friend">一位好朋友</option>
+                </select>
+              </label>
+              <label class="friend-recipient-name">朋友的名字<input name="recipientName" maxlength="24" placeholder="例如：小王" /></label>
+              <label>想说的话<textarea name="message" rows="5" placeholder="把想说的话交给河流吧。" required></textarea></label>
               <button class="friend-primary-button" type="submit">投进时间的河里 <span aria-hidden="true">↗</span></button>
             </form>
           </div>
@@ -2257,6 +2332,10 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
       const action = actionButton.dataset.friendAction;
       if (action === "logout") {
         onLogout?.();
+        return;
+      }
+      if (action === "locate-place") {
+        locateRoutePlace?.();
         return;
       }
       if (action === "water" || action === "fertilize") {
@@ -2291,7 +2370,29 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         pet.health = clampNumber(pet.health + changes[3], 0, 100);
         pet.lastCareAt = today;
         if (pet.health > 50 && pet.sick) pet.sick = false;
-        update(`${getPetName(pet.type)}和你一起完成了“${action === "pet-pet" ? "摸头" : action === "pet-train" ? "社会化训练" : action === "pet-walk" ? "散步" : action === "pet-feed" ? "喂食" : "铲屎"}”。`);
+        const reactions = {
+          pet: "蹭一蹭～",
+          train: "眼睛亮晶晶！",
+          walk: "开心地转圈圈！",
+          feed: "吃得香香的！",
+          clean: "变得干干净净！",
+        };
+        const actionLabels = {
+          pet: "摸头",
+          train: "社会化训练",
+          walk: "遛一遛",
+          feed: "喂食",
+          clean: "铲屎",
+        };
+        pet.reaction = reactions[petAction];
+        pet.reactionAction = petAction;
+        update(`${getPetDisplayName(pet)}${pet.reaction}`);
+        window.setTimeout(() => {
+          if (state.pet.reaction !== reactions[petAction]) return;
+          state.pet.reaction = "";
+          state.pet.reactionAction = "";
+          update(`${getPetDisplayName(pet)}很喜欢这次“${actionLabels[petAction]}”。`);
+        }, 1300);
         return;
       }
     }
@@ -2311,7 +2412,29 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     }
   });
 
+  let placeLookupTimer = null;
+
+  root.addEventListener("input", (event) => {
+    if (!event.target.matches("[data-friend-locate]")) return;
+    window.clearTimeout(placeLookupTimer);
+    placeLookupTimer = window.setTimeout(() => locateRoutePlace?.(), 750);
+  });
+
   root.addEventListener("change", (event) => {
+    if (event.target.matches('[name="wish"]')) {
+      const customWish = root.querySelector(".friend-custom-wish");
+      if (customWish) customWish.classList.toggle("is-visible", event.target.value === "custom");
+      return;
+    }
+    if (event.target.matches('[name="recipientType"]')) {
+      const recipientName = root.querySelector(".friend-recipient-name");
+      if (recipientName) recipientName.classList.toggle("is-visible", event.target.value === "friend");
+      return;
+    }
+    if (event.target.matches("[data-friend-locate]")) {
+      locateRoutePlace?.();
+      return;
+    }
     if (event.target.id !== "friendAvatarInput") return;
     const file = event.target.files?.[0];
     if (!file || !file.type.startsWith("image/")) return;
@@ -2334,6 +2457,17 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     const formData = new FormData(form);
     const formType = form.dataset.friendForm;
 
+    if (formType === "profile") {
+      const name = String(formData.get("profileName") || "").trim();
+      if (!name) {
+        update("名字不能为空。请再试一次。");
+        return;
+      }
+      state.profile.name = name;
+      update(`好呀，现在叫你“${name}”。`);
+      return;
+    }
+
     if (formType === "route") {
       const latitude = Number(formData.get("latitude"));
       const longitude = Number(formData.get("longitude"));
@@ -2346,6 +2480,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         place: String(formData.get("place") || "").trim(),
         date: String(formData.get("date") || ""),
         note: String(formData.get("note") || "").trim(),
+        piece: String(formData.get("piece") || "🧍"),
         latitude,
         longitude,
       });
@@ -2364,9 +2499,9 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     }
 
     if (formType === "farm") {
-      const presetWish = String(formData.get("wishPreset") || "身体健康").trim();
+      const selectedWish = String(formData.get("wish") || "身体健康").trim();
       const customWish = String(formData.get("customWish") || "").trim();
-      const wish = customWish || presetWish;
+      const wish = selectedWish === "custom" ? customWish : selectedWish;
       if (!wish) {
         update("请填写一个愿望，或者选择一个预设愿望。");
         return;
@@ -2384,10 +2519,25 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
       return;
     }
 
+    if (formType === "pet-name") {
+      state.pet.name = String(formData.get("petName") || "").trim();
+      update(state.pet.name ? `${state.pet.name}有了自己的名字！` : `已恢复使用“${getPetName(state.pet.type)}”作为名字。`);
+      return;
+    }
+
     if (formType === "bottle") {
+      const recipientType = String(formData.get("recipientType") || "self");
+      const recipientName = recipientType === "friend"
+        ? String(formData.get("recipientName") || "").trim()
+        : "未来的自己";
+      if (!recipientName) {
+        update("写给好朋友时，请填上对方的名字。 ");
+        return;
+      }
       state.bottles.push({
         message: String(formData.get("message") || "").trim(),
         openAt: String(formData.get("openAt") || ""),
+        recipientName,
       });
       update("漂流瓶已经投进时间的河里。");
     }
@@ -2539,7 +2689,17 @@ function bindFriendMode(data) {
   const authModeToggle = document.getElementById("authModeToggle");
   const authResend = document.getElementById("authResend");
   const submit = document.getElementById("authSubmit");
+  const rememberInput = document.getElementById("authRemember");
   let pendingVerificationEmail = "";
+  let shouldRememberSession = localStorage.getItem("friend-remember-session") !== "false";
+
+  if (rememberInput) rememberInput.checked = shouldRememberSession;
+
+  window.addEventListener("pagehide", () => {
+    if (!shouldRememberSession && supabaseClient) {
+      supabaseClient.auth.signOut({ scope: "local" });
+    }
+  });
 
   modeSwitch?.addEventListener("click", () => {
     if (document.body.dataset.siteMode === "friend") {
@@ -2552,6 +2712,7 @@ function bindFriendMode(data) {
       return;
     }
     setAuthMode("signIn");
+    if (rememberInput) rememberInput.checked = shouldRememberSession;
     openAuthModal();
   });
 
@@ -2594,6 +2755,8 @@ function bindFriendMode(data) {
     const passwordInput = document.getElementById("authPassword");
     const email = emailInput?.value.trim() || "";
     const password = passwordInput?.value || "";
+    shouldRememberSession = Boolean(rememberInput?.checked);
+    localStorage.setItem("friend-remember-session", String(shouldRememberSession));
 
     if (!emailInput?.validity.valid) {
       setAuthStatus("请输入有效的邮箱地址。", "error");
@@ -2645,6 +2808,7 @@ function bindFriendMode(data) {
         () => supabaseClient.auth.signOut(),
       );
       form.reset();
+      if (rememberInput) rememberInput.checked = shouldRememberSession;
     } catch (error) {
       const rawMessage = String(error?.message || "");
       const message = rawMessage.toLowerCase().includes("invalid login credentials")

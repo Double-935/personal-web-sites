@@ -102,9 +102,8 @@
 ## 最新简历同步
 
 - 网站内置 PDF 已替换为新版简历：
-  - `assets/docs/li-jiabei-resume.pdf`
-- 新版简历为 2 页 A4 PDF，当前状态写明：
-  - `立即到岗，每周4天，持续3个月`
+  - `assets/docs/Double-rusume.pdf`
+- 新版简历为 4 页 A4 PDF。
 - 首屏简介、联系模块、教育背景、项目经历和工作经历已根据新版简历同步。
 - AI 学习 / 项目经历模块当前重点展示：
   - `AI 辅助 - 个人网页搭建`
@@ -152,7 +151,7 @@
     ├── models/
     │   └── 3d-model.glb
     └── docs/
-        └── li-jiabei-resume.pdf
+        └── Double-rusume.pdf
 ```
 
 ## 如何维护
@@ -166,7 +165,7 @@
 - 更换主页照片：替换 `assets/images/home-photo.png`
 - 更换头像或其他图片：替换 `assets/images/` 中对应文件
 - 更换 AI 学习模块的 3D 模型：替换 `assets/models/3d-model.glb`
-- 更换简历 PDF：替换 `assets/docs/li-jiabei-resume.pdf`
+- 更换简历 PDF：替换 `assets/docs/Double-rusume.pdf`
 - 查看今日修改记录：打开 `更新记录.md`
 - 查看交接说明：打开 `HANDOFF.md`
 - 配置朋友版数据库：在 Supabase SQL Editor 执行 `supabase/friend-space.sql`
@@ -264,7 +263,7 @@ http://localhost:8000/
 - 确认邮箱和电话在不同设备上保持单行显示。
 - 确认 AI 学习项目右侧内容可以在手机上触摸滚动。
 - 确认主页照片、头像、兴趣爱好配图和简历 PDF 都能正常加载。
-- 确认简历下载链接打开的是新版 2 页 PDF 简历。
+- 确认简历下载链接打开的是新版 4 页 PDF 简历。
 - 确认 `assets/models/3d-model.glb` 已随项目一起上传。
 - 确认桌面端、平板端和手机端的布局没有溢出。
 - 发布时上传整个项目目录，不要只上传 `index.html`。

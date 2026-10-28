@@ -50,7 +50,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - `js/content.js`
 - Assets are stored locally inside `assets/`, including:
   - `assets/images/home-photo.png`
-  - `assets/docs/li-jiabei-resume.pdf`
+  - `assets/docs/Double-rusume.pdf`
   - `assets/images/brand-avatar.png`
   - `assets/images/entj-female.png`
 - Top navigation order is:
@@ -131,10 +131,10 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
   - work experience
   - other
   - contact
-- The built-in resume PDF has been replaced with the latest 2-page PDF from Downloads:
-  - `李佳蓓-立即到岗:每周四天-18628387059.pdf`
-- The website resume link still points to:
-  - `assets/docs/li-jiabei-resume.pdf`
+- The built-in resume PDF is now the user's latest 4-page A4 file:
+  - `assets/docs/Double-rusume.pdf`
+- The website resume link now points to:
+  - `assets/docs/Double-rusume.pdf`
 - The hero and contact copy now mention:
   - `立即到岗，每周 4 天，持续 3 个月`
 - The `教育背景` section now uses a centered showcase header and two large side-by-side cards, each with a visual panel above the school details, closer to the reference-style learning path layout.
@@ -225,7 +225,7 @@ Keep polishing the personal resume website so it is clean, deployment-friendly, 
 - Browser-based local visual verification could not be completed because the current environment blocks both the local `file://` page and starting a temporary local preview server; the remaining final visual check should be done manually in a browser at 375px, 390px, tablet portrait, tablet landscape, and desktop widths.
 - Visual browser verification of the deployed GitHub Pages URL was unavailable because the controlled browser blocked that domain; source-level and asset-level checks were completed instead.
 - Latest content sync:
-  - `assets/docs/li-jiabei-resume.pdf` was replaced by the latest 2-page resume PDF.
+  - The current download target is `assets/docs/Double-rusume.pdf`, a 4-page A4 PDF.
   - `js/content.js` was updated from the PDF content.
   - current CSS/JS cache version in `index.html` is `20260828-responsive-audit`.
 

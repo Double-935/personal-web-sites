@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="李佳蓓的个人网站：教育科技、编程教研、课程研发与内容运营。" />
   <title>李佳蓓 | Portfolio</title>
-  <link rel="stylesheet" href="./css/style.css?v=20261023-friend-space" />
+  <link rel="icon" href="./assets/images/brand-avatar.png" type="image/png" />
+  <link rel="stylesheet" href="./css/style.css?v=20261028-photo-panel" />
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -24,7 +25,7 @@
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     crossorigin=""
   ></script>
-  <script src="./js/content.js?v=20261023-friend-space" defer></script>
+  <script src="./js/content.js?v=20261028-functional-audit" defer></script>
 </head>
 <body>
   <div class="page">
@@ -47,45 +48,24 @@
           <span id="modeSwitchLabel">朋友版</span>
           <span class="mode-switch__arrow" aria-hidden="true">↗</span>
         </button>
-        <a class="download-link" id="resumeLink" href="#" download>简历.pdf</a>
+        <a class="download-link" id="resumeLink" href="./assets/docs/Double-rusume.pdf" download="Double-rusume.pdf">简历</a>
+        <a class="download-link" id="portfolioLink" href="./assets/docs/1.pdf" target="_blank" rel="noopener noreferrer">作品集</a>
       </div>
     </header>
 
     <main id="top">
       <div id="guestContent" data-site-version="guest">
-        <section class="hero" id="about-me" aria-labelledby="hero-title">
+        <a class="scroll-cue" id="scrollCue" href="#education">继续下滑，探索更多</a>
+        <section class="hero hero--photo-background" id="about-me" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow" id="heroEyebrow">在线</div>
-          <h1 id="heroTitle">Hi，<br />我是李佳蓓</h1>
-          <div class="hero-title" id="heroSubtitle">Education Technology / 教育科技</div>
-          <ul class="file-line file-line-summary hero-file-list" id="heroFile">
-            <li>A current master's student of Science and Robotics Education at The Education University of Hong Kong</li>
-            <li>Have a strong interest in AI products and will actively seek out the latest information and give them a try</li>
-            <li>Enjoy turning complex content into something clear, easy to follow and practically applicable</li>
-          </ul>
-          <div class="tags" id="heroTags" aria-label="个人标签"></div>
-          <a class="scroll-cue" id="scrollCue" href="#education">继续下滑，探索更多</a>
+          <h1 id="heroTitle">Hi，<br />加倍 Double</h1>
+          <div class="hero-title" id="heroSubtitle">虽然我不喜欢给人贴标签但是为了快速了解我</div>
         </div>
-
-        <div class="hero-visual" aria-label="李佳蓓照片">
-          <div class="portrait-frame"></div>
-          <img class="portrait" id="heroPhoto" alt="李佳蓓主页照片" />
-          <div class="hero-note">
-            <small id="heroNoteLabel">NOW</small>
-            <strong id="heroNoteTitle">AI × 教育</strong>
-            <span id="heroNoteText">正在继续探索最前沿的科学技术，确保课程设计与时俱进</span>
-          </div>
-        </div>
+        <div class="typographic-wall" id="heroTags" aria-label="个人标签动态文字墙"></div>
         </section>
 
-        <section class="section" id="education">
-        <div class="section-header section-header--education">
-          <div>
-            <p class="section-kicker">Learning Path</p>
-            <h2>我的学习坐标</h2>
-            <p id="educationSummary"></p>
-          </div>
-        </div>
+        <section class="section" id="education" aria-label="教育背景">
         <div class="education-list" id="educationList"></div>
         </section>
 
@@ -93,7 +73,7 @@
         <div class="section-header">
           <div>
             <p class="section-kicker">AI coding</p>
-            <h2>没有排期，也想把它做出来</h2>
+            <h2>“先试着玩一下嘛”</h2>
           </div>
           <p id="aboutSummary"></p>
         </div>
@@ -104,7 +84,7 @@
         <div class="section-header">
           <div>
             <p class="section-kicker">Experience</p>
-            <h2>我在真实现场做过什么</h2>
+            <h2>牛马驾到 统统闪开</h2>
           </div>
           <p id="workSummary"></p>
         </div>
@@ -116,7 +96,7 @@
         <section class="section section--skills" id="other">
         <div class="section-header section-header--skills">
           <div>
-            <h2>随机抽取一张我的档案卡</h2>
+            <h2>点击或拖动翻牌</h2>
           </div>
           <p id="skillsSummary"></p>
         </div>

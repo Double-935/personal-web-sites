@@ -4,8 +4,7 @@ const PORTFOLIO = {
     name: "PORTFOLIO",
   },
   links: {
-    resume: "./assets/docs/li-jiabei-resume.pdf",
-    photo: "./assets/images/home-photo.png",
+    resume: "./assets/docs/Double-rusume.pdf",
     mail: "mailto:jiabeilieee@foxmail.com",
   },
   auth: {
@@ -14,110 +13,107 @@ const PORTFOLIO = {
     publishableKey: "sb_publishable_yQW2hR3tAKxzzyvlQl8X0A_DL3Q_g3U",
   },
   nav: [
-    { label: "关于我", href: "#about-me" },
     { label: "教育背景", href: "#education" },
-    { label: "AI学习", href: "#about" },
+    { label: "项目经历", href: "#about" },
     { label: "工作经历", href: "#work" },
     { label: "技能与爱好", href: "#other" },
     { label: "联系我", href: "#contact" },
   ],
   hero: {
     eyebrow: "在线",
-    title: '<span class="hero-greeting">Hi，</span><span class="hero-name">我是李佳蓓</span>',
-    subtitle: "AI产品 x 教育科技",
-    file: [
-      "A current master's student of Science and Robotics Education at The Education University of Hong Kong",
-      "Have a strong interest in AI products and will actively seek out the latest information and give them a try",
-      "Enjoy turning complex content into something clear, easy to follow and practically applicable",
-    ],
+    title: '<span class="hero-greeting">你可以喊我</span><span class="hero-name">加倍 Double</span>',
+    subtitle: "虽然我不喜欢给人贴标签但是为了快速了解我",
     lead: "",
-    tags: ["AI", "STEM教育", "课程研发", "跨学科融合"],
-    note: {
-      label: "NOW",
-      title: "立即到岗",
-      text: "每周 4 天，持续 3 个月，期待参与AI产品与教育研发的相关工作",
-    },
+    tags: [
+      "AI产品", "STEM教育", "课程研发", "跨学科融合", "教育产品",
+      "vibe coding", "Python", "Scratch", "micro:bit", "基础 PRD",
+      "原型与交互思考", "HTML", "GitHub Pages", "Keynote", "秀米",
+      "剪映", "Premiere Pro",
+    ],
   },
   projects: {
     summary: "从一个真实的小问题出发，独立完成从想法、原型到可用产品。",
     items: [
       {
-        number: "项目一",
-        title: "AI 辅助 - 个人网页搭建",
-        lead: "基于 Codex、Gemini、triverse 等 AI 辅助开发工具，完成个人网站搭建、分层开发和 GitHub Pages 部署准备。",
+        title: "个人网站｜轻量账户系统开发",
+        navTitle: "个人网站",
+        date: "2026.08 - 至今",
+        role: "独立开发",
+        lead: "使用 <span class=\"project-emphasis\">Codex、Gemini</span> 等工具，以原生 <span class=\"project-emphasis\">HTML、CSS、JavaScript</span> 完成个人网站从信息架构、视觉排版、响应式交互到 3D 内容展示的开发，网站已上线并支持真实用户访问。",
         model: {
           src: "./assets/models/3d-model.glb",
-          alt: "项目一 3D 模型",
+          alt: "个人网站项目 3D 模型",
         },
         scrollContent: true,
         sections: [
-          {
-            label: "项目基本介绍",
-            text:
-              "围绕个人能力展示需求，独立完成个人网站从 0 到 1 搭建。网站用于系统展示教育背景、AI 学习项目、课程研发经历、编程教研经历和联系方式。",
-          },
-          {
-            label: "学习到的新知识",
-            text:
-              "熟悉Prompt调优，并在实际项目中进一步理解了 HTML、CSS、JavaScript 分层开发。也熟悉了内容配置、视觉排版、交互功能、图片资源管理、3D 模型展示和 GitHub Pages 部署准备。",
-          },
-          {
-            label: "遇到的问题及解决方案",
-            text:
-              "开发过程中重点处理了响应式适配、文字与按钮重叠、固定元素遮挡正文、抽卡结果按钮层级、邮箱电话单行显示、项目内容触摸滚动和本地资源引用等问题。",
-          },
-          {
-            label: "下次可以改进的",
-            text: [
-              "先确定最小可行性的方案（mvp），如网页中，必须包含的模块有哪些。",
-              "先确定项目的基本结构，如html+css+js，便于更换模型/迁移/维护。",
-            ],
-          },
-          {
-            label: "有待思考和完善的",
-            text: ["token的成本控制问题。", "是否可以把该网页做成一个可供用户复刻使用的产品。"],
-          },
+          { text: "完成<span class=\"project-emphasis\">域名购买、DNS 解析、HTTPS 配置；接入</span> <span class=\"project-emphasis\">Supabase Auth 与 Database</span>，实现邮箱验证、登录状态恢复、RLS 数据隔离和本地 JSONB 数据迁移/离线备份。" },
+          { text: "在开发中持续处理<span class=\"project-emphasis\">页面结构、交互和数据状态</span>问题，形成从需求拆解、实现、验证到迭代的完整实践。" },
         ],
       },
       {
-        number: "项目二",
-        title: "黑客松比赛",
-        lead: "围绕黑客松比赛经历，记录从选题、协作到作品呈现的完整过程。",
+        title: "EvoTavern Hackathon｜AI 互动内容平台",
+        navTitle: "黑客松",
+        date: "2026.09",
+        website: { label: "beeplay.top", url: "https://beeplay.top" },
+        lead: "4 人团队探索“AI 生成互动内容 + 内容分发”方向。",
+        images: [
+          { src: "./assets/images/EvoTavern Hackathon-1.JPG", alt: "EvoTavern Hackathon 项目现场" },
+          { src: "./assets/images/EvoTavern Hackathon-2.JPG", alt: "EvoTavern Hackathon 团队项目现场" },
+          { src: "./assets/images/EvoTavern Hackathon-3.png", alt: "BeePlay 互动内容体验画面" },
+        ],
+        scrollContent: true,
+        sections: [
+          { text: "个人角色<span class=\"project-emphasis\">「产品」</span>。定义 <span class=\"project-emphasis\">MVP</span>：用户通过一句话生成轻量互动内容并发布；其他用户可在信息流中浏览、体验，并进行转发、关注、收藏和评论。参与产品方案和 <span class=\"project-emphasis\">PRD</span>的梳理。项目完成 60+ 用户登录测试。" },
+          { text: "个人角色<span class=\"project-emphasis\">「UI / 前端设计」</span> ，前端代码提交于团队 GitHub 仓库分支，UI可见作品集。" },
+        ],
+      },
+      {
+        title: "北京天文馆｜硬件编程融合课程",
+        navTitle: "课程开发",
+        date: "2026.10 - 至今",
+        role: "课程研发",
+        lead: "面向北京城市学校 3-6 年级学生，设计 7.5 小时编程硬件融合天文科普课程，每班 20 余名学生，3 人为一小组协作完成项目。",
         placeholderImage: {
           src: "./assets/images/project-placeholder.svg",
-          alt: "黑客松比赛项目图片占位",
+          alt: "北京天文馆课程配图待补充",
         },
         scrollContent: true,
         sections: [
-          {
-            label: "项目基本介绍",
-            text:
-              "待补充：比赛名称、比赛主题、参赛时间、团队成员、项目目标和最终作品。后续可以在这里完整记录黑客松项目从想法到呈现的过程。",
-          },
-          {
-            label: "学习到的新知识",
-            text:
-              "待补充：比赛过程中接触到的新工具、新技术、产品方法、团队协作方式，以及如何在有限时间内完成方案验证。",
-          },
-          {
-            label: "遇见的问题和解决方案",
-            text:
-              "待补充：记录比赛过程中遇到的技术、沟通、时间管理或方案取舍问题，以及团队最终采取的解决方式。",
-          },
-          {
-            label: "下次可以改进的",
-            text: [
-              "待补充：赛前准备、任务拆分、时间安排和最终展示方面可以改进的地方。",
-              "待补充：如果再次参赛，希望提前验证哪些关键假设。",
-            ],
-          },
-          {
-            label: "有待思考和完善的",
-            text: [
-              "待补充：项目后续是否可以继续开发，或转化为一个真正可使用的产品。",
-              "待补充：如何进一步验证用户需求和项目价值。",
-            ],
-          },
+          { text: "选用 <span class=\"project-emphasis\">micro:bit V2 与扩展板</span>，设计电机、舵机、传感器与望远镜、探测仪等实体作品的互动方案，将静态手作转化为可控制、可展示的项目成果。" },
+          { text: "独立负责课程结构、活动设计与课件/文档开发。与 3 位天文老师协作校准内容，后续将形成课件、课程文档与可参赛的学生作品方案。" },
+        ],
+      },
+      {
+        title: "个人 AI Agent 项目｜求职机会监测与能力雷达",
+        navTitle: "Agent",
+        compactTitle: true,
+        date: "2026.10 - 至今",
+        lead: "设计面向个人求职的公开信息监测流程，覆盖目标公司官网、官方招聘页和公开招聘公众号；后续按用户授权接入需登录渠道。",
+        image: {
+          src: "./assets/images/AI Agent -1.png",
+          alt: "个人 AI Agent 项目资料截图",
+        },
+        scrollContent: true,
+        sections: [
+          { text: "建立岗位去重、官方链接验证、失效过滤、截止日标记与暂定匹配评分规则；以方向契合、可实习性、公司匹配、AI／教育相关度等维度排序。" },
+          { text: "设定工作日定时扫描、日报、临期高匹配岗位提醒和每周市场与能力雷达；项目处于早期运行与迭代阶段，后续补充日报样例和反馈效果。" },
+        ],
+      },
+      {
+        title: "SAVUS",
+        navTitle: "SAVUS",
+        date: "2022.12 - 2023.06",
+        role: "运营策划",
+        metaInline: true,
+        website: { label: "https://savus.mysxl.cn/", url: "https://savus.mysxl.cn/", prefix: "" },
+        lead: "<span class=\"project-emphasis\">公众号排版设计与运营。</span>负责公众号日常运营，使用<span class=\"project-emphasis\">秀米</span>完成排版与编辑 30 余次；最高浏览量达 3400+，账号运营 2 个月从 0 增长至 1500+ 粉丝；沟通同类型公众号及知识科普账号，合作方案一次性通过率达 90%。",
+        image: {
+          src: "./assets/images/SAVUS-1.png",
+          alt: "SAVUS 项目网站页面",
+        },
+        scrollContent: true,
+        sections: [
+          { text: "小红书<span class=\"project-emphasis\">内容运营。</span>熟悉小红书流量池机制，发布笔记 30 余篇；最高单篇获赞与收藏增长 150%，个人账号最高浏览量达 1.7 万+。" },
         ],
       },
     ],
@@ -128,12 +124,14 @@ const PORTFOLIO = {
       {
         school: "香港教育大学",
         degree: "Master of Arts in Science and Robotics Education",
-        date: "2026.08 - 2027.07",
+        date: "2026.09 - 2027.08",
         visualNote: "科学与机器人教育硕士，全日制。",
         visualImage: "./assets/images/hk-edu-background.jpg",
         badgeImage: "./assets/images/eduhk-logo.jpg",
-        text:
-          "主修 AI in Science and Robotics Education、Principles and Methods in Science and Robotics Education Research、Engineering and Programming for School Science and Robotics.",
+        bullets: [
+          "主修 AI in Science and Robotics Education、Principles and Methods in Science and Robotics Education Research、Engineering and Programming for School Science and Robotics",
+          "担任学生代表与 Student Helper，代表班级参与课程相关会议，收集并反馈学生的学习意见与建议；同时协助校园摄影等支持工作",
+        ],
         accent: "warm",
       },
       {
@@ -143,8 +141,10 @@ const PORTFOLIO = {
         visualNote: "教育技术学本科打底，积累课程设计与技术应用基础。",
         visualImage: "./assets/images/scnu-background.jpg",
         badgeImage: "./assets/images/scnu-logo.svg",
-        text:
-          "计算机科学学院全日制本科。曾获全国大学生计算机设计大赛三等奖、全国第六届大学生艺术展演活动优秀志愿者、校级优秀共青团员、校级优秀学生干部、校级三等奖学金、校级学术科技竞赛奖等。",
+        bullets: [
+          "曾获全国大学生计算机设计大赛三等奖、全国第六届大学生艺术展演活动优秀志愿者、校级优秀共青团员、校级优秀学生干部、校级三等奖学金、校级学术科技竞赛奖等。",
+          "好女不提当年勇～此处不再赘述！",
+        ],
         accent: "fresh",
       },
     ],
@@ -157,22 +157,11 @@ const PORTFOLIO = {
         title: "猿编程",
         role: "编程教研",
         intro:
-          "参与在线双师课课程的研发工作，并通过实际测试与调研来不断改进课程内容。该课程面向6-10岁学生，该课程内容包括Python与硬件（类似乐高积木）。",
-        highlights: [
-          { label: "AI工具应用", value: "即梦生成图片、通义总结会议、mia搭建个人知识库......我勇于尝试" },
-          { label: "多方沟通与协作", value: "与研发、与设计、与产品......我乐于沟通" },
-          { label: "用户洞察与转化", value: "真实的环境、真实的人，看看这节课的目标能否达成、看看这个产品能够走得多远" },
-          { label: "随材物料的制作", value: "Canva、Sketch、秀米、剪映......基础的设计工具我都能使用" },
-        ],
+          "参与在线双师课课程的研发工作，并通过实际测试与调研来不断改进课程内容。该课程面向6-10岁学生，该课程内容包括Python与硬件。",
         images: [
           {
             src: "./assets/images/work-experience-2.jpg",
             alt: "猿编程线下课堂支持现场",
-          },
-          {
-            src: "./assets/images/img-6385.jpg?v=20260828-work-image-6385",
-            alt: "猿编程课程支持现场",
-            fit: "contain",
           },
           {
             src: "./assets/images/yuancheng-classroom.jpg",
@@ -193,8 +182,9 @@ const PORTFOLIO = {
         highlights: [
           { label: "课程制作", value: "使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件并完成课件及物料制作" },
           { label: "流程沉淀", value: "熟悉课程产品生产流程，参与文档沉淀，并提供跨部门支持与协作" },
-          { label: "运营维护", value: "负责新媒体平台日常运营维护，确保内容更新及时、准确，并与主讲老师同步教学计划" },
-          { label: "内容优化", value: "围绕目标学生认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化" },
+        ],
+        images: [
+          { src: "./assets/images/zuoyebang-1.JPG", alt: "作业帮编程教研实习证件照片", fit: "contain" },
         ],
         text:
           "在教学教研部参与少儿编程课程研发，使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件，完成课件及相关物料制作，对课程内容和呈现效果负责。负责新媒体平台日常运营维护，确保每周发布内容与教学计划同步，避免信息误差。深入研究目标学生群体特点，针对认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化，确保内容有趣且易于理解。",
@@ -209,8 +199,23 @@ const PORTFOLIO = {
           { label: "竞赛支持", value: "按照学校要求，带领学生参加全国青少年信息素养大赛" },
           { label: "校园协作", value: "支持学校行政与摄影工作，能够独立使用秀米完成公众号文章排版" },
         ],
+        images: [
+          { src: "./assets/images/yingbing-1.JPG", alt: "成都市迎宾路小学教学分享现场" },
+        ],
         text:
           "熟悉 2022 版《义务教育信息科技课程标准》，针对 3-6 年级学生，使用 Python、Scratch 进行教学工作，每周 4 节，共计 40 节。按照学校要求，带领学生参加全国青少年信息素养大赛。支持学校其他行政工作，参与摄影工作，并能够独立使用秀米对该校公众号文章进行排版。",
+      },
+      {
+        date: "2023.02 - 2023.06",
+        title: "成都市玉林小学",
+        role: "信息技术教师",
+        highlights: [
+          { label: "课堂教学", value: "面向四、五年级开展 Scratch、3D One 教学；每周 4 节课，共计 48 节。" },
+          { label: "校园支持", value: "组织班会等活动 10 余次；制作毕业纪念视频 5 份，并在校级活动中完成摄影、撰稿 10 余次，为学校公众号运营提供支持。" },
+        ],
+        images: [
+          { src: "./assets/images/yulin-1.png", alt: "成都市玉林小学信息技术课堂现场" },
+        ],
       },
     ],
   },
@@ -218,20 +223,12 @@ const PORTFOLIO = {
     summary: "也许你会想认识更真实的我",
     items: [
       {
-        title: "快速学习的能力",
-        preview: "快速学习的能力",
+        title: "登高望远",
+        preview: "登高望远",
         detail:
-          "仅用五天就部署完成该网站，仅用10分钟就上手桨板（后半句是想加个配图）",
-        image: "./assets/images/hobby-interest.jpg?v=20260828-paddleboarding",
-        imageAlt: "桨板配图",
-      },
-      {
-        title: "高中信息技术教师资格证",
-        preview: "高中信息技术教师资格证",
-        detail:
-          "一棵树摇动另一棵树，一朵云推动另一朵云，一个灵魂唤醒另一个灵魂",
-        image: "./assets/images/teacher-certification.jpg",
-        imageAlt: "高中信息技术教师资格证配图",
+          "不登高山，不知天之高也；不临深溪，不知地之厚也",
+        image: "./assets/images/denggao-1.png",
+        imageAlt: "登高远望海湾与群山的照片",
       },
       {
         title: "MBTI",
@@ -251,8 +248,8 @@ const PORTFOLIO = {
         preview: "潜水",
         detail:
           "在水里只需要呼吸",
-        image: "./assets/images/diving.jpg",
-        imageAlt: "潜水配图",
+        image: "./assets/images/qianshui-1.JPG",
+        imageAlt: "戴潜水镜在水中潜游的照片",
       },
       {
         title: "游泳",
@@ -279,15 +276,25 @@ const PORTFOLIO = {
         imageAlt: "旅行配图",
       },
       {
-        title: "稳中求进的心态",
-        preview: "稳中求进的心态",
+        title: "教育产品与课程研发",
+        preview: "教育产品与课程研发",
         detail:
-          "比起单次亮眼的输出，我更在意长期积累出来的可靠性和迭代能力",
+          "一个灵魂唤醒另一个灵魂",
+        image: "./assets/images/jiaoyu-1.JPG",
+        imageAlt: "课堂教学展示现场照片",
+      },
+      {
+        title: "AI 与产品工具",
+        preview: "AI 与产品工具",
+        detail:
+          "看似寻常最奇崛，成如容易却艰辛",
+        image: "./assets/images/AI-1.png",
+        imageAlt: "纸上的手绘思路草图",
       },
     ],
   },
   contact: {
-    summary: "如果您正在寻找对 AI 、产品方面有浓厚兴趣的候选人，欢迎通过邮箱或电话联系我！",
+    summary: "如果您正在寻找对教育、产品、AI方面有浓厚兴趣的候选人，欢迎通过邮箱或电话联系我！",
     items: [
       { label: "邮箱", value: "jiabeilieee@foxmail.com" },
       { label: "电话/微信同号", value: "186-2838-7059" },
@@ -381,6 +388,12 @@ function bindCopyWidget() {
   buttons.forEach((button) => {
     const status = button.parentElement.querySelector(".copy-widget__status");
     const defaultStatus = button.dataset.copyDefault || "点击即可复制";
+    const arrow = button.querySelector(".contact-action__arrow");
+    const defaultArrow = arrow?.textContent;
+    if (status) {
+      status.setAttribute("role", "status");
+      status.setAttribute("aria-live", "polite");
+    }
     let resetTimer = null;
 
     const setStatus = (text) => {
@@ -393,13 +406,18 @@ function bindCopyWidget() {
     };
 
     button.addEventListener("click", async () => {
+      if (resetTimer) clearTimeout(resetTimer);
+      button.classList.remove("is-copied");
+      if (arrow) arrow.textContent = defaultArrow;
       try {
         await copyTextToClipboard(button.dataset.copyValue);
         button.classList.add("is-copied");
-        setStatus("已复制到剪贴板");
+        setStatus("已复制 ✓");
+        if (arrow) arrow.textContent = "✓";
         if (resetTimer) clearTimeout(resetTimer);
         resetTimer = setTimeout(() => {
           button.classList.remove("is-copied");
+          if (arrow) arrow.textContent = defaultArrow;
           setStatus(defaultStatus);
         }, 1600);
       } catch (error) {
@@ -452,49 +470,243 @@ function bindScrollCue() {
   window.addEventListener("resize", setCueState);
 }
 
-function renderTags(containerId, tags) {
+function renderTypographicWall(containerId, tags) {
   const el = document.getElementById(containerId);
   if (!el) return;
-  el.innerHTML = tags
-    .map(
-      (tag) => `
-        <button class="tag" type="button" data-tag-button data-tag-text="${tag}" aria-label="${tag}">
-          ${Array.from(tag)
-            .map(
-              (character, index) =>
-                `<span class="tag-letter" style="--tag-index: ${index}">${character}</span>`,
-            )
-            .join("")}
+  el.innerHTML = `
+    <div class="typographic-wall__noise" aria-hidden="true"></div>
+    <div class="typographic-wall__scan" aria-hidden="true"></div>
+    <div class="typographic-wall__words">
+      ${tags.map((tag) => `
+        <button class="typographic-wall__word" type="button" data-wall-word data-wall-label="${escapeHTML(tag)}" aria-label="${escapeHTML(tag)}" tabindex="-1">
+          <span data-wall-glyph aria-hidden="true">${escapeHTML(tag)}</span>
         </button>
-      `,
-    )
-    .join("");
+      `).join("")}
+    </div>
+  `;
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
-}
+function bindTypographicWall(containerId) {
+  const wall = document.getElementById(containerId);
+  if (!wall) return;
+  const words = Array.from(wall.querySelectorAll("[data-wall-word]"));
+  const noise = wall.querySelector(".typographic-wall__noise");
+  const scan = wall.querySelector(".typographic-wall__scan");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const scanMs = 2600;
+  const holdMs = 5000;
+  const dissolveMs = 800;
+  const restMs = 800;
+  const cycleMs = scanMs + holdMs + dissolveMs + restMs;
+  const backgroundChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const chineseChars = "学科产品教育研发展力交互编码创意";
+  let frame = 0;
+  let cycleStart = 0;
+  let lastGlyphTick = 0;
+  let lastNoiseTick = 0;
+  let inView = false;
+  let focusedWord = null;
+  let lastWidth = 0;
+  let lastHeight = 0;
 
-async function playTagSequence() {
-  const tags = document.querySelectorAll("[data-tag-button]");
-  const targetLabels = ["课程研发", "跨学科融合", "AI"];
-  const targetButtons = targetLabels
-    .map((label) => Array.from(tags).find((tag) => tag.dataset.tagText === label))
-    .filter(Boolean);
-
-  if (!targetButtons.length) return;
-
-  while (document.body && document.documentElement) {
-    for (const tag of targetButtons) {
-      const letterCount = tag.querySelectorAll(".tag-letter").length || 1;
-      tag.classList.remove("is-jumping");
-      void tag.offsetWidth;
-      tag.classList.add("is-jumping");
-      await sleep(letterCount * 1000 + 150);
-      tag.classList.remove("is-jumping");
-      await sleep(180);
+  const randomChar = (chars) => chars[Math.floor(Math.random() * chars.length)];
+  const scramble = (label, revealed) => Array.from(label).map((character, index) => {
+    if (index < revealed || /[\s:／]/u.test(character)) return character;
+    if (/[\u4e00-\u9fff]/u.test(character)) return randomChar(chineseChars);
+    if (/[0-9]/u.test(character)) return randomChar("0123456789");
+    if (/[a-z]/iu.test(character)) {
+      const random = randomChar("abcdefghijklmnopqrstuvwxyz");
+      return character === character.toUpperCase() ? random.toUpperCase() : random;
     }
+    return character;
+  }).join("");
+
+  const fillNoise = () => {
+    const columns = Math.ceil(wall.clientWidth / 11);
+    const lines = Math.ceil(wall.clientHeight / 25);
+    noise.textContent = Array.from({ length: lines }, () =>
+      Array.from({ length: columns }, () => Math.random() < 0.7 ? randomChar(backgroundChars) : " ").join(""),
+    ).join("\n");
+  };
+
+  const layout = (shuffle = false) => {
+    const width = Math.max(220, wall.clientWidth || 360);
+    const innerWidth = width - 40;
+    const rows = [[]];
+    const arrangedWords = [...words];
+    if (shuffle) {
+      for (let index = arrangedWords.length - 1; index > 0; index -= 1) {
+        const other = Math.floor(Math.random() * (index + 1));
+        [arrangedWords[index], arrangedWords[other]] = [arrangedWords[other], arrangedWords[index]];
+      }
+    }
+    let used = 0;
+    arrangedWords.forEach((word) => {
+      const wordWidth = Math.min(word.offsetWidth, innerWidth);
+      if (rows.at(-1).length && used + 18 + wordWidth > innerWidth) {
+        rows.push([]);
+        used = 0;
+      }
+      rows.at(-1).push({ word, width: wordWidth });
+      used += (used ? 18 : 0) + wordWidth;
+    });
+    const mobile = window.innerWidth <= 700;
+    wall.style.height = mobile ? `${Math.max(300, rows.length * 56 + 52)}px` : "";
+    const height = wall.clientHeight;
+    const rowPitch = rows.length > 1 ? (height - 82) / (rows.length - 1) : 0;
+    rows.forEach((row, rowIndex) => {
+      const wordWidth = row.reduce((total, item) => total + item.width, 0);
+      const free = Math.max(0, innerWidth - wordWidth);
+      const left = 20 + (row.length === 1 ? free * (rowIndex % 2 ? 0.65 : 0.25) : free * 0.06);
+      const gap = row.length > 1 ? (free * 0.88) / (row.length - 1) : 0;
+      let x = left;
+      row.forEach(({ word, width: itemWidth }) => {
+        const jitter = shuffle ? Math.round((Math.random() - 0.5) * 12) : 0;
+        const y = 32 + rowIndex * rowPitch + jitter;
+        word.style.left = `${Math.round(x)}px`;
+        word.style.top = `${y}px`;
+        word.dataset.wallTrigger = String((y / height) * scanMs);
+        x += itemWidth + gap;
+      });
+    });
+    fillNoise();
+    lastWidth = width;
+    lastHeight = height;
+  };
+
+  const setWord = (word, text, visible) => {
+    const glyph = word.querySelector("[data-wall-glyph]");
+    if (glyph.textContent !== text) glyph.textContent = text;
+    word.classList.toggle("is-visible", visible);
+    word.tabIndex = visible ? 0 : -1;
+  };
+
+  const showAll = () => {
+    words.forEach((word) => setWord(word, word.dataset.wallLabel, true));
+    scan.hidden = true;
+  };
+
+  const stop = () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+  };
+
+  const tick = (now) => {
+    frame = 0;
+    if (!inView || reducedMotion.matches || focusedWord || document.hidden) return;
+    if (now - cycleStart >= cycleMs) {
+      cycleStart += Math.floor((now - cycleStart) / cycleMs) * cycleMs;
+      layout(true);
+    }
+    const elapsed = (now - cycleStart) % cycleMs;
+    const scanActive = elapsed < scanMs;
+    scan.hidden = !scanActive;
+    if (scanActive) scan.style.top = `${(elapsed / scanMs) * 100}%`;
+
+    if (now - lastNoiseTick > 700) {
+      fillNoise();
+      lastNoiseTick = now;
+    }
+    if (now - lastGlyphTick > 83) {
+      words.forEach((word) => {
+        const label = word.dataset.wallLabel;
+        if (elapsed < scanMs) {
+          const progress = (elapsed - Number(word.dataset.wallTrigger)) / Math.min(850, 420 + label.length * 28);
+          const visible = progress >= 0;
+          const revealed = Math.floor(Math.max(0, Math.min(1, progress)) * Array.from(label).length);
+          setWord(word, progress >= 1 ? label : scramble(label, revealed), visible);
+        } else if (elapsed < scanMs + holdMs) {
+          setWord(word, label, true);
+        } else if (elapsed < scanMs + holdMs + dissolveMs) {
+          const progress = (elapsed - scanMs - holdMs) / dissolveMs;
+          const revealed = Math.floor((1 - progress) * Array.from(label).length);
+          setWord(word, scramble(label, revealed), progress < 0.92);
+        } else {
+          setWord(word, label, false);
+        }
+      });
+      lastGlyphTick = now;
+    }
+    frame = requestAnimationFrame(tick);
+  };
+
+  const start = () => {
+    if (!inView || reducedMotion.matches || focusedWord || document.hidden || frame) return;
+    frame = requestAnimationFrame(tick);
+  };
+
+  const restart = (shuffle = true) => {
+    stop();
+    layout(shuffle);
+    cycleStart = performance.now();
+    lastGlyphTick = 0;
+    start();
+  };
+
+  words.forEach((word) => {
+    const focus = () => {
+      focusedWord = word;
+      wall.dataset.focused = "true";
+      words.forEach((item) => item.classList.toggle("is-dimmed", item !== word));
+      stop();
+      showAll();
+    };
+    const blur = () => {
+      if (word.matches(":hover, :focus-visible")) return;
+      if (focusedWord !== word) return;
+      focusedWord = null;
+      delete wall.dataset.focused;
+      words.forEach((item) => item.classList.remove("is-dimmed"));
+      cycleStart = performance.now() - scanMs;
+      start();
+    };
+    word.addEventListener("mouseenter", focus);
+    word.addEventListener("mouseleave", blur);
+    word.addEventListener("focus", focus);
+    word.addEventListener("blur", blur);
+    word.addEventListener("click", (event) => event.stopPropagation());
+  });
+  wall.addEventListener("click", (event) => {
+    if (event.target.closest("[data-wall-word]")) return;
+    focusedWord = null;
+    delete wall.dataset.focused;
+    words.forEach((word) => word.classList.remove("is-dimmed"));
+    restart(true);
+  });
+
+  const resize = () => {
+    if (Math.abs(wall.clientWidth - lastWidth) < 2 && Math.abs(wall.clientHeight - lastHeight) < 2) return;
+    layout(false);
+    if (reducedMotion.matches || focusedWord) showAll();
+    else restart(false);
+  };
+  if (window.ResizeObserver) new ResizeObserver(resize).observe(wall);
+  else window.addEventListener("resize", resize);
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) {
+        if (reducedMotion.matches) showAll();
+        else restart(false);
+      } else stop();
+    }, { threshold: 0.1 }).observe(wall);
+  } else {
+    inView = true;
+    cycleStart = performance.now();
   }
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) {
+      stop();
+      showAll();
+    } else restart(false);
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else if (inView) restart(false);
+  });
+  layout(false);
+  if (reducedMotion.matches) showAll();
+  else start();
 }
 
 function renderFacts(containerId, facts) {
@@ -516,17 +728,19 @@ function renderProjects(containerId, items) {
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = items
-    .map((project) => {
+    .map((project, projectIndex) => {
       const sections = project.sections
         .map(
           (section) => {
             const body = Array.isArray(section.text)
-              ? `<ul>${section.text.map((item) => `<li>${item}</li>`).join("")}</ul>`
+              ? `<ul>${section.text.map((item) => typeof item === "string"
+                ? `<li>${item}</li>`
+                : `<li><strong>${item.label}</strong>：${item.text}</li>`).join("")}</ul>`
               : `<p>${section.text}</p>`;
 
             return `
               <div class="project-section">
-                <span class="project-section__label">${section.label}</span>
+                ${section.label ? `<span class="project-section__label">${section.label}</span>` : ""}
                 ${body}
               </div>
             `;
@@ -535,11 +749,14 @@ function renderProjects(containerId, items) {
         .join("");
       const chips = project.sections
         .slice(0, 3)
+        .filter((section) => section.label)
         .map((section) => `<span>${section.label}</span>`)
         .join("");
       const hasModel = Boolean(project.model);
+      const hasGallery = Array.isArray(project.images) && project.images.length > 1;
+      const hasImage = Boolean(project.image || hasGallery);
       const hasPlaceholderImage = Boolean(project.placeholderImage);
-      const visualClass = `project-visual${hasModel ? " project-visual--model" : ""}${hasPlaceholderImage ? " project-visual--placeholder" : ""}`;
+      const visualClass = `project-visual${hasModel ? " project-visual--model" : ""}${hasImage || hasPlaceholderImage ? " project-visual--placeholder" : ""}${hasGallery ? " project-visual--gallery" : ""}`;
       const contentClass = `project-content${project.scrollContent ? " project-content--scroll" : ""}`;
       const visualMarkup = hasModel
         ? `
@@ -555,18 +772,29 @@ function renderProjects(containerId, items) {
               <span class="project-model-label">3D模型 拖动可查看</span>
             </div>
           `
-        : hasPlaceholderImage
+        : hasGallery
           ? `
               <img
-                class="project-placeholder-image"
-                src="${project.placeholderImage.src}"
-                alt="${project.placeholderImage.alt || project.title}"
+                class="project-placeholder-image${project.images[0].fit === "contain" ? " project-placeholder-image--contain" : ""}"
+                src="${escapeHTML(project.images[0].src)}"
+                alt="${escapeHTML(project.images[0].alt || project.title)}"
+                loading="lazy"
+              />
+              <button class="project-gallery__arrow project-gallery__arrow--previous" type="button" data-project-gallery-direction="previous" aria-label="上一张图片">←</button>
+              <button class="project-gallery__arrow project-gallery__arrow--next" type="button" data-project-gallery-direction="next" aria-label="下一张图片">→</button>
+              <span class="project-gallery__count" data-project-gallery-count aria-live="polite">1 / ${project.images.length}</span>
+            `
+        : hasImage || hasPlaceholderImage
+          ? `
+              <img
+                class="project-placeholder-image${project.image?.fit === "contain" ? " project-placeholder-image--contain" : ""}"
+                src="${(project.image || project.placeholderImage).src}"
+                alt="${(project.image || project.placeholderImage).alt || project.title}"
                 loading="lazy"
               />
             `
         : `
             <div class="project-visual__frame">
-              <span class="project-number project-number--large">${project.number}</span>
               <strong class="project-visual__title">${project.title}</strong>
               <p class="project-visual__lead">${project.lead}</p>
               <div class="project-visual__chips">
@@ -577,14 +805,14 @@ function renderProjects(containerId, items) {
 
       return `
         <article class="project-item project-item--showcase">
-          <div class="${visualClass}" aria-hidden="true">
+          <div class="${visualClass}"${hasGallery ? ` data-project-gallery="${projectIndex}" role="group" aria-label="${escapeHTML(project.navTitle || project.title)}图片轮播"` : ' aria-hidden="true"'}>
             ${visualMarkup}
           </div>
           <div class="${contentClass}">
             <div class="project-header">
-              <span class="project-number">${project.number}</span>
-              <strong>${project.title}</strong>
-              <p>${project.lead}</p>
+              <strong${project.compactTitle ? ' class="project-title--compact"' : ""}>${project.title}</strong>
+              ${project.date || project.role || project.website ? `<p class="project-meta${project.metaInline ? " project-meta--inline" : ""}">${project.date ? `<span>${project.date}</span>` : ""}${project.role ? `<span>${project.role}</span>` : ""}${project.website ? `<span>${project.website.prefix ?? "项目网站："}<a class="project-website" href="${escapeHTML(project.website.url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(project.website.label)}</a></span>` : ""}</p>` : ""}
+              ${project.lead ? `<p>${project.lead}</p>` : ""}
             </div>
             <div class="project-sections">
               ${sections}
@@ -594,6 +822,85 @@ function renderProjects(containerId, items) {
       `;
     })
     .join("");
+}
+
+function bindProjectGalleries(items) {
+  document.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
+    const project = items[Number(gallery.dataset.projectGallery)];
+    const images = project?.images;
+    const image = gallery.querySelector(".project-placeholder-image");
+    const count = gallery.querySelector("[data-project-gallery-count]");
+    if (!images?.length || !image || !count) return;
+
+    let current = 0;
+    const show = (next) => {
+      current = (next + images.length) % images.length;
+      image.src = images[current].src;
+      image.alt = images[current].alt || project.title;
+      image.classList.toggle("project-placeholder-image--contain", images[current].fit === "contain");
+      count.textContent = `${current + 1} / ${images.length}`;
+    };
+
+    gallery.querySelectorAll("[data-project-gallery-direction]").forEach((button) => {
+      button.addEventListener("click", () => {
+        show(current + (button.dataset.projectGalleryDirection === "next" ? 1 : -1));
+      });
+    });
+  });
+}
+
+function bindProjectDirectory(items) {
+  const list = document.getElementById("projectList");
+  if (!list || !items.length) return;
+  const panels = Array.from(list.children);
+  const directory = document.createElement("div");
+  directory.className = "project-directory";
+  directory.innerHTML = `
+    <div class="project-directory__tabs" role="tablist" aria-label="项目目录">
+      ${items.map((item, index) => `<button type="button" role="tab" id="project-tab-${index}" aria-label="${String(index + 1).padStart(2, "0")} ${escapeHTML(item.title)}" aria-controls="project-panel-${index}" aria-selected="${index === 0}" tabindex="${index === 0 ? 0 : -1}"><span class="project-directory__number">${String(index + 1).padStart(2, "0")}</span><strong>${escapeHTML(item.navTitle || item.title)}</strong></button>`).join("")}
+    </div>`;
+  list.before(directory);
+  const tabs = Array.from(directory.querySelectorAll('[role="tab"]'));
+  const projectSection = list.closest("#about");
+  const projectColors = ["#efe9db", "#eee9f7", "#e7f1e9", "#f6e9e0", "#e9edf6"];
+  let current = 0;
+  let transition;
+  panels.forEach((panel, index) => {
+    panel.id = `project-panel-${index}`;
+    panel.setAttribute("role", "tabpanel");
+    panel.setAttribute("aria-labelledby", `project-tab-${index}`);
+    panel.tabIndex = 0;
+  });
+  const select = (index, focus = false) => {
+    const changed = index !== current;
+    current = index;
+    projectSection?.style.setProperty("--project-active-bg", projectColors[index % projectColors.length]);
+    transition?.cancel();
+    panels.forEach((panel, i) => { panel.hidden = i !== index; });
+    tabs.forEach((tab, i) => {
+      tab.setAttribute("aria-selected", String(i === index));
+      tab.tabIndex = i === index ? 0 : -1;
+    });
+    if (focus) tabs[index].focus();
+    if (changed && !window.matchMedia("(prefers-reduced-motion: reduce)").matches && panels[index].animate) {
+      transition = panels[index].animate([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 250, easing: "ease-out" });
+    }
+    window.dispatchEvent(new Event("resize"));
+  };
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => select(index));
+    tab.addEventListener("keydown", (event) => {
+      let target;
+      if (event.key === "ArrowRight") target = Math.min(current + 1, tabs.length - 1);
+      if (event.key === "ArrowLeft") target = Math.max(current - 1, 0);
+      if (event.key === "Home") target = 0;
+      if (event.key === "End") target = tabs.length - 1;
+      if (target === undefined) return;
+      event.preventDefault();
+      select(target, true);
+    });
+  });
+  select(0);
 }
 
 let projectModelRuntimePromise = null;
@@ -1202,7 +1509,9 @@ function renderEducation(containerId, items) {
               <span class="education-card__date">${item.date}</span>
               <span class="education-card__degree-label">${item.degree}</span>
             </div>
-            <p>${item.text}</p>
+            ${item.bullets
+              ? `<ul class="education-card__bullets">${item.bullets.map((text) => `<li>${text}</li>`).join("")}</ul>`
+              : `<p>${item.text}</p>${(item.supplementaryText || []).map((text) => `<p>${text}</p>`).join("")}`}
           </div>
         </article>
       `;
@@ -1218,7 +1527,9 @@ function renderTimeline(containerId, items) {
       const side = index % 2 === 0 ? "left" : "right";
       const step = String(index + 1).padStart(2, "0");
       const isOpen = Boolean(item.defaultOpen);
-      const timelineIntro = item.intro || (!item.highlights ? item.text : "");
+      const highlights = [...(item.highlights || []), ...(item.supplementaryHighlights || [])];
+      const hasFeaturedContent = Boolean(highlights.length || item.images?.length);
+      const timelineIntro = item.intro || item.supplementaryIntro || (!highlights.length ? item.text : "");
 
       return `
         <div class="timeline-entry timeline-entry--${side}" data-work-item data-step="${step}">
@@ -1234,20 +1545,14 @@ function renderTimeline(containerId, items) {
               </span>
               <span class="timeline-click-hint" data-timeline-hint>${isOpen ? "点击收起" : "点击展开"}</span>
             </button>
-            <div class="timeline-body ${(item.highlights && !item.pendingContent) ? "timeline-body--featured" : ""}" aria-hidden="${isOpen ? "false" : "true"}">
+            <div class="timeline-body ${hasFeaturedContent ? "timeline-body--featured" : ""}" aria-hidden="${isOpen ? "false" : "true"}">
             ${
-              item.pendingContent
-                ? `
-                  <div class="timeline-placeholder">
-                    <span>内容待补充</span>
-                  </div>
-                `
-                : item.highlights
+              hasFeaturedContent
                   ? `
                     <div class="timeline-feature__copy">
                       ${timelineIntro ? `<p class="timeline-intro">${timelineIntro}</p>` : ""}
-                      <div class="timeline-highlights">
-                        ${item.highlights
+                      ${highlights.length ? `<div class="timeline-highlights">
+                        ${highlights
                           .map(
                             (highlight) => `
                               <div class="timeline-highlight">
@@ -1257,7 +1562,7 @@ function renderTimeline(containerId, items) {
                             `,
                           )
                           .join("")}
-                      </div>
+                      </div>` : ""}
                     </div>
                     ${
                       item.images
@@ -1285,6 +1590,12 @@ function renderTimeline(containerId, items) {
                         : ""
                     }
                   `
+                  : item.pendingContent
+                    ? `
+                      <div class="timeline-placeholder">
+                        <span>内容待补充</span>
+                      </div>
+                    `
                   : `
                       <p>${item.text}</p>
                     `
@@ -1299,17 +1610,28 @@ function renderTimeline(containerId, items) {
 
 function bindWorkTimeline() {
   const items = document.querySelectorAll("[data-work-item]");
+  const light = (item) => {
+    item.classList.add("work-is-seen");
+  };
   items.forEach((item) => {
     const card = item.querySelector(".timeline-item");
     const head = item.querySelector(".timeline-head");
     const body = item.querySelector(".timeline-body");
     const hint = item.querySelector("[data-timeline-hint]");
     if (!card || !head || !body) return;
+    body.inert = !card.classList.contains("is-open");
 
     const setOpen = (isOpen) => {
       card.classList.toggle("is-open", isOpen);
       head.setAttribute("aria-expanded", String(isOpen));
       body.setAttribute("aria-hidden", String(!isOpen));
+      body.inert = !isOpen;
+      if (isOpen) light(item);
+      if (isOpen && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        body.querySelectorAll(".timeline-intro, .timeline-highlight, .timeline-feature__media").forEach((element, index) => {
+          element.animate?.([{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 350, delay: Math.min(index, 5) * 60, fill: "backwards", easing: "ease-out" });
+        });
+      }
       if (hint) {
         hint.textContent = isOpen ? "点击收起" : "点击展开";
       }
@@ -1332,32 +1654,25 @@ function bindWorkTimeline() {
 }
 
 function bindWorkGalleries() {
-  const galleries = document.querySelectorAll("[data-work-gallery]");
-  galleries.forEach((gallery) => {
+  document.querySelectorAll("[data-work-gallery]").forEach((gallery) => {
     const images = Array.from(gallery.querySelectorAll("[data-gallery-image]"));
     if (!images.length) return;
-
     let activeIndex = 0;
-    let timer = null;
-
-    const update = () => {
-      images.forEach((image, index) => {
-        const offset = (index - activeIndex + images.length) % images.length;
-        image.classList.toggle("is-active", offset === 0);
-        image.classList.toggle("is-next", offset === 1);
-        image.classList.toggle("is-back", offset > 1);
-        image.style.zIndex = String(images.length - offset);
-      });
-    };
-
-    const step = () => {
+    const update = () => images.forEach((image, index) => {
+      const offset = (index - activeIndex + images.length) % images.length;
+      image.classList.toggle("is-active", offset === 0);
+      image.classList.toggle("is-next", offset === 1);
+      image.classList.toggle("is-back", offset > 1);
+      image.style.zIndex = String(images.length - offset);
+    });
+    update();
+    if (images.length < 2) return;
+    window.setInterval(() => {
+      if (document.hidden || !gallery.closest(".timeline-item")?.classList.contains("is-open")) return;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       activeIndex = (activeIndex + 1) % images.length;
       update();
-    };
-
-    update();
-    gallery.dataset.autoplay = "true";
-    window.setInterval(step, 2000);
+    }, 4000);
   });
 }
 
@@ -1416,188 +1731,441 @@ function renderSkillDetail(item) {
 function renderSkills(containerId, items) {
   const el = document.getElementById(containerId);
   if (!el) return;
+  const displayOrder = items.length === 8
+    ? [1, 7, 3, 0, 5, 2, 4, 6]
+    : items.map((_, index) => index);
 
   el.innerHTML = `
-    <div class="skills-showcase" data-skill-showcase>
-      <div class="skills-stack">
-        <div class="skills-stack__deck" aria-label="技能与爱好档案卡">
-          ${items
-            .map(
-              (item, index) => `
-                <div
-                  class="skills-stack-card"
-                  data-skill-index="${index}"
-                  style="--skill-index: ${index};"
-                  aria-hidden="true"
-                >
-                  <span class="skills-stack-card__back">Skills x life</span>
-                </div>
-              `,
-            )
-            .join("")}
-        </div>
-        <button class="skills-draw" type="button" data-skill-random>
-          随机抽一张
-          <span aria-hidden="true">✦</span>
-        </button>
-      </div>
-      <article class="skills-detail" data-skill-detail aria-live="polite"></article>
+    <div class="skill-gallery" data-skill-gallery>
+      ${displayOrder.map((index) => {
+        const item = items[index];
+        return `
+        <article class="skills-detail skill-gallery__card${item.image && !item.traits ? " skills-detail--photo" : ""}${item.traits ? " skills-detail--mbti" : ""}" data-skill-card aria-label="${escapeHTML(item.title)}档案卡">
+          <span class="skills-detail__shadow" aria-hidden="true"></span>
+          <div class="skills-detail__rotor" data-skill-rotor>
+            <div class="skills-detail__face skills-detail__face--front" data-skill-front>
+              <canvas class="skills-detail__galaxy" aria-hidden="true"></canvas>
+              <span class="skills-detail__glare" aria-hidden="true"></span>
+            </div>
+            <div class="skills-detail__face skills-detail__face--back" data-skill-back aria-hidden="true" inert>
+              <div class="skills-detail__back-content">${renderSkillDetail(item)}</div>
+              <span class="skills-detail__glare" aria-hidden="true"></span>
+            </div>
+          </div>
+          <button class="skills-detail__flip-toggle" type="button" data-skill-flip-toggle aria-label="翻开${escapeHTML(item.title)}档案卡" aria-pressed="false">↻</button>
+        </article>
+      `;
+      }).join("")}
     </div>
   `;
 }
 
-async function playShuffleSound(durationMs = 2000) {
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContext) return;
+let skillFlipAudioContext = null;
+let skillFlipNoiseBuffer = null;
+
+function playSkillFlipSound() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return;
 
   try {
-    const context = new AudioContext();
-    if (context.state === "suspended") {
-      await context.resume();
-    }
+    const audio = skillFlipAudioContext ||= new AudioContextClass();
+    if (audio.state === "suspended") void audio.resume().catch(() => {});
 
-    const master = context.createGain();
-    master.gain.value = 0.16;
-    master.connect(context.destination);
-
-    const filter = context.createBiquadFilter();
-    filter.type = "bandpass";
-    filter.frequency.value = 1100;
-    filter.Q.value = 1.2;
-    filter.connect(master);
-
-    const startAt = context.currentTime + 0.02;
-    const burstLength = 0.18;
-    const interval = 0.24;
-    const burstCount = Math.max(1, Math.ceil(durationMs / (interval * 1000)));
-
-    for (let index = 0; index < burstCount; index += 1) {
-      const source = context.createBufferSource();
-      const buffer = context.createBuffer(1, Math.floor(context.sampleRate * burstLength), context.sampleRate);
-      const data = buffer.getChannelData(0);
-      for (let sample = 0; sample < data.length; sample += 1) {
-        const fade = 1 - sample / data.length;
-        data[sample] = (Math.random() * 2 - 1) * fade;
+    if (!skillFlipNoiseBuffer) {
+      const sampleCount = Math.ceil(audio.sampleRate * 0.2);
+      skillFlipNoiseBuffer = audio.createBuffer(1, sampleCount, audio.sampleRate);
+      const samples = skillFlipNoiseBuffer.getChannelData(0);
+      for (let index = 0; index < sampleCount; index += 1) {
+        samples[index] = Math.random() * 2 - 1;
       }
-
-      const burstGain = context.createGain();
-      const burstFilter = context.createBiquadFilter();
-      burstFilter.type = "highpass";
-      burstFilter.frequency.value = 260 + index * 18;
-
-      const burstStart = startAt + index * interval;
-      burstGain.gain.setValueAtTime(0, burstStart);
-      burstGain.gain.linearRampToValueAtTime(0.32, burstStart + 0.03);
-      burstGain.gain.linearRampToValueAtTime(0.1, burstStart + 0.11);
-      burstGain.gain.linearRampToValueAtTime(0, burstStart + burstLength);
-
-      source.buffer = buffer;
-      source.connect(burstGain);
-      burstGain.connect(burstFilter);
-      burstFilter.connect(filter);
-      source.start(burstStart);
-      source.stop(burstStart + burstLength + 0.02);
     }
 
-    window.setTimeout(() => {
-      context.close().catch(() => {});
-    }, durationMs + 280);
-  } catch (error) {
-    // 音效失败时不影响视觉抽卡流程。
+    const now = audio.currentTime;
+    const swish = audio.createBufferSource();
+    const filter = audio.createBiquadFilter();
+    const swishGain = audio.createGain();
+    swish.buffer = skillFlipNoiseBuffer;
+    filter.type = "bandpass";
+    filter.Q.value = 0.8;
+    filter.frequency.setValueAtTime(850, now);
+    filter.frequency.exponentialRampToValueAtTime(2300, now + 0.08);
+    filter.frequency.exponentialRampToValueAtTime(650, now + 0.19);
+    swishGain.gain.setValueAtTime(0.0001, now);
+    swishGain.gain.exponentialRampToValueAtTime(0.055, now + 0.025);
+    swishGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.19);
+    swish.connect(filter).connect(swishGain).connect(audio.destination);
+    swish.start(now);
+    swish.stop(now + 0.19);
+
+    const tap = audio.createOscillator();
+    const tapGain = audio.createGain();
+    tap.type = "triangle";
+    tap.frequency.setValueAtTime(420, now + 0.11);
+    tap.frequency.exponentialRampToValueAtTime(250, now + 0.18);
+    tapGain.gain.setValueAtTime(0.0001, now + 0.11);
+    tapGain.gain.exponentialRampToValueAtTime(0.014, now + 0.125);
+    tapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+    tap.connect(tapGain).connect(audio.destination);
+    tap.start(now + 0.11);
+    tap.stop(now + 0.18);
+  } catch {
+    // Audio may be unavailable in some browsers; flipping still works.
   }
 }
 
-function bindSkillCards(items) {
-  const showcase = document.querySelector("[data-skill-showcase]");
-  if (!showcase) return;
-
-  const detail = showcase.querySelector("[data-skill-detail]");
-  const cards = Array.from(showcase.querySelectorAll("[data-skill-index]"));
-  const randomButton = showcase.querySelector("[data-skill-random]");
-  let isAnimating = false;
-  const scatterLayouts = [
-    { x: -240, y: -160, rotate: -12, scale: 0.82 },
-    { x: 250, y: -130, rotate: 10, scale: 0.78 },
-    { x: -230, y: 170, rotate: -8, scale: 0.8 },
-    { x: 240, y: 160, rotate: 13, scale: 0.76 },
-  ];
-
-  const setScatterLayout = (activeIndex) => {
-    cards.forEach((card, cardIndex) => {
-      const scatter = scatterLayouts[cardIndex % scatterLayouts.length];
-      const offset = cardIndex - activeIndex;
-      const jitterX = Math.round((Math.random() - 0.5) * 36);
-      const jitterY = Math.round((Math.random() - 0.5) * 30);
-      const jitterRotate = ((Math.random() - 0.5) * 6).toFixed(1);
-      const isActive = cardIndex === activeIndex;
-      const x = scatter.x + jitterX + offset * 18;
-      const y = scatter.y + jitterY + offset * 10;
-      const rotate = scatter.rotate + Number(jitterRotate) + offset * 2;
-
-      card.classList.toggle("is-active", isActive);
-      card.style.setProperty("--scatter-x", `${x}px`);
-      card.style.setProperty("--scatter-y", `${y}px`);
-      card.style.setProperty("--scatter-rotate", `${rotate}deg`);
-      card.style.setProperty("--scatter-scale", isActive ? "0.92" : String(scatter.scale));
-      card.style.setProperty("--scatter-opacity", isActive ? "0" : "0.72");
-    });
-  };
-
-  const resetScatterLayout = () => {
-    cards.forEach((card) => {
-      card.classList.remove("is-active", "is-flipping");
-      card.style.removeProperty("--scatter-x");
-      card.style.removeProperty("--scatter-y");
-      card.style.removeProperty("--scatter-rotate");
-      card.style.removeProperty("--scatter-scale");
-      card.style.removeProperty("--scatter-opacity");
-    });
-  };
-
-  const revealCard = (index) => {
-    const activeIndex = (index + items.length) % items.length;
-    setScatterLayout(activeIndex);
-
-    if (detail) {
-      detail.classList.toggle("skills-detail--photo", Boolean(items[activeIndex].image && !items[activeIndex].traits));
-      detail.classList.toggle("skills-detail--mbti", Boolean(items[activeIndex].traits));
-      detail.innerHTML = renderSkillDetail(items[activeIndex]);
+function bindSkillFlipCard(card) {
+  const rotor = card.querySelector("[data-skill-rotor]");
+  const front = card.querySelector("[data-skill-front]");
+  const back = card.querySelector("[data-skill-back]");
+  const toggle = card.querySelector("[data-skill-flip-toggle]");
+  const shadow = card.querySelector(".skills-detail__shadow");
+  const cardLabel = card.getAttribute("aria-label") || "档案卡";
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const spring = (state, target, stiffness, damping, dt) => {
+    state.velocity += (-stiffness * (state.value - target) - damping * state.velocity) * dt;
+    state.value += state.velocity * dt;
+    if (Math.abs(state.value - target) < 0.01 && Math.abs(state.velocity) < 0.01) {
+      state.value = target;
+      state.velocity = 0;
     }
+    return state.value !== target || state.velocity !== 0;
+  };
+  const turn = { value: 0, velocity: 0 };
+  const tiltX = { value: 0, velocity: 0, target: 0 };
+  const tiltY = { value: 0, velocity: 0, target: 0 };
+  const lift = { value: 1, velocity: 0, target: 1 };
+  const sheen = { value: 0, velocity: 0, target: 0 };
+  let turnTarget = 0;
+  let flipped = false;
+  let grip = null;
+  let frame = 0;
+  let lastFrame = 0;
 
-    showcase.classList.add("has-result", "is-revealing");
-
-    window.setTimeout(() => {
-      showcase.classList.remove("is-revealing");
-      isAnimating = false;
-      if (randomButton) {
-        randomButton.disabled = false;
-        randomButton.innerHTML = `随机抽一张 <span aria-hidden="true">✦</span>`;
-      }
-    }, 1000);
+  const paint = () => {
+    const facing = Math.abs(Math.cos((turn.value * Math.PI) / 180));
+    rotor.style.transform = `perspective(1100px) scale(${lift.value}) rotateX(${tiltX.value}deg) rotateY(${turn.value + tiltY.value}deg)`;
+    card.style.setProperty("--skill-sheen", String(sheen.value));
+    shadow.style.transform = `scaleX(${0.08 + 0.92 * facing})`;
+    shadow.style.opacity = String(0.1 + 0.9 * facing * facing);
   };
 
-  if (randomButton) {
-    randomButton.addEventListener("click", () => {
-      if (isAnimating) return;
+  const animateFrame = (now) => {
+    const dt = Math.min((now - (lastFrame || now)) / 1000, 0.04);
+    lastFrame = now;
+    let moving = false;
+    if (!grip?.moved) moving = spring(turn, turnTarget, 170, 20, dt) || moving;
+    moving = spring(tiltX, tiltX.target, 240, 24, dt) || moving;
+    moving = spring(tiltY, tiltY.target, 240, 24, dt) || moving;
+    moving = spring(lift, lift.target, 320, 26, dt) || moving;
+    moving = spring(sheen, sheen.target, 320, 26, dt) || moving;
+    paint();
+    frame = moving ? requestAnimationFrame(animateFrame) : 0;
+    if (!moving) lastFrame = 0;
+  };
 
-      isAnimating = true;
-      randomButton.disabled = true;
-      randomButton.innerHTML = `洗牌中 <span aria-hidden="true">✦</span>`;
-      showcase.classList.remove("has-result", "is-revealing");
-      showcase.classList.add("is-shuffling");
-      resetScatterLayout();
-      if (detail) {
-        detail.classList.remove("skills-detail--photo", "skills-detail--mbti");
-        detail.innerHTML = "";
+  const startAnimation = () => {
+    if (!frame && !reducedMotion.matches) frame = requestAnimationFrame(animateFrame);
+  };
+
+  const setFlipped = (next, instant = false, targetAngle = next ? 180 : 0) => {
+    if (!instant && next !== flipped) playSkillFlipSound();
+    flipped = next;
+    turnTarget = targetAngle;
+    card.dataset.flipped = String(next);
+    front.setAttribute("aria-hidden", String(next));
+    back.setAttribute("aria-hidden", String(!next));
+    front.inert = next;
+    back.inert = !next;
+    toggle.setAttribute("aria-pressed", String(next));
+    toggle.setAttribute("aria-label", next ? `翻到${cardLabel}封面` : `翻开${cardLabel}`);
+    if (instant || reducedMotion.matches) {
+      turn.value = turnTarget;
+      turn.velocity = 0;
+      paint();
+    } else {
+      startAnimation();
+    }
+  };
+
+  const rest = () => {
+    tiltX.target = 0;
+    tiltY.target = 0;
+    lift.target = 1;
+    sheen.target = 0;
+    startAnimation();
+  };
+
+  const flip = () => {
+    const base = Math.round(turnTarget / 180) * 180;
+    setFlipped(!flipped, false, base + (flipped ? -180 : 180));
+  };
+
+  card.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || event.target.closest("[data-skill-flip-toggle]") || grip) return;
+    try {
+      card.setPointerCapture(event.pointerId);
+    } catch {
+      // The card still supports click-to-flip when pointer capture is unavailable.
+    }
+    grip = {
+      id: event.pointerId,
+      x: event.clientX,
+      base: turn.value,
+      moved: false,
+      slop: event.pointerType === "touch" ? 8 : 4,
+      history: [],
+    };
+    turn.velocity = 0;
+    lift.target = 1.03;
+    startAnimation();
+  });
+
+  card.addEventListener("pointermove", (event) => {
+    if (grip?.id === event.pointerId) {
+      const distance = event.clientX - grip.x;
+      if (!grip.moved && (Math.abs(distance) < grip.slop || reducedMotion.matches)) return;
+      if (!grip.moved) {
+        grip.moved = true;
+        card.dataset.dragging = "";
+        tiltX.target = tiltY.target = sheen.target = 0;
       }
-      playShuffleSound(2000);
+      turn.value = grip.base + (distance / card.clientWidth) * 180;
+      const now = performance.now();
+      grip.history.push({ time: now, angle: turn.value });
+      while (grip.history.length > 2 && now - grip.history[0].time > 90) grip.history.shift();
+      paint();
+      return;
+    }
+    if (event.pointerType === "touch" || reducedMotion.matches) return;
+    const bounds = card.getBoundingClientRect();
+    const x = Math.max(0, Math.min(1, (event.clientX - bounds.left) / bounds.width));
+    const y = Math.max(0, Math.min(1, (event.clientY - bounds.top) / bounds.height));
+    tiltX.target = (0.5 - y) * 24;
+    tiltY.target = (x - 0.5) * 24;
+    sheen.target = 1;
+    card.style.setProperty("--skill-gx", `${x * 100}%`);
+    card.style.setProperty("--skill-gy", `${y * 100}%`);
+    startAnimation();
+  });
 
-      window.setTimeout(() => {
-        showcase.classList.remove("is-shuffling");
-        revealCard(Math.floor(Math.random() * items.length));
-      }, 2000);
+  const release = (event, cancelled = false) => {
+    if (grip?.id !== event.pointerId) return;
+    const currentGrip = grip;
+    grip = null;
+    card.removeAttribute("data-dragging");
+    try {
+      if (card.hasPointerCapture(event.pointerId)) card.releasePointerCapture(event.pointerId);
+    } catch {
+      // A cancelled pointer may already have released capture.
+    }
+    if (event.pointerType === "touch" || !card.matches(":hover")) rest();
+    if (!currentGrip.moved) {
+      if (!cancelled) flip();
+      else setFlipped(flipped, false, Math.round(currentGrip.base / 180) * 180);
+      return;
+    }
+    const first = currentGrip.history[0];
+    const last = currentGrip.history.at(-1);
+    const velocity = !cancelled && first && last && last.time > first.time && performance.now() - last.time < 60
+      ? ((last.angle - first.angle) / (last.time - first.time)) * 1000
+      : 0;
+    const projected = cancelled ? currentGrip.base : turn.value + velocity * 0.16;
+    const base = Math.round(currentGrip.base / 180) * 180;
+    const targetAngle = Math.max(base - 180, Math.min(base + 180, Math.round(projected / 180) * 180));
+    turn.velocity = velocity;
+    setFlipped(Math.abs(Math.round(targetAngle / 180)) % 2 === 1, false, targetAngle);
+  };
+
+  card.addEventListener("pointerup", (event) => release(event));
+  card.addEventListener("pointercancel", (event) => release(event, true));
+  card.addEventListener("lostpointercapture", (event) => release(event, true));
+  card.addEventListener("pointerenter", (event) => {
+    if (event.pointerType !== "touch") {
+      lift.target = 1.03;
+      startAnimation();
+    }
+  });
+  card.addEventListener("pointerleave", () => {
+    if (!grip) rest();
+  });
+  card.addEventListener("dragstart", (event) => event.preventDefault());
+  toggle.addEventListener("click", flip);
+
+  const reset = () => {
+    if (frame) cancelAnimationFrame(frame);
+    frame = 0;
+    lastFrame = 0;
+    grip = null;
+    card.removeAttribute("data-dragging");
+    [tiltX, tiltY, sheen].forEach((state) => {
+      state.value = state.target = state.velocity = 0;
     });
-  }
+    lift.value = lift.target = 1;
+    lift.velocity = 0;
+    setFlipped(false, true);
+  };
+
+  card.dataset.reducedMotion = String(reducedMotion.matches);
+  reducedMotion.addEventListener("change", () => {
+    card.dataset.reducedMotion = String(reducedMotion.matches);
+    if (reducedMotion.matches) {
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+      lastFrame = 0;
+      turn.value = turnTarget;
+      turn.velocity = 0;
+      [tiltX, tiltY, sheen].forEach((state) => {
+        state.value = state.target = state.velocity = 0;
+      });
+      lift.value = lift.target = 1;
+      lift.velocity = 0;
+      paint();
+    }
+  });
+  reset();
+  return { reset, flipTo: setFlipped };
+}
+
+function bindSkillGalaxy(card) {
+  const canvas = card.querySelector(".skills-detail__galaxy");
+  const context = canvas?.getContext("2d");
+  if (!context) return;
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const pointer = { x: 0, y: 0, active: false };
+  const palette = ["255, 255, 255", "220, 225, 255", "248, 224, 255", "196, 213, 255"];
+  const stars = Array.from({ length: 170 }, () => ({
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
+    z: 0.2 + Math.random(),
+    speed: 0.65 + Math.random() * 0.9,
+    phase: Math.random() * Math.PI * 2,
+    color: palette[Math.floor(Math.random() * palette.length)],
+    bright: Math.random() < 0.14,
+  }));
+  let width = 0;
+  let height = 0;
+  let visible = false;
+  let frame = 0;
+  let previousTime = 0;
+
+  const project = (star) => ({
+    x: width / 2 + (star.x / star.z) * width * 0.46,
+    y: height / 2 + (star.y / star.z) * height * 0.46,
+  });
+
+  const paint = (elapsed, time) => {
+    if (!width || !height) return;
+    context.fillStyle = "#0c0b13";
+    context.fillRect(0, 0, width, height);
+    const haze = context.createRadialGradient(width * 0.5, height * 0.52, 0, width * 0.5, height * 0.52, Math.max(width, height) * 0.65);
+    haze.addColorStop(0, "rgba(48, 38, 82, 0.22)");
+    haze.addColorStop(1, "rgba(10, 9, 18, 0)");
+    context.fillStyle = haze;
+    context.fillRect(0, 0, width, height);
+
+    for (const star of stars) {
+      const previous = project(star);
+      if (elapsed) star.z -= elapsed * (0.11 + star.speed * 0.09);
+      let point = project(star);
+      if (star.z < 0.16 || point.x < -14 || point.x > width + 14 || point.y < -14 || point.y > height + 14) {
+        star.x = (Math.random() - 0.5) * 2;
+        star.y = (Math.random() - 0.5) * 2;
+        star.z = 1.2;
+        point = project(star);
+      }
+
+      if (pointer.active) {
+        const dx = point.x - pointer.x;
+        const dy = point.y - pointer.y;
+        const distance = Math.hypot(dx, dy);
+        const radius = Math.min(width, height) * 0.4;
+        if (distance > 0 && distance < radius) {
+          const push = ((radius - distance) / radius) ** 2 * 16;
+          point.x += (dx / distance) * push;
+          point.y += (dy / distance) * push;
+        }
+      }
+
+      const twinkle = 0.72 + Math.sin(time * 0.0018 * star.speed + star.phase) * 0.28;
+      const opacity = Math.min(1, (0.28 + (1.2 - star.z) * 0.62) * twinkle);
+      const radius = star.bright ? 1.1 + (1.2 - star.z) * 1.4 : 0.35 + (1.2 - star.z) * 0.65;
+      if (star.bright) {
+        const glow = context.createRadialGradient(point.x, point.y, 0, point.x, point.y, radius * 5);
+        glow.addColorStop(0, `rgba(${star.color}, ${opacity * 0.55})`);
+        glow.addColorStop(1, `rgba(${star.color}, 0)`);
+        context.fillStyle = glow;
+        context.beginPath();
+        context.arc(point.x, point.y, radius * 5, 0, Math.PI * 2);
+        context.fill();
+      }
+      if (elapsed && star.z < 0.38 && Math.hypot(point.x - previous.x, point.y - previous.y) < 14) {
+        context.strokeStyle = `rgba(${star.color}, ${opacity * 0.35})`;
+        context.lineWidth = Math.max(0.4, radius * 0.6);
+        context.beginPath();
+        context.moveTo(previous.x, previous.y);
+        context.lineTo(point.x, point.y);
+        context.stroke();
+      }
+      context.fillStyle = `rgba(${star.color}, ${opacity})`;
+      context.beginPath();
+      context.arc(point.x, point.y, radius, 0, Math.PI * 2);
+      context.fill();
+    }
+  };
+
+  const shouldAnimate = () => visible && !document.hidden && !reducedMotion.matches && card.dataset.flipped !== "true";
+  const tick = (time) => {
+    frame = 0;
+    if (!shouldAnimate()) return;
+    const elapsed = previousTime ? Math.min((time - previousTime) / 1000, 0.05) : 0;
+    previousTime = time;
+    paint(elapsed, time);
+    frame = requestAnimationFrame(tick);
+  };
+  const sync = () => {
+    if (shouldAnimate()) {
+      if (!frame) frame = requestAnimationFrame(tick);
+    } else if (frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+      previousTime = 0;
+    }
+  };
+  const resize = () => {
+    const bounds = canvas.getBoundingClientRect();
+    width = bounds.width;
+    height = bounds.height;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    paint(0, performance.now());
+  };
+
+  card.addEventListener("pointermove", (event) => {
+    const bounds = card.getBoundingClientRect();
+    pointer.x = event.clientX - bounds.left;
+    pointer.y = event.clientY - bounds.top;
+    pointer.active = true;
+  });
+  card.addEventListener("pointerleave", () => { pointer.active = false; });
+  new ResizeObserver(resize).observe(canvas);
+  new IntersectionObserver((entries) => {
+    visible = entries[0].isIntersecting;
+    sync();
+  }).observe(card);
+  new MutationObserver(sync).observe(card, { attributes: true, attributeFilter: ["data-flipped"] });
+  reducedMotion.addEventListener("change", sync);
+  document.addEventListener("visibilitychange", sync);
+  resize();
+}
+
+function bindSkillCards() {
+  document.querySelectorAll("[data-skill-card]").forEach((card) => {
+    bindSkillFlipCard(card);
+    bindSkillGalaxy(card);
+  });
 }
 
 function renderContacts(containerId, items) {
@@ -1829,6 +2397,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
 
   let routeMap = null;
   let locateRoutePlace = null;
+  let placeLookupVersion = 0;
 
   const renderBoard = () => {
     const reminders = getReminderMeetings();
@@ -1987,6 +2556,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     locateRoutePlace = async () => {
       const placeInput = root.querySelector('[name="place"]');
       const place = String(placeInput?.value || "").trim();
+      const lookupVersion = ++placeLookupVersion;
       const pointStatus = root.querySelector("#friendMapPointStatus");
       if (!place) {
         if (pointStatus) pointStatus.textContent = "先输入想去的地点，再为你定位。";
@@ -2004,6 +2574,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         );
         if (!response.ok) throw new Error("PLACE_LOOKUP_FAILED");
         const results = await response.json();
+        if (lookupVersion !== placeLookupVersion || place !== String(placeInput?.value || "").trim()) return;
         const result = Array.isArray(results) ? results[0] : null;
         const latitude = Number(result?.lat);
         const longitude = Number(result?.lon);
@@ -2013,6 +2584,7 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
         routeMap.setView([latitude, longitude], 12, { animate: true });
         selectPoint(latitude, longitude, `已定位到：${result.display_name || place}`);
       } catch (error) {
+        if (lookupVersion !== placeLookupVersion) return;
         if (pointStatus) {
           pointStatus.textContent = "暂时找不到这个地点；可以换一个更完整的地点名称，或直接点击地图选点。";
           pointStatus.dataset.state = "error";
@@ -2416,6 +2988,12 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
 
   root.addEventListener("input", (event) => {
     if (!event.target.matches("[data-friend-locate]")) return;
+    placeLookupVersion += 1;
+    const routeForm = event.target.closest('[data-friend-form="route"]');
+    const latitudeInput = routeForm?.querySelector('[name="latitude"]');
+    const longitudeInput = routeForm?.querySelector('[name="longitude"]');
+    if (latitudeInput) latitudeInput.value = "";
+    if (longitudeInput) longitudeInput.value = "";
     window.clearTimeout(placeLookupTimer);
     placeLookupTimer = window.setTimeout(() => locateRoutePlace?.(), 750);
   });
@@ -2469,9 +3047,12 @@ async function renderFriendContent(data, userEmail, supabaseClient, userId, onLo
     }
 
     if (formType === "route") {
-      const latitude = Number(formData.get("latitude"));
-      const longitude = Number(formData.get("longitude"));
-      if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) {
+      const latitudeValue = String(formData.get("latitude") || "").trim();
+      const longitudeValue = String(formData.get("longitude") || "").trim();
+      const latitude = Number(latitudeValue);
+      const longitude = Number(longitudeValue);
+      if (!latitudeValue || !longitudeValue || !Number.isFinite(latitude) || !Number.isFinite(longitude)
+        || Math.abs(latitude) > 90 || Math.abs(longitude) > 180) {
         update("请先在地图上点击选择路线位置。");
         return;
       }
@@ -2645,10 +3226,28 @@ function createSupabaseClient(data) {
     return null;
   }
 
-  return window.supabase.createClient(
-    data.auth.supabaseUrl,
-    data.auth.publishableKey,
-  );
+  const authStorage = {
+    getItem(key) {
+      return localStorage.getItem("friend-remember-session") === "false"
+        ? sessionStorage.getItem(key)
+        : localStorage.getItem(key);
+    },
+    setItem(key, value) {
+      const remember = localStorage.getItem("friend-remember-session") !== "false";
+      const target = remember ? localStorage : sessionStorage;
+      const other = remember ? sessionStorage : localStorage;
+      target.setItem(key, value);
+      other.removeItem(key);
+    },
+    removeItem(key) {
+      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
+    },
+  };
+
+  return window.supabase.createClient(data.auth.supabaseUrl, data.auth.publishableKey, {
+    auth: { storage: authStorage },
+  });
 }
 
 async function authenticateFriend(mode, credentials, client) {
@@ -2694,12 +3293,6 @@ function bindFriendMode(data) {
   let shouldRememberSession = localStorage.getItem("friend-remember-session") !== "false";
 
   if (rememberInput) rememberInput.checked = shouldRememberSession;
-
-  window.addEventListener("pagehide", () => {
-    if (!shouldRememberSession && supabaseClient) {
-      supabaseClient.auth.signOut({ scope: "local" });
-    }
-  });
 
   modeSwitch?.addEventListener("click", () => {
     if (document.body.dataset.siteMode === "friend") {
@@ -2799,14 +3392,16 @@ function bindFriendMode(data) {
       currentUserEmail = email;
       closeAuthModal();
       setSiteMode("friend", currentUserEmail);
-      renderedFriendEmail = currentUserEmail;
-      renderFriendContent(
-        data,
-        currentUserEmail,
-        supabaseClient,
-        result.user?.id || result.session?.user?.id,
-        () => supabaseClient.auth.signOut(),
-      );
+      if (renderedFriendEmail !== currentUserEmail) {
+        renderedFriendEmail = currentUserEmail;
+        renderFriendContent(
+          data,
+          currentUserEmail,
+          supabaseClient,
+          result.user?.id || result.session?.user?.id,
+          () => supabaseClient.auth.signOut(),
+        );
+      }
       form.reset();
       if (rememberInput) rememberInput.checked = shouldRememberSession;
     } catch (error) {
@@ -2863,32 +3458,80 @@ function bindFriendMode(data) {
   }
 }
 
+// Small progressive enhancements: content stays visible if animation is unavailable.
+function bindPortfolioEffects() {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const revealAnimations = new Set();
+  let revealObserver;
+  if (!reducedMotion.matches && "IntersectionObserver" in window) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        revealObserver.unobserve(entry.target);
+        if (reducedMotion.matches || typeof entry.target.animate !== "function") return;
+        const animation = entry.target.animate([
+          { opacity: 0, transform: "translateY(18px)" },
+          { opacity: 1, transform: "translateY(0)" },
+        ], { duration: 600, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+        revealAnimations.add(animation);
+        animation.onfinish = () => revealAnimations.delete(animation);
+      });
+    }, { threshold: 0, rootMargin: "0px 0px -32px 0px" });
+    document.querySelectorAll("#guestContent .section-header, #educationList > *, #projectList > *, #workList > *, #skillList > *, #contact .contact-panel").forEach((element) => {
+      // Leave initially visible content steady; animate only content reached by scrolling.
+      if (element.getBoundingClientRect().top >= window.innerHeight) revealObserver.observe(element);
+    });
+  }
+  const title = document.getElementById("heroTitle");
+  let titleAnimation;
+  if (title && !reducedMotion.matches && typeof title.animate === "function") {
+    titleAnimation = title.animate([
+      { opacity: 0, filter: "blur(12px)", transform: "translateY(16px)" },
+      { opacity: 1, filter: "blur(0px)", transform: "translateY(0)" },
+    ], { duration: 850, easing: "cubic-bezier(0.22, 1, 0.36, 1)" });
+  }
+
+  const cards = document.querySelectorAll("#projectList .project-item");
+  const clearSpotlight = () => cards.forEach((card) => card.classList.remove("has-spotlight"));
+  cards.forEach((card) => {
+    card.classList.add("project-spotlight");
+    card.addEventListener("pointermove", (event) => {
+      if (reducedMotion.matches || event.pointerType === "touch") return;
+      const bounds = card.getBoundingClientRect();
+      card.style.setProperty("--spotlight-x", `${event.clientX - bounds.left}px`);
+      card.style.setProperty("--spotlight-y", `${event.clientY - bounds.top}px`);
+      card.classList.add("has-spotlight");
+    }, { passive: true });
+    card.addEventListener("pointerleave", () => card.classList.remove("has-spotlight"));
+    card.addEventListener("pointercancel", () => card.classList.remove("has-spotlight"));
+  });
+  reducedMotion.addEventListener("change", () => {
+    if (reducedMotion.matches) {
+      revealObserver?.disconnect();
+      revealAnimations.forEach((animation) => animation.cancel());
+      revealAnimations.clear();
+      titleAnimation?.cancel();
+      clearSpotlight();
+    }
+  });
+}
+
 function renderPortfolio(data) {
   renderNav(data.nav);
   bindNavActivation();
   setText("heroEyebrow", data.hero.eyebrow);
   setHTML("heroTitle", data.hero.title);
   setText("heroSubtitle", data.hero.subtitle);
-  setHTML(
-    "heroFile",
-    `
-      ${data.hero.file
-        .map((line) => `<li>${line}</li>`)
-        .join("")}
-    `,
-  );
   setText("heroLead", data.hero.lead);
-  setText("heroNoteLabel", data.hero.note.label);
-  setText("heroNoteTitle", data.hero.note.title);
-  setText("heroNoteText", data.hero.note.text);
-  renderTags("heroTags", data.hero.tags);
-  playTagSequence();
+  renderTypographicWall("heroTags", data.hero.tags);
+  bindTypographicWall("heroTags");
 
   setText("aboutSummary", data.projects.summary);
   renderProjects("projectList", data.projects.items);
+  bindProjectGalleries(data.projects.items);
+  bindProjectDirectory(data.projects.items);
   bindProjectModels();
 
-  setText("educationSummary", data.education.summary);
   renderEducation("educationList", data.education.items);
 
   setText("workSummary", data.work.summary);
@@ -2902,7 +3545,7 @@ function renderPortfolio(data) {
   setText("contactSummary", data.contact.summary);
   renderContacts("contactList", data.contact.items);
   bindCopyWidget();
-  bindSkillCards(data.skills.items);
+  bindSkillCards();
 
   setText("footer", data.footer);
   bindFriendMode(data);
@@ -2913,10 +3556,8 @@ function renderPortfolio(data) {
     if (el) el.setAttribute("href", data.links.resume);
   });
 
-  const photo = document.getElementById("heroPhoto");
-  if (photo) photo.setAttribute("src", data.links.photo);
-
   bindScrollCue();
+  bindPortfolioEffects();
 }
 
 window.PORTFOLIO_DATA = PORTFOLIO;

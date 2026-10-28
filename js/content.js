@@ -179,6 +179,7 @@ const PORTFOLIO = {
         date: "2024.01 - 2024.03",
         title: "作业帮",
         role: "编程教研实习",
+        layout: "split",
         highlights: [
           { label: "课程制作", value: "使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件并完成课件及物料制作" },
           { label: "流程沉淀", value: "熟悉课程产品生产流程，参与文档沉淀，并提供跨部门支持与协作" },
@@ -229,6 +230,7 @@ const PORTFOLIO = {
           "不登高山，不知天之高也；不临深溪，不知地之厚也",
         image: "./assets/images/denggao-1.png",
         imageAlt: "登高远望海湾与群山的照片",
+        imagePosition: "left center",
       },
       {
         title: "MBTI",
@@ -282,6 +284,8 @@ const PORTFOLIO = {
           "一个灵魂唤醒另一个灵魂",
         image: "./assets/images/jiaoyu-1.JPG",
         imageAlt: "课堂教学展示现场照片",
+        imagePosition: "left center",
+        imageZoom: 1.35,
       },
       {
         title: "AI 与产品工具",
@@ -1532,7 +1536,7 @@ function renderTimeline(containerId, items) {
       const timelineIntro = item.intro || item.supplementaryIntro || (!highlights.length ? item.text : "");
 
       return `
-        <div class="timeline-entry timeline-entry--${side}" data-work-item data-step="${step}">
+        <div class="timeline-entry timeline-entry--${side}${item.layout === "split" ? " timeline-entry--split" : ""}" data-work-item data-step="${step}">
           <div class="timeline-marker" aria-hidden="true">
             <span>${step}</span>
           </div>
@@ -1695,6 +1699,11 @@ function renderSkillTraits(traits) {
 }
 
 function renderSkillDetail(item) {
+  const imageStyle = [
+    item.imagePosition && `object-position: ${item.imagePosition}`,
+    item.imageZoom && `transform: scale(${item.imageZoom}); transform-origin: left center`,
+  ].filter(Boolean).join("; ");
+
   if (item.traits) {
     return `
       <div class="skills-detail__copy">
@@ -1720,7 +1729,7 @@ function renderSkillDetail(item) {
       item.image
         ? `
           <div class="skills-detail__media">
-            <img class="skills-detail__image" src="${item.image}" alt="${item.imageAlt || item.title}" />
+            <img class="skills-detail__image" src="${item.image}" alt="${item.imageAlt || item.title}"${imageStyle ? ` style="${imageStyle}"` : ""} />
           </div>
         `
         : ""

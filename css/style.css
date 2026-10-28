@@ -1506,20 +1506,23 @@ body.is-auth-open {
 
 .timeline-entry--left .timeline-item {
   grid-column: 1;
+  grid-row: 1;
 }
 
 .timeline-entry--right .timeline-item {
   grid-column: 3;
+  grid-row: 1;
 }
 
 .timeline-marker {
   grid-column: 2;
+  grid-row: 1;
   align-self: start;
   justify-self: center;
   position: relative;
   width: 34px;
   height: 34px;
-  margin-top: 22px;
+  margin-top: 12px;
   border-radius: 50%;
   background: rgba(122, 92, 224, 0.12);
   border: 1px solid rgba(122, 92, 224, 0.2);
@@ -1754,6 +1757,43 @@ body.is-auth-open {
 .timeline-body--featured > * {
   min-width: 0;
   max-width: 100%;
+}
+
+.timeline-entry--split .timeline-body--featured {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: 12px;
+}
+
+.timeline-entry--split .timeline-highlights {
+  grid-template-columns: 1fr;
+}
+
+.timeline-entry--split .timeline-feature__media {
+  width: 100%;
+  align-self: start;
+}
+
+.timeline-entry--split .timeline-gallery__stack {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1600 / 2133;
+}
+
+.timeline-entry--split .timeline-gallery__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  .timeline-entry--split .timeline-body--featured {
+    grid-template-columns: 1fr;
+  }
 }
 
 .timeline-item.is-open .timeline-body {
@@ -2672,13 +2712,11 @@ body.is-auth-open {
   position: relative;
   overflow: hidden;
   width: min(92%, 960px);
-  min-height: 620px;
   margin-inline: auto;
-  padding: 58px;
+  padding: 50px 58px 34px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto auto;
-  gap: 24px;
+  gap: 28px;
   align-items: start;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 34px;
@@ -2713,7 +2751,7 @@ body.is-auth-open {
   margin: 18px 0 0;
   max-width: 12ch;
   color: #f5f7f3;
-  font-size: clamp(3rem, 6vw, 6.2rem);
+  font-size: clamp(2.8rem, 5.2vw, 5.2rem);
   line-height: 1.02;
   letter-spacing: -0.08em;
   font-weight: 900;
@@ -2825,9 +2863,8 @@ body.is-auth-open {
 .contact-action .copy-widget__status {
   margin-top: 2px;
   width: 100%;
-  justify-self: start;
-  padding-left: 18px;
-  text-align: left;
+  justify-self: center;
+  text-align: center;
   color: rgba(31, 30, 26, 0.58);
   line-height: 1.35;
 }
@@ -4570,7 +4607,7 @@ body[data-site-mode="friend"] .footer {
   }
 
   .contact-action .copy-widget__status {
-    padding-left: 14px;
+    text-align: center;
   }
 
   .skills-detail__title {

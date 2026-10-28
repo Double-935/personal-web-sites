@@ -57,9 +57,9 @@ const PORTFOLIO = {
         website: { label: "beeplay.top", url: "https://beeplay.top" },
         lead: "4 人团队探索“AI 生成互动内容 + 内容分发”方向。",
         images: [
-          { src: "./assets/images/EvoTavern Hackathon-1.JPG", alt: "EvoTavern Hackathon 项目现场" },
-          { src: "./assets/images/EvoTavern Hackathon-2.JPG", alt: "EvoTavern Hackathon 团队项目现场" },
-          { src: "./assets/images/EvoTavern Hackathon-3.png", alt: "BeePlay 互动内容体验画面" },
+          { src: "./assets/images/optimized/EvoTavern Hackathon-1.webp", alt: "EvoTavern Hackathon 项目现场" },
+          { src: "./assets/images/optimized/EvoTavern Hackathon-2.webp", alt: "EvoTavern Hackathon 团队项目现场" },
+          { src: "./assets/images/optimized/EvoTavern Hackathon-3.webp", alt: "BeePlay 互动内容体验画面" },
         ],
         scrollContent: true,
         sections: [
@@ -90,7 +90,7 @@ const PORTFOLIO = {
         date: "2026.10 - 至今",
         lead: "设计面向个人求职的公开信息监测流程，覆盖目标公司官网、官方招聘页和公开招聘公众号；后续按用户授权接入需登录渠道。",
         image: {
-          src: "./assets/images/AI Agent -1.png",
+          src: "./assets/images/optimized/AI Agent -1.webp",
           alt: "个人 AI Agent 项目资料截图",
         },
         scrollContent: true,
@@ -108,7 +108,7 @@ const PORTFOLIO = {
         website: { label: "https://savus.mysxl.cn/", url: "https://savus.mysxl.cn/", prefix: "" },
         lead: "<span class=\"project-emphasis\">公众号排版设计与运营。</span>负责公众号日常运营，使用<span class=\"project-emphasis\">秀米</span>完成排版与编辑 30 余次；最高浏览量达 3400+，账号运营 2 个月从 0 增长至 1500+ 粉丝；沟通同类型公众号及知识科普账号，合作方案一次性通过率达 90%。",
         image: {
-          src: "./assets/images/SAVUS-1.png",
+          src: "./assets/images/optimized/SAVUS-1.webp",
           alt: "SAVUS 项目网站页面",
         },
         scrollContent: true,
@@ -126,8 +126,8 @@ const PORTFOLIO = {
         degree: "Master of Arts in Science and Robotics Education",
         date: "2026.09 - 2027.08",
         visualNote: "科学与机器人教育硕士，全日制。",
-        visualImage: "./assets/images/hk-edu-background.jpg",
-        badgeImage: "./assets/images/eduhk-logo.jpg",
+        visualImage: "./assets/images/optimized/hk-edu-background.webp",
+        badgeImage: "./assets/images/optimized/eduhk-logo.webp",
         bullets: [
           "主修 AI in Science and Robotics Education、Principles and Methods in Science and Robotics Education Research、Engineering and Programming for School Science and Robotics",
           "担任学生代表与 Student Helper，代表班级参与课程相关会议，收集并反馈学生的学习意见与建议；同时协助校园摄影等支持工作",
@@ -139,7 +139,7 @@ const PORTFOLIO = {
         degree: "教育技术学本科",
         date: "2020.09 - 2024.06",
         visualNote: "教育技术学本科打底，积累课程设计与技术应用基础。",
-        visualImage: "./assets/images/scnu-background.jpg",
+        visualImage: "./assets/images/optimized/scnu-background.webp",
         badgeImage: "./assets/images/scnu-logo.svg",
         bullets: [
           "曾获全国大学生计算机设计大赛三等奖、全国第六届大学生艺术展演活动优秀志愿者、校级优秀共青团员、校级优秀学生干部、校级三等奖学金、校级学术科技竞赛奖等。",
@@ -160,15 +160,15 @@ const PORTFOLIO = {
           "参与在线双师课课程的研发工作，并通过实际测试与调研来不断改进课程内容。该课程面向6-10岁学生，该课程内容包括Python与硬件。",
         images: [
           {
-            src: "./assets/images/work-experience-2.jpg",
+            src: "./assets/images/optimized/work-experience-2.webp",
             alt: "猿编程线下课堂支持现场",
           },
           {
-            src: "./assets/images/yuancheng-classroom.jpg",
+            src: "./assets/images/optimized/yuancheng-classroom.webp",
             alt: "猿编程课堂现场",
           },
           {
-            src: "./assets/images/yuancheng-dinner.jpg",
+            src: "./assets/images/optimized/yuancheng-dinner.webp",
             alt: "猿编程相关活动照片",
           },
         ],
@@ -185,7 +185,7 @@ const PORTFOLIO = {
           { label: "流程沉淀", value: "熟悉课程产品生产流程，参与文档沉淀，并提供跨部门支持与协作" },
         ],
         images: [
-          { src: "./assets/images/zuoyebang-1.JPG", alt: "作业帮编程教研实习证件照片", fit: "contain" },
+          { src: "./assets/images/optimized/zuoyebang-1.webp", alt: "作业帮编程教研实习证件照片", fit: "contain" },
         ],
         text:
           "在教学教研部参与少儿编程课程研发，使用 Scratch 开发 AI 课、专业拓展课共 4 节，设计工程文件，完成课件及相关物料制作，对课程内容和呈现效果负责。负责新媒体平台日常运营维护，确保每周发布内容与教学计划同步，避免信息误差。深入研究目标学生群体特点，针对认知水平和兴趣点，对 10 余个工程文件进行适应性修改和优化，确保内容有趣且易于理解。",
@@ -201,7 +201,7 @@ const PORTFOLIO = {
           { label: "校园协作", value: "支持学校行政与摄影工作，能够独立使用秀米完成公众号文章排版" },
         ],
         images: [
-          { src: "./assets/images/yingbing-1.JPG", alt: "成都市迎宾路小学教学分享现场" },
+          { src: "./assets/images/optimized/yingbing-1.webp", alt: "成都市迎宾路小学教学分享现场" },
         ],
         text:
           "熟悉 2022 版《义务教育信息科技课程标准》，针对 3-6 年级学生，使用 Python、Scratch 进行教学工作，每周 4 节，共计 40 节。按照学校要求，带领学生参加全国青少年信息素养大赛。支持学校其他行政工作，参与摄影工作，并能够独立使用秀米对该校公众号文章进行排版。",
@@ -215,7 +215,7 @@ const PORTFOLIO = {
           { label: "校园支持", value: "组织班会等活动 10 余次；制作毕业纪念视频 5 份，并在校级活动中完成摄影、撰稿 10 余次，为学校公众号运营提供支持。" },
         ],
         images: [
-          { src: "./assets/images/yulin-1.png", alt: "成都市玉林小学信息技术课堂现场" },
+          { src: "./assets/images/optimized/yulin-1.webp", alt: "成都市玉林小学信息技术课堂现场" },
         ],
       },
     ],
@@ -228,7 +228,7 @@ const PORTFOLIO = {
         preview: "登高望远",
         detail:
           "不登高山，不知天之高也；不临深溪，不知地之厚也",
-        image: "./assets/images/denggao-1.png",
+        image: "./assets/images/optimized/denggao-1.webp",
         imageAlt: "登高远望海湾与群山的照片",
         imagePosition: "left center",
       },
@@ -236,7 +236,7 @@ const PORTFOLIO = {
         title: "MBTI",
         preview: "ENTJ-A",
         role: "分析家",
-        image: "./assets/images/entj-female.png",
+        image: "./assets/images/optimized/entj-female.webp",
         traits: [
           { label: "外向", value: 63 },
           { label: "天马行空", value: 53 },
@@ -250,7 +250,7 @@ const PORTFOLIO = {
         preview: "潜水",
         detail:
           "在水里只需要呼吸",
-        image: "./assets/images/qianshui-1.JPG",
+        image: "./assets/images/optimized/qianshui-1.webp",
         imageAlt: "戴潜水镜在水中潜游的照片",
       },
       {
@@ -258,7 +258,7 @@ const PORTFOLIO = {
         preview: "游泳",
         detail:
           "有效避免颈椎病、腰椎病",
-        image: "./assets/images/swimming.jpg?v=20260827-image-fix",
+        image: "./assets/images/optimized/swimming.webp?v=20260827-image-fix",
         imageAlt: "游泳配图",
       },
       {
@@ -266,7 +266,7 @@ const PORTFOLIO = {
         preview: "吃饭",
         detail:
           "吃饭是人生头等大事",
-        image: "./assets/images/eating.jpg?v=20260827-image-fix",
+        image: "./assets/images/optimized/eating.webp?v=20260827-image-fix",
         imageAlt: "吃饭配图",
       },
       {
@@ -274,7 +274,7 @@ const PORTFOLIO = {
         preview: "旅行",
         detail:
           "也想去看看更大的世界呢～",
-        image: "./assets/images/travel.jpg?v=20260827-image-fix",
+        image: "./assets/images/optimized/travel.webp?v=20260827-image-fix",
         imageAlt: "旅行配图",
       },
       {
@@ -282,7 +282,7 @@ const PORTFOLIO = {
         preview: "教育产品与课程研发",
         detail:
           "一个灵魂唤醒另一个灵魂",
-        image: "./assets/images/jiaoyu-1.JPG",
+        image: "./assets/images/optimized/jiaoyu-1.webp",
         imageAlt: "课堂教学展示现场照片",
         imagePosition: "left center",
         imageZoom: 1.35,
@@ -292,7 +292,7 @@ const PORTFOLIO = {
         preview: "AI 与产品工具",
         detail:
           "看似寻常最奇崛，成如容易却艰辛",
-        image: "./assets/images/AI-1.png",
+        image: "./assets/images/optimized/AI-1.webp",
         imageAlt: "纸上的手绘思路草图",
       },
     ],
@@ -1478,7 +1478,7 @@ function bindProjectModels() {
   const canvases = document.querySelectorAll("[data-project-model]");
   canvases.forEach((canvas) => {
     if (canvas.dataset.modelReady === "true") return;
-    mountProjectModel(canvas).catch((error) => {
+    const load = () => mountProjectModel(canvas).catch((error) => {
       console.error("Project 3D model failed to load:", error);
       canvas.dataset.modelReady = "error";
       const container = canvas.closest(".project-visual");
@@ -1488,6 +1488,12 @@ function bindProjectModels() {
         status.textContent = "3D 模型加载失败，请刷新或检查网络";
       }
     });
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      void load();
+    }, { rootMargin: "150px" });
+    observer.observe(canvas);
   });
 }
 
@@ -1501,10 +1507,10 @@ function renderEducation(containerId, items) {
       return `
         <article class="education-card${accentClass}">
           <div class="education-card__visual" aria-hidden="true">
-            <img class="education-card__image" src="${item.visualImage}" alt="${item.school}背景图" />
+            <img loading="lazy" decoding="async" class="education-card__image" src="${item.visualImage}" alt="${item.school}背景图" />
             <div class="education-card__image-overlay"></div>
             <span class="education-card__badge">
-              <img class="education-card__badge-image" src="${item.badgeImage}" alt="${item.school}校徽" />
+              <img loading="lazy" decoding="async" class="education-card__badge-image" src="${item.badgeImage}" alt="${item.school}校徽" />
             </span>
           </div>
           <div class="education-card__body">
@@ -1715,7 +1721,7 @@ function renderSkillDetail(item) {
         </div>
       </div>
       <div class="skills-detail__media">
-        <img class="skills-detail__image skills-detail__image--mbti" src="${item.image}" alt="ENTJ-A 分析家形象" />
+        <img loading="lazy" decoding="async" class="skills-detail__image skills-detail__image--mbti" src="${item.image}" alt="ENTJ-A 分析家形象" />
       </div>
     `;
   }
@@ -1729,7 +1735,7 @@ function renderSkillDetail(item) {
       item.image
         ? `
           <div class="skills-detail__media">
-            <img class="skills-detail__image" src="${item.image}" alt="${item.imageAlt || item.title}"${imageStyle ? ` style="${imageStyle}"` : ""} />
+            <img loading="lazy" decoding="async" class="skills-detail__image" src="${item.image}" alt="${item.imageAlt || item.title}"${imageStyle ? ` style="${imageStyle}"` : ""} />
           </div>
         `
         : ""
